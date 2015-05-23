@@ -6,11 +6,11 @@
 
         $scope.items = [
             {
-                location: 'introduction',
+                location: '/introduction',
                 title: 'Introduction'
             },
             {
-                location: 'geo',
+                location: '/geo',
                 title: 'Geo'
             }
         ];
@@ -21,8 +21,8 @@
 
         //
 
-        function handleSidebarItemClick($event, item) {
-            $event.preventDefault();
+        function handleSidebarItemClick(event, item) {
+            event.preventDefault();
             $location.path(item.location);
         }
 
@@ -30,8 +30,12 @@
             $rootScope.$on('$routeChangeSuccess', handleRootChangeSuccess);
         }
 
-        function handleRootChangeSuccess(current) {
-            console.log(current);
+        function handleRootChangeSuccess() {
+            var currentItem, currentPath = $location.path();
+            for (var i = 0, length = $scope.items.length; i < length; i++) {
+                currentItem = $scope.items[i];
+                currentItem.selected = currentItem.location === currentPath;
+            }
         }
 
         function activate() {

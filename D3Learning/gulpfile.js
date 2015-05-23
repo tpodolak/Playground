@@ -45,7 +45,8 @@ gulp.task("copy", function () {
         "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
         "angular": "angular/angular*.{js,map}",
         "angular-route": "angular-route/angular-route*.{js,map}",
-        "normalize-css": "normalize-css/normalize.css"
+        "normalize-css": "normalize-css/normalize.css",
+        "d3": "d3/d3.{min.js,js}"
     }
 
     for (var destinationDir in bower) {
