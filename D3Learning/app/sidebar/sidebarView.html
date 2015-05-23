@@ -1,4 +1,11 @@
-<!-- Sidebar -->
+<script type="text/ng-template" id="tree_item_renderer.html">
+    <a href="#" ng-click="handleSidebarItemClick($event,data)" ng-class="{selected:data.selected}" >{{data.title}}</a>
+    <ul>
+        <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'">
+        </li>
+    </ul>
+</script>
+
 
 <div class="panel panel-primary full">
     <div class="panel-heading">Menu</div>
@@ -6,11 +13,7 @@
     <div class="stretched panel-body-wrapper">
         <div class="panel-body">
             <ul class="sidebar-nav">
-                <li ng-repeat="item in items" ng-class="{active: item.selected}">
-                    <a href="#" ng-click="handleSidebarItemClick($event,item)">
-                        {{item.title}}
-                    </a>
-                </li>
+                <li style="margin: 0px;" ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
             </ul>
         </div>
     </div>

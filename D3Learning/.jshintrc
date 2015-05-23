@@ -86,7 +86,8 @@
     "globals"       : { 
     	"angular" :true,
     	"Windows" :true,
-        "$":true
+        "$":true,
+        "d3":true
     }       
 
 }

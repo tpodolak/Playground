@@ -4,14 +4,28 @@
 
     function sidebarController($scope, $rootScope, $location) {
 
-        $scope.items = [
+        $scope.tree = [
             {
-                location: '/introduction',
-                title: 'Introduction'
+                location: '/reusableCharts',
+                title: 'Reusable charts',
+                nodes: [
+                    {
+                        location: '/creatingElements',
+                        title: 'Creating elements'
+                    }
+                ]
+
             },
             {
-                location: '/geo',
-                title: 'Geo'
+                location: '/noSvg',
+                title: 'No SVG',
+                nodes: [
+                    {
+                        location: '/noSvg',
+                        title: 'No SVG'
+                    }
+                ]
+
             }
         ];
 
@@ -31,10 +45,17 @@
         }
 
         function handleRootChangeSuccess() {
-            var currentItem, currentPath = $location.path();
-            for (var i = 0, length = $scope.items.length; i < length; i++) {
-                currentItem = $scope.items[i];
+            selectCurrentItem($scope.tree,$location.path());
+        }
+
+        function selectCurrentItem(items, currentPath) {
+            var currentItem;
+            for (var i = 0, length = items.length; i < length; i++) {
+                currentItem = items[i];
                 currentItem.selected = currentItem.location === currentPath;
+                if (currentItem.nodes && currentItem.nodes.length) {
+                    selectCurrentItem(currentItem.nodes, currentPath);
+                }
             }
         }
 

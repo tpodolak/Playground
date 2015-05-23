@@ -1,22 +1,30 @@
 (function () {
+
+    angular.module('app.reusableCharts', []);
+    angular.module('app.noSvgVisualisation', []);
+
     angular.module('app', [
         'ngRoute',
-        'app.geo',
-        'app.introduction'
+        'app.reusableCharts',
+        'app.noSvgVisualisation'
     ]).config(configureRoutes);
 
 
     function configureRoutes($routeProvider) {
-        $routeProvider.when('/introduction', {
-            url: '/introduction',
-            controller: 'introductionCtrl',
-            templateUrl: 'app/introduction/introductionView.html'
-        }).when('/geo', {
-            url: '/geo',
-            controller: 'geoCtrl',
-            templateUrl: 'app/geo/geoView.html'
+        $routeProvider.when('/reusableCharts', {
+            url: '/reusableCharts',
+            controller: 'reusableChartsCtrl',
+            templateUrl: 'app/reusableCharts/reusableChartsView.html'
+        }).when('/creatingElements', {
+            url: '/creatingElements',
+            controller: 'creatingElementsCtrl',
+            templateUrl: 'app/reusableCharts/creatingElementsView.html'
+        }).when('/noSvg', {
+            url: '/noSvg',
+            controller: 'noSvgVisualisationCtrl',
+            templateUrl: 'app/noSvgVisualisation/noSvgVisualisationView.html'
         }).otherwise({
-            redirectTo: '/introduction'
+            redirectTo: '/reusableCharts'
         });
     }
 })();
