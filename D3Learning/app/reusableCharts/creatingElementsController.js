@@ -3,12 +3,12 @@
     angular.module('app.reusableCharts').controller('creatingElementsCtrl', creatingElementsController);
 
 
-    function creatingElementsController($scope) {
+    function creatingElementsController($scope, randomDataService) {
         var data = [
-            {name: 'AAPL', mentions: addData([], 150, 300), byHour: 34.3},
-            {name: 'MSFT', mentions: addData([], 150, 300), byHour: 11.1},
-            {name: 'GOOG', mentions: addData([], 150, 300), byHour: 19.2},
-            {name: 'NFLX', mentions: addData([], 150, 300), byHour: 6.7}
+            {name: 'AAPL', mentions: randomDataService.addData([], 150, 300), byHour: 34.3},
+            {name: 'MSFT', mentions: randomDataService.addData([], 150, 300), byHour: 11.1},
+            {name: 'GOOG', mentions: randomDataService.addData([], 150, 300), byHour: 19.2},
+            {name: 'NFLX', mentions: randomDataService.addData([], 150, 300), byHour: 6.7}
         ];
 
         var barcode = barcodeChart().width(600).height(100);
@@ -17,7 +17,7 @@
         $scope.appendData = function () {
 
             for (var i = 0, length = data.length; i < length; i++) {
-                addData(data[i].mentions, 30, 3 * 60);
+                randomDataService.addData(data[i].mentions, 30, 3 * 60);
             }
 
             d3.select('#chart').selectAll('table tr td.data-item').data(data).datum(function (d) {
@@ -203,28 +203,6 @@
             };
 
             return chart;
-        }
-
-
-        // Compute a random interval using an Exponential Distribution
-        function randomInterval(avgSeconds) {
-            return Math.floor(-Math.log(Math.random()) * 1000 * avgSeconds);
-        }
-
-        // Create or extend an array of increasing dates by adding
-// a number of random seconds.
-        function addData(data, numItems, avgSeconds) {
-            // Compute the most recent time in the data array.
-            var n = data.length,
-                t = (n > 0) ? data[n - 1].date : new Date();
-
-            // Append items with increasing times in the data array.
-            for (var k = 0; k < numItems - 1; k += 1) {
-                t = new Date(t.getTime() + randomInterval(avgSeconds));
-                data.push({date: t});
-            }
-
-            return data;
         }
     }
 
