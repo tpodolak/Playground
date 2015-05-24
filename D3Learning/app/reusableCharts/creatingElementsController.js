@@ -16,11 +16,11 @@
         $scope.title = "Creating elements";
         $scope.appendData = function () {
 
-            for(var i= 0,length = data.length;i<length;i++){
+            for (var i = 0, length = data.length; i < length; i++) {
                 addData(data[i].mentions, 30, 3 * 60);
             }
 
-            d3.select('#chart').selectAll('table tr td.data-item').data(data).datum(function(d){
+            d3.select('#chart').selectAll('table tr td.data-item').data(data).datum(function (d) {
                 return d.mentions;
             }).call(barcode);
         };
