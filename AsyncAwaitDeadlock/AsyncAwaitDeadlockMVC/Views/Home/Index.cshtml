@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Deadlock - mix async/await and Task.Wait without ConfigureAwait</h2>
+        <p>
+            This operation will cause deadlock. View will never be returned to the browser.
+        </p>
+        <p>@Html.ActionLink("Deadlock", "Deadlock", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>No deadlock - mix async/await Task.Wait with ConfigureAwait(false)</h2>
+        <p>This operation will NOT cause deadlock, however this is a blocking call. View will be returned in about 3s.</p>
+        <p>@Html.ActionLink("Blocking", "Blocking", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Proper way - using async/await all the way</h2>
+        <p>This is a proper non-blocking, async/await all the way down implementation. View will be returned in about 3s</p>
+        <p>@Html.ActionLink("Proper", "Proper", "Home")</p>
+    </div>
+</div>

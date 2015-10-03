@@ -1,0 +1,26 @@
+﻿<Window x:Class="AsyncAwaitDeadlock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Click="DeadlockButton_OnClick" Name="DeadlockButton">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                Deadlock - mix async/await and Task.Wait without ConfigureAwait
+            </TextBlock>
+        </Button>
+        <Button Grid.Column="1" Click="NoDeadlockButton_OnClick" Name="NoDeadlockButton">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center">No deadlock - mix async/await Task.Wait with ConfigureAwait(false)</TextBlock>
+        </Button>
+        <Button Grid.Column="2" Click="ProperWayButton_OnClick" Name="ProperWayButton">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center">Proper way - using async/await all the way</TextBlock>
+        </Button>
+    </Grid>
+</Window>
