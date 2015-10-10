@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Knockout App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../scripts/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../scripts/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <h1>Todos</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input data-bind="value: current, valueUpdate: 'afterkeydown',  executeOnEnter: add"
+                       class="form-control input-lg"
+                       placeholder="Enter text"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid" data-bind="visible: todos().length > 0">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table todos">
+                <thead>
+                <tr>
+                    <td class="col-md-1"><span class="glyphicon glyphicon-chevron-down"
+                                               data-bind="click: $root.toggleAll"></span> <span>Completed</span>
+                    </td>
+                    <td class="col-md-10">Name</td>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: todos">
+                <tr>
+                    <td class="col-md-1">
+                        <input type="checkbox" data-bind="checked: completed"/>
+                    </td>
+                    <td class="col-md-10" data-bind="css: { completed: completed, editing: editing }">
+                        <label data-bind="text: title, event: { dblclick: $root.startEditing }"></label>
+                        <input type="text"
+                               data-bind="value: title, valueUpdate: 'afterkeydown',hasFocus: editing, executeOnEnter: $root.finishEditing, event: { blur: $root.saveEditing }">
+                    </td>
+                    </td>
+                    <td class="col-md-push-12">
+                        <button class="btn btn-sm btn-danger pull-right" data-bind="click: $root.remove">Remove</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <strong data-bind="text: remainingCount">0</strong>
+            <span data-bind="text: humanizeItems(remainingCount)"></span> left
+        </div>
+    </div>
+</div>
+
+
+<script data-main="app.js" src="../scripts/requirejs/require.js"></script>
+</body>
+</html>

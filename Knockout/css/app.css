@@ -1,0 +1,14 @@
+table.todos tr td.completed label{
+    color: #d9d9d9;
+    text-decoration: line-through;
+}
+
+table.todos tr td.editing label {
+    display: none;
+}
+
+/*this is overkill */
+table.todos tr td:not(.editing) input[type=text] {
+    display: none;
+}
+
