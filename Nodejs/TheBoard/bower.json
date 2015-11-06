@@ -1,0 +1,21 @@
+{
+  "name": "TheBoard",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tpodolak/Playground",
+  "authors": [
+    "tpodolak <tom.podolak@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.8.3",
+    "bootstrap": "~3.3.5"
+  }
+}
