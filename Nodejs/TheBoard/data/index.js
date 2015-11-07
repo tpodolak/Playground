@@ -19,6 +19,16 @@
         });
     }
     
+    data.addNote = function (category, note, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.notes.update({ name: category }, { $push: { notes: note } }, next);
+            }
+        });
+    }
+    
     data.createNewCategory = function (categoryName, next) {
         database.getDb(function (err, db) {
             if (err) {
@@ -28,10 +38,10 @@
                 db.notes.find({ name: categoryName }).count(function (error, count) {
                     
                     if (error) {
-                        next( error, null );
+                        next(error);
                     }
-                    if ( count !== 0 ) {
-                        next( "Category already exists" );
+                    if (count !== 0) {
+                        next("Category already exists");
                     } else {
                         var cat = {
                             name: categoryName,
@@ -46,6 +56,16 @@
                         });
                     }
                 });
+            }
+        });
+    }
+    
+    data.getNotes = function (categoryName, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.notes.findOne({ name: categoryName }, next);
             }
         });
     }

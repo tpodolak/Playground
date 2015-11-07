@@ -30,6 +30,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controllers\notesController.js" />
     <Compile Include="controllers\homeController.js" />
     <Compile Include="controllers\index.js" />
     <Compile Include="data\database.js" />
