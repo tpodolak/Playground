@@ -36,6 +36,15 @@
     <Compile Include="data\database.js" />
     <Compile Include="data\index.js" />
     <Compile Include="data\seedData.js" />
+    <Compile Include="public\js\notesView.js" />
+    <Compile Include="public\lib\angular-bootstrap\index.js" />
+    <Compile Include="public\lib\angular-bootstrap\ui-bootstrap-tpls.js" />
+    <Compile Include="public\lib\angular-bootstrap\ui-bootstrap-tpls.min.js" />
+    <Compile Include="public\lib\angular-bootstrap\ui-bootstrap.js" />
+    <Compile Include="public\lib\angular-bootstrap\ui-bootstrap.min.js" />
+    <Compile Include="public\lib\angular\angular.js" />
+    <Compile Include="public\lib\angular\angular.min.js" />
+    <Compile Include="public\lib\angular\index.js" />
     <Compile Include="public\lib\bootstrap\dist\js\bootstrap.js" />
     <Compile Include="public\lib\bootstrap\dist\js\bootstrap.min.js" />
     <Compile Include="public\lib\bootstrap\dist\js\npm.js" />
@@ -147,6 +156,24 @@
     <Compile Include="server.js" />
     <Content Include="package.json" />
     <Content Include="public\css\site.css" />
+    <Content Include="public\images\note-blue.png" />
+    <Content Include="public\images\note-green.png" />
+    <Content Include="public\images\note-orange.png" />
+    <Content Include="public\images\note-yellow.png" />
+    <Content Include="public\lib\angular-bootstrap\.bower.json" />
+    <Content Include="public\lib\angular-bootstrap\.gitignore" />
+    <Content Include="public\lib\angular-bootstrap\.npmignore" />
+    <Content Include="public\lib\angular-bootstrap\bower.json" />
+    <Content Include="public\lib\angular-bootstrap\package.json" />
+    <Content Include="public\lib\angular-bootstrap\README.md" />
+    <Content Include="public\lib\angular-bootstrap\ui-bootstrap-csp.css" />
+    <Content Include="public\lib\angular\.bower.json" />
+    <Content Include="public\lib\angular\angular-csp.css" />
+    <Content Include="public\lib\angular\angular.min.js.gzip" />
+    <Content Include="public\lib\angular\angular.min.js.map" />
+    <Content Include="public\lib\angular\bower.json" />
+    <Content Include="public\lib\angular\package.json" />
+    <Content Include="public\lib\angular\README.md" />
     <Content Include="public\lib\bootstrap\.bower.json" />
     <Content Include="public\lib\bootstrap\bower.json" />
     <Content Include="public\lib\bootstrap\dist\css\bootstrap-theme.css" />
@@ -259,6 +286,7 @@
     <Content Include="README.md" />
     <Content Include="views\index.vash" />
     <Content Include="views\layout.vash" />
+    <Content Include="views\notes.vash" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="controllers\" />
@@ -266,6 +294,8 @@
     <Folder Include="public\" />
     <Folder Include="public\css\" />
     <Folder Include="public\lib\" />
+    <Folder Include="public\lib\angular-bootstrap\" />
+    <Folder Include="public\lib\angular\" />
     <Folder Include="public\lib\bootstrap\" />
     <Folder Include="public\lib\bootstrap\dist\" />
     <Folder Include="public\lib\bootstrap\dist\css\" />
@@ -300,6 +330,8 @@
     <Folder Include="public\lib\jquery\src\traversing\var\" />
     <Folder Include="public\lib\jquery\src\var\" />
     <Folder Include="public\lib\underscore\" />
+    <Folder Include="public\images\" />
+    <Folder Include="public\js\" />
     <Folder Include="views\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->

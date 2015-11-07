@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressSession({
-
+    resave: true,
+    saveUninitialized: true,
     secret: "TheBoard"
 }));
 app.use(flash());

@@ -3,12 +3,12 @@
     var data = require("../data");
     notesController.init = function (app) {
         app.get("/api/notes/:categoryName", function (req, res) {
-            data.getNotes(req.params.categoryName, function (err, notes) {
+            data.getNotes(req.params.categoryName, function (err, data) {
                 if (err) {
                     res.send(400, err);
                 } else {
                     res.set('Content-Type', 'application/json');
-                    res.send(notes);
+                    res.send(data.notes);
                 }
             });
 
