@@ -70,6 +70,27 @@
         });
     }
     
+    data.addUser = function (user, next) {
+        database.getDb(function (error, db) {
+            if (error) {
+                console.log("Failed to seed database: " + error);
+                next(error);
+            } else {
+                db.users.insert(user, next);
+            }
+        });
+    }
+    
+    data.getUser = function (username, next) {
+        database.getDb(function (err, db) {
+            if (err) {
+                next(err);
+            } else {
+                db.users.findOne({ username: username }, next);
+            }
+        });
+    };
+    
     function seedDatabase() {
         database.getDb(function (error, db) {
             if (error) {

@@ -19,6 +19,10 @@ app.use(expressSession({
 app.use(flash());
 // static resources
 app.use(express.static(__dirname + "/public"));
+
+var auth = require("./auth");
+auth.init(app);
+
 var controller = require("./controllers");
 // map the routes
 controller.init(app);

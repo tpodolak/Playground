@@ -1,6 +1,8 @@
 (function (notesController) {
     
     var data = require("../data");
+    var auth = require('../auth');
+    
     notesController.init = function (app) {
         app.get("/api/notes/:categoryName", function (req, res) {
             data.getNotes(req.params.categoryName, function (err, data) {
@@ -14,7 +16,7 @@
 
         });
         
-        app.post('/api/notes/:categoryName', function (req, res) {
+        app.post('/api/notes/:categoryName', auth.ensureApiAuthenticated, function (req, res) {
             var categoryName = req.params.categoryName,
                 note = {
                     note: req.body.note,

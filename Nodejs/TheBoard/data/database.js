@@ -1,5 +1,5 @@
 (function (database) {
-
+    
     var mongodb = require("mongodb"),
         mongoUrl = "mongodb://localhost:27017/theBoard",
         theDb = null;
@@ -11,7 +11,8 @@
                 } else {
                     theDb = {
                         db: db,
-                        notes:db.collection('notes')
+                        notes: db.collection('notes'),
+                        users: db.collection('users')
                     };
                     next(null, theDb);
                 }
