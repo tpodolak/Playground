@@ -4,7 +4,7 @@
 
     <h3>Register</h3>
     @if (model.message) {
-      <p>@model.message</p>
+      <p class="alert alert-danger">@model.message</p>
     }
     <form action="/register" method="post" role="form" class="form-horizontal">
       <div class="form-group">

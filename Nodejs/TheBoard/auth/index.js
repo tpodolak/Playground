@@ -58,7 +58,7 @@
         app.use(passport.session());
         
         app.get('/login', function (req, res) {
-            res.render('login', { title: 'Login to The Board', message: req.flash('loginError') });
+            res.render('login', { title: 'Login to The Board', message: req.flash('loginError').toString() });
         });
         
         app.post('/login', function (req, res, next) {
@@ -66,13 +66,18 @@
                 if (err) {
                     next(err);
                 } else {
-                    req.logIn(user, function (err) {
-                        if (err) {
-                            next(err);
-                        } else {
-                            res.redirect("/");
-                        }
-                    });
+                    if ( user ) {
+                        req.logIn( user, function( err ) {
+                            if ( err ) {
+                                next( err );
+                            } else {
+                                res.redirect( "/" );
+                            }
+                        } );
+                    } else {
+                        req.flash('loginError', "Invalid username or password");
+                        res.redirect("/login");
+                    }
                 }
             });
             
@@ -80,7 +85,7 @@
         });
         
         app.get("/register", function (req, res) {
-            res.render("register", { title: "Register for the board", message: req.flash("registrationError") });
+            res.render("register", { title: "Register for the board", message: req.flash("registrationError").toString() });
         });
         
         app.post("/register", function (req, res) {
@@ -93,13 +98,28 @@
                 salt: salt
             };
             
-            data.addUser(user, function (error) {
-                if (error) {
-                    req.flash("registrationError", "Could not save user to database");
+            data.getUser(user.name, function (err, user) {
+                var registrationerror = "registrationError";
+                if (err) {
+                    req.flash(registrationerror, "Failed to register user");
                     res.redirect("/register");
-                } else {
-                    res.redirect("/login");
+                    return;
                 }
+                
+                if (user) {
+                    req.flash(registrationerror, "User with the same name already exists");
+                    res.redirect("/register");
+                    return;
+
+                }
+                data.addUser(user, function (error) {
+                    if (error) {
+                        req.flash(registrationerror, "Failed to register user");
+                        res.redirect("/register");
+                    } else {
+                        res.redirect("/login");
+                    }
+                });
             });
         });
     };

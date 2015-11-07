@@ -10,7 +10,7 @@
                     title: 'Express + Vash', 
                     error: error, 
                     categories: results,
-                    newCatError: req.flash("newCatName"),
+                    newCatError: req.flash("newCatName").toString(),
                     user: req.user
                 });
             });
