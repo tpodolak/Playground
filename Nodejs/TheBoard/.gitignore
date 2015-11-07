@@ -167,4 +167,4 @@ $RECYCLE.BIN/
 
 typings/
 public/lib/
-.ntvs_analysis
+.ntvs_analysis.dat
