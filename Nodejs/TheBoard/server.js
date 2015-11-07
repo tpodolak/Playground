@@ -30,3 +30,6 @@ controller.init(app);
 
 var server = http.createServer(app);
 server.listen(3000);
+
+var updater = require("./updater");
+updater.init( server );
