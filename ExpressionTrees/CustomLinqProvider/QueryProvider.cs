@@ -41,5 +41,10 @@ namespace CustomLinqProvider
 
         public abstract string GetQueryText(Expression expression);
         public abstract object Execute(Expression expression);
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CustomLinqProvider
 {
@@ -7,7 +8,7 @@ namespace CustomLinqProvider
     {
         internal static Type GetElementType(Type seqType)
         {
-            Type ienum = FindIEnumerable(seqType);
+            var ienum = FindIEnumerable(seqType);
             if (ienum == null) return seqType;
             return ienum.GetGenericArguments()[0];
         }
@@ -19,21 +20,17 @@ namespace CustomLinqProvider
                 return typeof(IEnumerable<>).MakeGenericType(seqType.GetElementType());
             if (seqType.IsGenericType)
             {
-                foreach (Type arg in seqType.GetGenericArguments())
+                foreach (var ienum in seqType.GetGenericArguments().Select(arg => typeof(IEnumerable<>).MakeGenericType(arg)).Where(ienum => ienum.IsAssignableFrom(seqType)))
                 {
-                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
-                    if (ienum.IsAssignableFrom(seqType))
-                    {
-                        return ienum;
-                    }
+                    return ienum;
                 }
             }
-            Type[] ifaces = seqType.GetInterfaces();
-            if (ifaces != null && ifaces.Length > 0)
+            var ifaces = seqType.GetInterfaces();
+            if (ifaces.Length > 0)
             {
-                foreach (Type iface in ifaces)
+                foreach (var iface in ifaces)
                 {
-                    Type ienum = FindIEnumerable(iface);
+                    var ienum = FindIEnumerable(iface);
                     if (ienum != null) return ienum;
                 }
             }
