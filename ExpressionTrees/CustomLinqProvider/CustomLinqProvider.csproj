@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Customers.cs" />
     <Compile Include="DbQueryProvider.cs" />
+    <Compile Include="Evaluator.cs" />
     <Compile Include="Northwind.cs" />
     <Compile Include="ObjectReader.cs" />
     <Compile Include="Orders.cs" />

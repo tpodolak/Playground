@@ -7,10 +7,6 @@ namespace CustomLinqProvider
 {
     public abstract class QueryProvider : IQueryProvider
     {
-        protected QueryProvider()
-        {
-        }
-
         IQueryable<T> IQueryProvider.CreateQuery<T>(Expression expression)
         {
             return new Query<T>(this, expression);
@@ -41,10 +37,5 @@ namespace CustomLinqProvider
 
         public abstract string GetQueryText(Expression expression);
         public abstract object Execute(Expression expression);
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
     }
 }
