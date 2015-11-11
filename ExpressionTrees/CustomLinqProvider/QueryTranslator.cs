@@ -65,6 +65,7 @@ namespace CustomLinqProvider
             switch (b.NodeType)
             {
                 case ExpressionType.And:
+                case ExpressionType.AndAlso:
                     sb.Append(" AND ");
                     break;
                 case ExpressionType.Or:

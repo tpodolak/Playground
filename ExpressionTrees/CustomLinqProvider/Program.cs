@@ -19,7 +19,7 @@ namespace CustomLinqProvider
                 Northwind db = new Northwind(con);
 
                 IQueryable<Customers> query =
-                     db.Customers.Where(c => c.City == "London");
+                    db.Customers.Where(c => c.City == "London" && c.Country == "UK");
 
                 Console.WriteLine("Query:\n{0}\n", query);
 

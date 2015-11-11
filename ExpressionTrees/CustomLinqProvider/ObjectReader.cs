@@ -44,15 +44,9 @@ namespace CustomLinqProvider
                 this.fields = typeof(T).GetFields();
             }
 
-            public T Current
-            {
-                get { return this.current; }
-            }
+            public T Current => this.current;
 
-            object IEnumerator.Current
-            {
-                get { return this.current; }
-            }
+            object IEnumerator.Current => this.current;
 
             public bool MoveNext()
             {
