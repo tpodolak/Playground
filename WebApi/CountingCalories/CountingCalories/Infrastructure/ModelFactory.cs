@@ -93,15 +93,19 @@ namespace CountingKs.Infrastructure
         {
             try
             {
-                var uri = new Uri(diaryEntry.MeasureUrl);
-                var measureId = int.Parse(uri.Segments.Last());
-                var measure = repo.GetMeasure(measureId);
                 var entry = new DiaryEntry
                 {
                     Quantity = diaryEntry.Quantity,
-                    Measure = measure,
-                    FoodItem = measure.Food,
                 };
+
+                if (!string.IsNullOrWhiteSpace(diaryEntry.MeasureUrl))
+                {
+                    var uri = new Uri(diaryEntry.MeasureUrl);
+                    var measureId = int.Parse(uri.Segments.Last());
+                    var measure = repo.GetMeasure(measureId);
+                    entry.Measure = measure;
+                    entry.FoodItem = measure.Food;
+                }
                 return entry;
             }
             catch (Exception ex)

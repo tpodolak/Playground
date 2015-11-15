@@ -64,5 +64,55 @@ namespace CountingKs.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+
+        public HttpResponseMessage Delete(DateTime diaryid, int id)
+        {
+            try
+            {
+                if (!repo.GetDiaryEntries(identityService.CurrentUser, diaryid).Any(val => val.Id == id))
+                    return Request.CreateResponse(HttpStatusCode.NotFound, $"Could not find diary with id={id}");
+
+                if (repo.DeleteDiaryEntry(id) && repo.SaveAll())
+                    return Request.CreateResponse(HttpStatusCode.OK);
+
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Unable to delete entry");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
+        // Put spec states that we should send entire object to update - no for partial updates
+        // Patch on the other hand - yes for partial updates
+        [HttpPatch]
+        [HttpPost]
+        public HttpResponseMessage Patch(DateTime diaryid, int id, [FromBody] DiaryEntryModel diaryEntry)
+        {
+            try
+            {
+                var entry = repo.GetDiaryEntry(identityService.CurrentUser, diaryid, id);
+                if (entry == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+
+                var parsedValue = modelFactory.Parse(diaryEntry);
+
+                if (parsedValue == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+                if (entry.Quantity != parsedValue.Quantity)
+                {
+                    entry.Quantity = parsedValue.Quantity;
+                    if (repo.SaveAll())
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
     }
 }
