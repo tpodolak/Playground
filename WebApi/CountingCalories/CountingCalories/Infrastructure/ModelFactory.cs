@@ -111,7 +111,16 @@ namespace CountingKs.Infrastructure
             catch (Exception ex)
             {
                 return null;
-            }   
+            }
+        }
+
+        public DiarySummaryModel CreateSummary(Diary diary)
+        {
+            return new DiarySummaryModel
+            {
+                DiaryDate = diary.CurrentDate,
+                TotalCalories = Math.Round(diary.Entries.Sum(val => val.Measure.Calories*val.Quantity))
+            };
         }
 
         public IEnumerable<DiaryEntryModel> Create(IEnumerable<DiaryEntry> diaryEntries)

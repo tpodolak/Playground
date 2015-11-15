@@ -15,5 +15,6 @@ namespace CountingKs.Infrastructure
         IEnumerable<DiaryEntryModel> Create(IEnumerable<DiaryEntry> diaryEntries);
         DiaryEntryModel Create(DiaryEntry diaryEntry);
         DiaryEntry Parse(DiaryEntryModel diaryEntry);
+        DiarySummaryModel CreateSummary(Diary diary);
     }
 }
