@@ -1,4 +1,6 @@
-﻿To run the app
+﻿Learning basics of Node.js through Pluralsight examples
+
+To run the app
 ```bash
 npm install bower -g
 ```
