@@ -19,7 +19,6 @@ namespace CountingKs.Data.Entities
     public double Sodium { get; set; }
     public double Iron { get; set; }
     public double Cholestrol { get; set; }
-
     public virtual Food Food { get; set; }
   }
 }

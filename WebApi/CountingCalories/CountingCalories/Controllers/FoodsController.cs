@@ -3,7 +3,8 @@ using System.Linq;
 using System.Web.Http;
 using CountingKs.Data;
 using CountingKs.Data.Entities;
-
+using CountingKs.Models;
+using CountingKs.Infrastructure;
 namespace CountingKs.Controllers
 {
     public class FoodsController : ApiController
@@ -15,14 +16,19 @@ namespace CountingKs.Controllers
             this.countingKsRepo = countingKsRepo;
         }
 
-        public IEnumerable<Food> Get()
+        public IEnumerable<FoodModel> Get(bool includeMeasures = true)
         {
-            var results = this.countingKsRepo.GetAllFoods()
-                .OrderBy(val => val.Description)
-                .Take(25)
-                .ToList();
+            IQueryable<Food> query;
+            query = includeMeasures ? countingKsRepo.GetAllFoodsWithMeasures() : countingKsRepo.GetAllFoods();
+            query = query.OrderBy(val => val.Description)
+                         .Take(25);
 
-            return results;
+            return query.Map<Food, FoodModel>();
+        }
+
+        public FoodModel Get(int id)
+        {
+            return countingKsRepo.GetFood(id).Map<Food, FoodModel>();
         }
     }
 }

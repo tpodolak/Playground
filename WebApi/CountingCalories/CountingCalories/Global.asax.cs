@@ -9,7 +9,11 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 using CountingKs.Data;
+using CountingKs.Data.Entities;
+using CountingKs.Infrastructure;
+using CountingKs.Models;
 
 namespace CountingKs
 {
@@ -21,24 +25,20 @@ namespace CountingKs
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            WebApiConfig.ConfigureFormatters(GlobalConfiguration.Configuration);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            ConfigureContainer();
+            ConfigureDependencyResolver();
         }
 
-        private void ConfigureContainer()
+        private void ConfigureDependencyResolver()
         {
-            var builder = new ContainerBuilder();
-            var executingAssembly = Assembly.GetExecutingAssembly();
+            var callingAssembly = Assembly.GetCallingAssembly();
             var dataAssembly = Assembly.GetAssembly(typeof(ICountingKsRepository));
-            builder.RegisterApiControllers(executingAssembly);
-            builder.RegisterAssemblyTypes(executingAssembly, dataAssembly).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(executingAssembly, dataAssembly);
-            var container = builder.Build();
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new DefaultDependencyResolver(callingAssembly, dataAssembly);
         }
     }
 }
