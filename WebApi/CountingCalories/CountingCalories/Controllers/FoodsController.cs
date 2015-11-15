@@ -26,9 +26,9 @@ namespace CountingKs.Controllers
             return query.Map<Food, FoodModel>();
         }
 
-        public FoodModel Get(int id)
+        public FoodModel Get(int foodid)
         {
-            return countingKsRepo.GetFood(id).Map<Food, FoodModel>();
+            return countingKsRepo.GetFood(foodid).Map<Food, FoodModel>();
         }
     }
 }
