@@ -2,7 +2,7 @@
 
 namespace CountingKs.Models
 {
-    public class FoodModel
+    public class FoodModel : ModelBase
     {
         public int Id { get; set; }
         public string Description { get; set; }
