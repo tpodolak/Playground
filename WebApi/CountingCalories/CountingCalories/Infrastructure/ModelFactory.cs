@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Routing;
+using CountingKs.Data;
 using CountingKs.Data.Entities;
 using CountingKs.Models;
 
@@ -8,9 +10,12 @@ namespace CountingKs.Infrastructure
 {
     public class ModelFactory : IModelFactory
     {
+        private readonly ICountingKsRepository repo;
         private readonly UrlHelper urlHelper;
-        public ModelFactory(UrlHelper urlHelper)
+
+        public ModelFactory(ICountingKsRepository repo, UrlHelper urlHelper)
         {
+            this.repo = repo;
             this.urlHelper = urlHelper;
         }
 
@@ -19,7 +24,7 @@ namespace CountingKs.Infrastructure
             var result = new FoodModel
             {
                 Id = food.Id,
-                Url = urlHelper.Link("Foods", new {foodid = food.Id}),
+                Url = urlHelper.Link("Foods", new { foodid = food.Id }),
                 Description = food.Description,
                 Measures = food.Measures.Select(Create).ToList()
             };
@@ -51,6 +56,65 @@ namespace CountingKs.Infrastructure
             if (measures == null)
                 return Enumerable.Empty<MeasureModel>();
             return measures.Select(this.Create);
+        }
+
+        public DiaryModel Create(Diary diary)
+        {
+            return new DiaryModel
+            {
+                Id = diary.Id,
+                Url = urlHelper.Link("Diaries", new { diaryid = diary.CurrentDate.ToString("yyyy-MM-dd") }),
+                CurrentDate = diary.CurrentDate,
+                UserName = diary.UserName,
+                Entries = diary.Entries.Select(Create).ToList()
+            };
+        }
+
+        public IEnumerable<DiaryModel> Create(IEnumerable<Diary> measures)
+        {
+            if (measures == null)
+                return Enumerable.Empty<DiaryModel>();
+            return measures.Select(this.Create);
+        }
+
+        public DiaryEntryModel Create(DiaryEntry diaryEntry)
+        {
+            return new DiaryEntryModel
+            {
+                Url = urlHelper.Link("DiaryEntries", new { diaryid = diaryEntry.Diary.CurrentDate.ToString("yyyy-MM-dd"), id = diaryEntry.Id }),
+                Quantity = diaryEntry.Quantity,
+                FoodDescription = diaryEntry.FoodItem.Description,
+                MeasureDescription = diaryEntry.Measure.Description,
+                MeasureUrl = urlHelper.Link("Measures", new { foodid = diaryEntry.FoodItem.Id, id = diaryEntry.Measure.Id })
+            };
+        }
+
+        public DiaryEntry Parse(DiaryEntryModel diaryEntry)
+        {
+            try
+            {
+                var uri = new Uri(diaryEntry.MeasureUrl);
+                var measureId = int.Parse(uri.Segments.Last());
+                var measure = repo.GetMeasure(measureId);
+                var entry = new DiaryEntry
+                {
+                    Quantity = diaryEntry.Quantity,
+                    Measure = measure,
+                    FoodItem = measure.Food,
+                };
+                return entry;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }   
+        }
+
+        public IEnumerable<DiaryEntryModel> Create(IEnumerable<DiaryEntry> diaryEntries)
+        {
+            if (diaryEntries == null)
+                return Enumerable.Empty<DiaryEntryModel>();
+            return diaryEntries.Select(Create);
         }
     }
 }
