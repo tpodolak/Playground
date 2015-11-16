@@ -3,10 +3,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using CountingKs.Data;
-using CountingKs.Infrastructure;
+using CountingCalories.Data;
+using CountingCalories.Infrastructure;
 
-namespace CountingKs
+namespace CountingCalories
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -29,7 +29,7 @@ namespace CountingKs
         private void ConfigureDependencyResolver()
         {
             var callingAssembly = Assembly.GetCallingAssembly();
-            var dataAssembly = Assembly.GetAssembly(typeof(ICountingKsRepository));
+            var dataAssembly = Assembly.GetAssembly(typeof(ICountingCaloriesRepository));
             GlobalConfiguration.Configuration.DependencyResolver = new DefaultDependencyResolver(callingAssembly, dataAssembly);
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace CountingKs.Infrastructure
+namespace CountingCalories.Infrastructure
 {
     public class IdentityService : IIdentityService
     {

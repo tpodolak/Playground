@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using CountingKs.Data;
+using CountingCalories.Data;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
   public class HomeController : Controller
   {
     public ActionResult Index()
     {
-      var repo = new CountingKsRepository(new CountingKsContext());
+      var repo = new CountingCaloriesRepository(new CountingCaloriesContext());
 
       var results = repo.GetAllFoodsWithMeasures().Take(25).ToList();
 

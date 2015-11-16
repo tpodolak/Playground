@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Routing;
-using CountingKs.Data;
-using CountingKs.Data.Entities;
-using CountingKs.Models;
+using CountingCalories.Data;
+using CountingCalories.Data.Entities;
+using CountingCalories.Models;
 
-namespace CountingKs.Infrastructure
+namespace CountingCalories.Infrastructure
 {
     public class ModelFactory : IModelFactory
     {
-        private readonly ICountingKsRepository repo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly UrlHelper urlHelper;
 
-        public ModelFactory(ICountingKsRepository repo, UrlHelper urlHelper)
+        public ModelFactory(ICountingCaloriesRepository repo, UrlHelper urlHelper)
         {
             this.repo = repo;
             this.urlHelper = urlHelper;

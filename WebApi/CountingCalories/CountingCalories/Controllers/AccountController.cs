@@ -4,13 +4,13 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
+using CountingCalories.Filters;
+using CountingCalories.Models;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using CountingKs.Filters;
-using CountingKs.Models;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
   [System.Web.Mvc.Authorize]
   [InitializeSimpleMembership]

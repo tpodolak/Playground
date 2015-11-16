@@ -1,4 +1,4 @@
-﻿namespace CountingKs.Data.Entities
+﻿namespace CountingCalories.Data.Entities
 {
   public class DiaryEntry
   {

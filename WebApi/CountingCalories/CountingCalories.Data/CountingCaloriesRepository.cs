@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using CountingKs.Data.Entities;
+using CountingCalories.Data.Entities;
 
-namespace CountingKs.Data
+namespace CountingCalories.Data
 {
-  public class CountingKsRepository : ICountingKsRepository
+  public class CountingCaloriesRepository : ICountingCaloriesRepository
   {
-    private CountingKsContext _ctx;
-    public CountingKsRepository(CountingKsContext ctx)
+    private CountingCaloriesContext _ctx;
+    public CountingCaloriesRepository(CountingCaloriesContext ctx)
     {
       _ctx = ctx;
     }

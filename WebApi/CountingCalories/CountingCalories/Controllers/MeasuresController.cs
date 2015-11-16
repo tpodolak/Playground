@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using CountingKs.Data;
-using CountingKs.Infrastructure;
-using CountingKs.Models;
+using CountingCalories.Data;
+using CountingCalories.Infrastructure;
+using CountingCalories.Models;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
     public class MeasuresController : ApiController
     {
-        private readonly ICountingKsRepository repo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly IModelFactory modelFactory;
 
-        public MeasuresController(ICountingKsRepository repo, IModelFactory modelFactory)
+        public MeasuresController(ICountingCaloriesRepository repo, IModelFactory modelFactory)
         {
             this.repo = repo;
             this.modelFactory = modelFactory;

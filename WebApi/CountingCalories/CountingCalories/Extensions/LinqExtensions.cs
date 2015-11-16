@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CountingKs.Extensions
+namespace CountingCalories.Extensions
 {
     public static class LinqExtensions
     {

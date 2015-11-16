@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CountingKs.Data.Entities
+namespace CountingCalories.Data.Entities
 {
   public class Diary
   {

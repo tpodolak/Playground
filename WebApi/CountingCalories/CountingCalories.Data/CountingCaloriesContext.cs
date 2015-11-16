@@ -1,27 +1,27 @@
 ﻿using System.Data.Entity;
-using CountingKs.Data.Entities;
+using CountingCalories.Data.Entities;
 
-namespace CountingKs.Data
+namespace CountingCalories.Data
 {
-  public class CountingKsContext : DbContext
+  public class CountingCaloriesContext : DbContext
   {
-    public CountingKsContext()
+    public CountingCaloriesContext()
       : base("DefaultConnection")
     {
       this.Configuration.LazyLoadingEnabled = false;
       this.Configuration.ProxyCreationEnabled = false;
     }
 
-    static CountingKsContext()
+    static CountingCaloriesContext()
     {
-      Database.SetInitializer(new MigrateDatabaseToLatestVersion<CountingKsContext, CountingKsMigrationConfiguration>());
+      Database.SetInitializer(new MigrateDatabaseToLatestVersion<CountingCaloriesContext, CountingCaloriesMigrationConfiguration>());
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
 
-      CountingKsMapping.Configure(modelBuilder);
+      CountingCaloriesMapping.Configure(modelBuilder);
     }
 
     public DbSet<ApiUser> ApiUsers { get; set; }

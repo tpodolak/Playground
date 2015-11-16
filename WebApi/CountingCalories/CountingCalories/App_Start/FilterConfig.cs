@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace CountingKs
+namespace CountingCalories
 {
   public class FilterConfig
   {

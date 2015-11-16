@@ -4,21 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using CountingKs.Data;
-using CountingKs.Filters;
-using CountingKs.Infrastructure;
-using CountingKs.Models;
+using CountingCalories.Data;
+using CountingCalories.Filters;
+using CountingCalories.Infrastructure;
+using CountingCalories.Models;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
     [BasicAuthorize]
     public class DiariesController : ApiController
     {
-        private readonly ICountingKsRepository repo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly IModelFactory modelFactory;
         private readonly IIdentityService identityService;
 
-        public DiariesController(ICountingKsRepository repo, IModelFactory modelFactory, IIdentityService identityService)
+        public DiariesController(ICountingCaloriesRepository repo, IModelFactory modelFactory, IIdentityService identityService)
         {
             this.repo = repo;
             this.modelFactory = modelFactory;

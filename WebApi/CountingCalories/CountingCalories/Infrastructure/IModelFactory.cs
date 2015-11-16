@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using CountingKs.Data.Entities;
-using CountingKs.Models;
+using CountingCalories.Data.Entities;
+using CountingCalories.Models;
 
-namespace CountingKs.Infrastructure
+namespace CountingCalories.Infrastructure
 {
     public interface IModelFactory
     {

@@ -1,4 +1,4 @@
-﻿namespace CountingKs
+﻿namespace CountingCalories
 {
   public static class AuthConfig
   {

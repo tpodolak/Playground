@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Routing;
-using CountingKs.Data;
-using CountingKs.Data.Entities;
-using CountingKs.Infrastructure;
-using CountingKs.Models;
-namespace CountingKs.Controllers
+using CountingCalories.Data;
+using CountingCalories.Infrastructure;
+using CountingCalories.Models;
+
+namespace CountingCalories.Controllers
 {
     public class FoodsController : ApiController
     {
-        private readonly ICountingKsRepository countingKsRepo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly IModelFactory modelFactory;
         private const int PageSize = 50;
 
-        public FoodsController(ICountingKsRepository countingKsRepo, IModelFactory modelFactory)
+        public FoodsController(ICountingCaloriesRepository repo, IModelFactory modelFactory)
         {
-            this.countingKsRepo = countingKsRepo;
+            this.repo = repo;
             this.modelFactory = modelFactory;
         }
 
@@ -25,7 +24,7 @@ namespace CountingKs.Controllers
         {
             var urlHelper = new UrlHelper(Request);
 
-            var query = includeMeasures ? countingKsRepo.GetAllFoodsWithMeasures() : countingKsRepo.GetAllFoods();
+            var query = includeMeasures ? repo.GetAllFoodsWithMeasures() : repo.GetAllFoods();
             query = query.OrderBy(val => val.Description);
 
             var totalCount = query.Count();
@@ -45,7 +44,7 @@ namespace CountingKs.Controllers
 
         public FoodModel Get(int foodid)
         {
-            var food = countingKsRepo.GetFood(foodid);
+            var food = repo.GetFood(foodid);
             return modelFactory.Create(food);
         }
     }

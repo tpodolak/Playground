@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
     public abstract class BaseController : ApiController
     {

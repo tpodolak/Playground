@@ -2,19 +2,18 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using CountingKs.Data;
-using CountingKs.Infrastructure;
-using CountingKs.Models;
+using CountingCalories.Data;
+using CountingCalories.Infrastructure;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
     public class DiarySummaryController : ApiController
     {
-        private readonly ICountingKsRepository repo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly IIdentityService identityService;
         private readonly IModelFactory modelFactory;
 
-        public DiarySummaryController(ICountingKsRepository repo, IIdentityService identityService, IModelFactory modelFactory)
+        public DiarySummaryController(ICountingCaloriesRepository repo, IIdentityService identityService, IModelFactory modelFactory)
         {
             this.repo = repo;
             this.identityService = identityService;

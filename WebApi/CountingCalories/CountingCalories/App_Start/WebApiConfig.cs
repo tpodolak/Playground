@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
-using CountingKs.Filters;
 using Newtonsoft.Json.Serialization;
 
-namespace CountingKs
+namespace CountingCalories
 {
     public static class WebApiConfig
     {

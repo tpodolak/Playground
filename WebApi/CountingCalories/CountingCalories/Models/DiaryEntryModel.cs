@@ -1,5 +1,5 @@
 ﻿
-namespace CountingKs.Models
+namespace CountingCalories.Models
 {
     public class DiaryEntryModel : ModelBase
     {

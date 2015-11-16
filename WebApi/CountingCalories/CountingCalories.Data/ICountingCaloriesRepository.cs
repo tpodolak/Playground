@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
-using CountingKs.Data.Entities;
-namespace CountingKs.Data
+using CountingCalories.Data.Entities;
+
+namespace CountingCalories.Data
 {
-  public interface ICountingKsRepository
+  public interface ICountingCaloriesRepository
   {
     // General
     bool SaveAll();

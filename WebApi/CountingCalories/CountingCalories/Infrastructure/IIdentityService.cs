@@ -1,4 +1,4 @@
-﻿namespace CountingKs.Infrastructure
+﻿namespace CountingCalories.Infrastructure
 {
     public interface IIdentityService
     {

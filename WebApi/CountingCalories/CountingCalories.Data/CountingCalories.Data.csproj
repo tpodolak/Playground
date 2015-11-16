@@ -7,8 +7,8 @@
     <ProjectGuid>{AF4DDE5F-8DF7-4D80-A3CD-88E1D0DBCB1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CountingKs.Data</RootNamespace>
-    <AssemblyName>CountingKs.Data</AssemblyName>
+    <RootNamespace>CountingCalories.Data</RootNamespace>
+    <AssemblyName>CountingCalories.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -51,18 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountingKsContext.cs" />
-    <Compile Include="CountingKsMapping.cs" />
-    <Compile Include="CountingKsMigrationConfiguration.cs" />
-    <Compile Include="CountingKsRepository.cs" />
-    <Compile Include="CountingKsSeeder.cs" />
+    <Compile Include="CountingCaloriesContext.cs" />
+    <Compile Include="CountingCaloriesMapping.cs" />
+    <Compile Include="CountingCaloriesMigrationConfiguration.cs" />
+    <Compile Include="CountingCaloriesRepository.cs" />
+    <Compile Include="CountingCaloriesSeeder.cs" />
     <Compile Include="Entities\ApiUser.cs" />
     <Compile Include="Entities\AuthToken.cs" />
     <Compile Include="Entities\Diary.cs" />
     <Compile Include="Entities\Food.cs" />
     <Compile Include="Entities\DiaryEntry.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="ICountingKsRepository.cs" />
+    <Compile Include="ICountingCaloriesRepository.cs" />
     <Compile Include="Entities\Measure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

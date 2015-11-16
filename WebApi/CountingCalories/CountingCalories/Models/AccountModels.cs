@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
-namespace CountingKs.Models
+namespace CountingCalories.Models
 {
   public class UsersContext : DbContext
   {
@@ -18,7 +18,7 @@ namespace CountingKs.Models
   public class UserProfile
   {
     [Key]
-    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int UserId { get; set; }
     public string UserName { get; set; }
   }

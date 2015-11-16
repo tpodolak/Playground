@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CountingKs.Models
+namespace CountingCalories.Models
 {
     public class DiaryModel : ModelBase
     {

@@ -1,4 +1,4 @@
-﻿namespace CountingKs.Models
+﻿namespace CountingCalories.Models
 {
     public abstract class ModelBase
     {

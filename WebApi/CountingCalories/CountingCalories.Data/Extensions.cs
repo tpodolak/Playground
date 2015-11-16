@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
-namespace CountingKs.Data
+namespace CountingCalories.Data
 {
   public static class Extensions
   {

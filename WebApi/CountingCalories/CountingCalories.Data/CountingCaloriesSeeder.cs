@@ -8,14 +8,14 @@ using System.Data.OleDb;
 using System.Globalization;
 using System.Linq;
 using System.Web.Hosting;
-using CountingKs.Data.Entities;
+using CountingCalories.Data.Entities;
 
-namespace CountingKs.Data
+namespace CountingCalories.Data
 {
-  public class CountingKsSeeder
+  public class CountingCaloriesSeeder
   {
-    CountingKsContext _ctx;
-    public CountingKsSeeder(CountingKsContext ctx)
+    CountingCaloriesContext _ctx;
+    public CountingCaloriesSeeder(CountingCaloriesContext ctx)
     {
       _ctx = ctx;
     }

@@ -4,19 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using CountingKs.Data;
-using CountingKs.Infrastructure;
-using CountingKs.Models;
+using CountingCalories.Data;
+using CountingCalories.Infrastructure;
+using CountingCalories.Models;
 
-namespace CountingKs.Controllers
+namespace CountingCalories.Controllers
 {
     public class DiaryEntriesController : ApiController
     {
-        private readonly ICountingKsRepository repo;
+        private readonly ICountingCaloriesRepository repo;
         private readonly IIdentityService identityService;
         private readonly IModelFactory modelFactory;
 
-        public DiaryEntriesController(ICountingKsRepository repo, IIdentityService identityService, IModelFactory modelFactory)
+        public DiaryEntriesController(ICountingCaloriesRepository repo, IIdentityService identityService, IModelFactory modelFactory)
         {
             this.repo = repo;
             this.identityService = identityService;

@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
-using CountingKs.Data.Entities;
+using CountingCalories.Data.Entities;
 
-namespace CountingKs.Data
+namespace CountingCalories.Data
 {
-  public class CountingKsMapping
+  public class CountingCaloriesMapping
   {
     public static void Configure(DbModelBuilder modelBuilder)
     {

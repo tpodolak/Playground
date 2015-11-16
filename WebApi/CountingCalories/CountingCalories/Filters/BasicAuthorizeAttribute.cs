@@ -8,7 +8,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using WebMatrix.WebData;
 
-namespace CountingKs.Filters
+namespace CountingCalories.Filters
 {
     /// <summary>
     /// Basic authentication using WWW-Authenticate header
