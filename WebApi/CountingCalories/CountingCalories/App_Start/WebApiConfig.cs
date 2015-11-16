@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using CountingKs.Filters;
 using Newtonsoft.Json.Serialization;
 
 namespace CountingKs
@@ -36,7 +37,7 @@ namespace CountingKs
             config.Routes.MapHttpRoute(
                 name: "DiarySummary",
                 routeTemplate: "api/user/diaries/{diaryid}/summary",
-                defaults: new { controller = "diarysummary"}
+                defaults: new { controller = "diarysummary" }
                 );
 
             config.Routes.MapHttpRoute(
@@ -57,6 +58,13 @@ namespace CountingKs
             {
                 formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }
+        }
+
+        public static void ConfigureHttps(HttpConfiguration config)
+        {
+#if !DEBUG
+            config.Filters.Add(new RequireHttpsAttribute());
+#endif
         }
     }
 }

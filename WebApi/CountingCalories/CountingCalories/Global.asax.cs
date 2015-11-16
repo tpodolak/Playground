@@ -16,6 +16,7 @@ namespace CountingKs
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            WebApiConfig.ConfigureHttps(GlobalConfiguration.Configuration);
             WebApiConfig.ConfigureFormatters(GlobalConfiguration.Configuration);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

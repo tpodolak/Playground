@@ -1,7 +1,9 @@
-﻿namespace CountingKs.Infrastructure
+﻿using System.Threading;
+
+namespace CountingKs.Infrastructure
 {
     public class IdentityService : IIdentityService
     {
-        public string CurrentUser => "tpodolak";
+        public string CurrentUser => Thread.CurrentPrincipal.Identity.Name;
     }
 }

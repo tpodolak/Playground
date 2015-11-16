@@ -5,11 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CountingKs.Data;
+using CountingKs.Filters;
 using CountingKs.Infrastructure;
 using CountingKs.Models;
 
 namespace CountingKs.Controllers
 {
+    [BasicAuthorize]
     public class DiariesController : ApiController
     {
         private readonly ICountingKsRepository repo;

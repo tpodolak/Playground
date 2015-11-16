@@ -12,7 +12,7 @@ using CountingKs.Models;
 
 namespace CountingKs.Controllers
 {
-  [Authorize]
+  [System.Web.Mvc.Authorize]
   [InitializeSimpleMembership]
   public class AccountController : Controller
   {
