@@ -11,7 +11,7 @@ using CountingCalories.Models;
 
 namespace CountingCalories.Controllers
 {
-    [BasicAuthorize]
+    [TokenAuthorization(true)]
     public class DiariesController : ApiController
     {
         private readonly ICountingCaloriesRepository repo;

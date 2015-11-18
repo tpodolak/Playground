@@ -223,9 +223,10 @@
     <Compile Include="Controllers\MeasuresController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
-    <Compile Include="Filters\BasicAuthorizeAttribute.cs" />
+    <Compile Include="Filters\BasicAuthorizationAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\RequaireHttpsAttribute.cs" />
+    <Compile Include="Filters\TokenAuthorizationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

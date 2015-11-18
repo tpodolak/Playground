@@ -17,7 +17,7 @@ namespace CountingCalories.Filters
     /// Authorization: Basic dHBvZG9sYWs6MTIzNDU2
     /// magic string dHBvZG9sYWs6MTIzNDU2 equals to Base64 encoded credentials tpodolak:123456
     /// </summary>
-    public class BasicAuthorizeAttribute : AuthorizationFilterAttribute
+    public class BasicAuthorizationAttribute : AuthorizationFilterAttribute
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {

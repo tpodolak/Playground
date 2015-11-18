@@ -8,6 +8,7 @@ using System.Web.Http.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CountingCalories.Data;
+using CountingCalories.Filters;
 
 namespace CountingCalories.Infrastructure
 {
@@ -16,16 +17,9 @@ namespace CountingCalories.Infrastructure
         private readonly AutofacWebApiDependencyResolver dependencyResolver;
         public DefaultDependencyResolver(params Assembly[] assemblies)
         {
-            //            var builder = new ContainerBuilder();
-            //            builder.RegisterHttpRequestMessage(GlobalConfiguration.Configuration);
-            //            builder.RegisterApiControllers(assemblies);
-            //            builder.RegisterAssemblyTypes().Except<ModelFactory>().AsImplementedInterfaces();
-            //            builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>();
-            //            // builder.Register<IModelFactory>(c => new ModelFactory(new UrlHelper(c.Resolve<HttpRequestMessage>()))).InstancePerRequest();
-            //            var container = builder.Build();
-
             var builder = new ContainerBuilder();
-            builder.RegisterHttpRequestMessage(GlobalConfiguration.Configuration);
+            var httpConfiguration = GlobalConfiguration.Configuration;
+            builder.RegisterHttpRequestMessage(httpConfiguration);
             builder.RegisterApiControllers(assemblies);
             builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>().AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>();

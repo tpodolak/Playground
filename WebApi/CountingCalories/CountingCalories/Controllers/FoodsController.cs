@@ -3,11 +3,13 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using CountingCalories.Data;
+using CountingCalories.Filters;
 using CountingCalories.Infrastructure;
 using CountingCalories.Models;
 
 namespace CountingCalories.Controllers
 {
+    [TokenAuthorization(false)]
     public class FoodsController : ApiController
     {
         private readonly ICountingCaloriesRepository repo;
