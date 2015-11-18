@@ -123,6 +123,15 @@ namespace CountingCalories.Infrastructure
             };
         }
 
+        public AuthTokenModel Create(AuthToken authToken)
+        {
+            return new AuthTokenModel
+            {
+                Expiration = authToken.Expiration,
+                Token = authToken.Token
+            };
+        }
+
         public IEnumerable<DiaryEntryModel> Create(IEnumerable<DiaryEntry> diaryEntries)
         {
             if (diaryEntries == null)

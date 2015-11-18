@@ -16,5 +16,6 @@ namespace CountingCalories.Infrastructure
         DiaryEntryModel Create(DiaryEntry diaryEntry);
         DiaryEntry Parse(DiaryEntryModel diaryEntry);
         DiarySummaryModel CreateSummary(Diary diary);
+        AuthTokenModel Create(AuthToken authToken);
     }
 }

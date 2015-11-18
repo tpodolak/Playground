@@ -221,6 +221,7 @@
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeasuresController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Filters\BasicAuthorizeAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Infrastructure\IModelFactory.cs" />
     <Compile Include="Infrastructure\ModelFactory.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AuthTokenModel.cs" />
     <Compile Include="Models\DiaryEntryModel.cs" />
     <Compile Include="Models\DiaryModel.cs" />
     <Compile Include="Models\DiarySummaryModel.cs" />
@@ -241,6 +243,7 @@
     <Compile Include="Models\MeasureModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\PageResult.cs" />
+    <Compile Include="Models\TokenRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
