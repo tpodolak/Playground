@@ -19,6 +19,8 @@ namespace CountingCalories.Filters
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
+#if !DEBUG
+
             const string apiKeyName = "apikey", tokenName = "token";
             try
             {
@@ -46,6 +48,7 @@ namespace CountingCalories.Filters
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, ex);
 
             }
+#endif
         }
     }
 }

@@ -4,6 +4,17 @@ namespace CountingCalories.Infrastructure
 {
     public class IdentityService : IIdentityService
     {
-        public string CurrentUser => Thread.CurrentPrincipal.Identity.Name;
+        public string CurrentUser
+        {
+            get
+            {
+#if DEBUG
+                return "tpodolak";
+#else
+                return Thread.CurrentPrincipal.Identity.Name;
+#endif
+
+            }
+        }
     }
 }

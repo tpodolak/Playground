@@ -19,6 +19,7 @@ namespace CountingCalories.Infrastructure
         {
             var builder = new ContainerBuilder();
             var httpConfiguration = GlobalConfiguration.Configuration;
+            builder.RegisterInstance(GlobalConfiguration.Configuration);
             builder.RegisterHttpRequestMessage(httpConfiguration);
             builder.RegisterApiControllers(assemblies);
             builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>().AsImplementedInterfaces();

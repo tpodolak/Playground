@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using CountingCalories.Infrastructure;
 using Newtonsoft.Json.Serialization;
 
 namespace CountingCalories
@@ -70,6 +72,11 @@ namespace CountingCalories
 #if !DEBUG
             config.Filters.Add(new RequireHttpsAttribute());
 #endif
+        }
+
+        public static void ConfigureControllerSelector(HttpConfiguration config)
+        {
+            config.Services.Replace(typeof (IHttpControllerSelector), new CustomHttpControllerSelector(config));
         }
     }
 }

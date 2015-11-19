@@ -21,6 +21,7 @@ namespace CountingCalories.Filters
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
+#if !DEBUG
             var authHeader = actionContext.Request.Headers.Authorization;
             if (authHeader != null)
             {
@@ -48,6 +49,7 @@ namespace CountingCalories.Filters
             }
 
             HandleUnauthorized(actionContext);
+#endif
         }
 
         private void HandleUnauthorized(HttpActionContext actionContext)

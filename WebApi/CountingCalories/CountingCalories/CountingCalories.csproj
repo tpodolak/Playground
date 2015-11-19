@@ -220,6 +220,7 @@
     <Compile Include="Controllers\DiarySummaryController.cs" />
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MeasuresV2Controller.cs" />
     <Compile Include="Controllers\MeasuresController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CustomHttpControllerSelector.cs" />
     <Compile Include="Infrastructure\DefaultDependencyResolver.cs" />
     <Compile Include="Infrastructure\IdentityService.cs" />
     <Compile Include="Infrastructure\IIdentityService.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Models\DiarySummaryModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
     <Compile Include="Models\MeasureModel.cs" />
+    <Compile Include="Models\MeasureV2Model.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\PageResult.cs" />
     <Compile Include="Models\TokenRequestModel.cs" />

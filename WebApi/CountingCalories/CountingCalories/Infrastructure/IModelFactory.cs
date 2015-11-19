@@ -9,6 +9,8 @@ namespace CountingCalories.Infrastructure
         FoodModel Create(Food food);
         IEnumerable<FoodModel> Create(IEnumerable<Food> foods);
         MeasureModel Create(Measure measure);
+        MeasureV2Model CreateMeasure(Measure measure);
+        IEnumerable<MeasureV2Model> CreateMeasure(IEnumerable<Measure> measures);
         IEnumerable<MeasureModel> Create(IEnumerable<Measure> measures);
         DiaryModel Create(Diary diary);
         IEnumerable<DiaryModel> Create(IEnumerable<Diary> measures);

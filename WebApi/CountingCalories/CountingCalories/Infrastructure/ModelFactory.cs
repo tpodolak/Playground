@@ -51,6 +51,33 @@ namespace CountingCalories.Infrastructure
             return result;
         }
 
+        public MeasureV2Model CreateMeasure(Measure measure)
+        {
+            return new MeasureV2Model
+            {
+                Id = measure.Id,
+                Url = urlHelper.Link("Measures", new { id = measure.Id, foodid = measure.Food.Id, v = 2 }),
+                Calories = measure.Calories,
+                Description = measure.Description,
+                TotalFat = measure.TotalFat,
+                SaturatedFat = measure.SaturatedFat,
+                Protein = measure.Protein,
+                Carbohydrates = measure.Carbohydrates,
+                Fiber = measure.Fiber,
+                Sugar = measure.Sugar,
+                Sodium = measure.Sodium,
+                Iron = measure.Iron,
+                Cholestrol = measure.Cholestrol,
+            };
+        }
+
+        public IEnumerable<MeasureV2Model> CreateMeasure(IEnumerable<Measure> measures)
+        {
+            if (measures == null)
+                return Enumerable.Empty<MeasureV2Model>();
+            return measures.Select(CreateMeasure);
+        }
+
         public IEnumerable<MeasureModel> Create(IEnumerable<Measure> measures)
         {
             if (measures == null)
@@ -119,7 +146,7 @@ namespace CountingCalories.Infrastructure
             return new DiarySummaryModel
             {
                 DiaryDate = diary.CurrentDate,
-                TotalCalories = Math.Round(diary.Entries.Sum(val => val.Measure.Calories*val.Quantity))
+                TotalCalories = Math.Round(diary.Entries.Sum(val => val.Measure.Calories * val.Quantity))
             };
         }
 
