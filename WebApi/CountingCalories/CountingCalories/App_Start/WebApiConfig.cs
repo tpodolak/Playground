@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using CountingCalories.Infrastructure;
@@ -64,6 +65,7 @@ namespace CountingCalories
             foreach (var formatter in config.Formatters.OfType<JsonMediaTypeFormatter>())
             {
                 formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                CreateMediatypes(formatter);
             }
         }
 
@@ -76,7 +78,23 @@ namespace CountingCalories
 
         public static void ConfigureControllerSelector(HttpConfiguration config)
         {
-            config.Services.Replace(typeof (IHttpControllerSelector), new CustomHttpControllerSelector(config));
+            config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
+        }
+
+        private static void CreateMediatypes(JsonMediaTypeFormatter mediafFormatter)
+        {
+            // this supports only one media type, for prod we should also take care of others like application/xml etc
+            var mediaTypes = new[]
+            {
+                "application/vnd.coutingcalories.food.v1+json",
+                "application/vnd.coutingcalories.measure.v1+json",
+                "application/vnd.coutingcalories.measure.v2+json",
+                "application/vnd.coutingcalories.diary.v1+json",
+                "application/vnd.coutingcalories.diaryEntry.v1+json",
+            };
+
+            foreach (var media in mediaTypes.Select(val => new MediaTypeHeaderValue(val)))
+                mediafFormatter.SupportedMediaTypes.Add(media);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -8,6 +11,7 @@ namespace CountingCalories.Infrastructure
 {
     public class CustomHttpControllerSelector : DefaultHttpControllerSelector
     {
+        const string DefaultApiVersion = "1";
         public CustomHttpControllerSelector(HttpConfiguration configuration) : base(configuration)
         {
         }
@@ -20,7 +24,10 @@ namespace CountingCalories.Infrastructure
             HttpControllerDescriptor defaultController;
             if (controllers.TryGetValue(controllerName, out defaultController))
             {
-                var apiVersion = this.GetVersionFromQueryString(request);
+                // var apiVersion = GetVersionFromQueryString(request);
+                // var apiVersion = GetVersionFromHeader(request);
+                // var apiVersion = GetVersionFromAcceptHeaderVersion(request);
+                var apiVersion = GetVersionFromMediaType(request);
                 var versionedControllerName = string.Concat(controllerName, "V", apiVersion);
 
                 HttpControllerDescriptor versionedController;
@@ -43,6 +50,35 @@ namespace CountingCalories.Infrastructure
             {
                 return version;
             }
+            return DefaultApiVersion;
+        }
+
+        private string GetVersionFromHeader(HttpRequestMessage request)
+        {
+            const string versionHeader = "X-Api-Version";
+
+            var headerApiVersion = request.Headers.GetValues(versionHeader).FirstOrDefault();
+
+            return string.IsNullOrWhiteSpace(headerApiVersion) ? DefaultApiVersion : headerApiVersion;
+        }
+
+        private string GetVersionFromAcceptHeaderVersion(HttpRequestMessage request)
+        {
+            // this supports only one media type, for prod we should also take care of others like application/xml etc
+            var headerApiVersion = request.Headers.Accept.Where(val => val.MediaType == "application/json")
+                .SelectMany(val => val.Parameters)
+                .FirstOrDefault(val => val.Name.Equals("version", StringComparison.InvariantCultureIgnoreCase));
+            return headerApiVersion != null ? headerApiVersion.Value : DefaultApiVersion;
+        }
+
+        private string GetVersionFromMediaType(HttpRequestMessage request)
+        {
+            var accept = request.Headers.Accept;
+            var ex = new Regex(@"application\/vnd\.coutingcalories\.([a-z]+)\.v([0-9]+)\+json", RegexOptions.IgnoreCase);
+
+            foreach (var match in accept.Select(mime => ex.Match(mime.MediaType)))
+                return match.Groups[2].Value;
+
             return "1";
         }
     }
