@@ -3,12 +3,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
-using Autofac.Integration.WebApi;
 using CountingCalories.Data;
 
 namespace CountingCalories.Filters
 {
+    // Note this is not OAuth 
     public class TokenAuthorizationAttribute : BasicAuthorizationAttribute
     {
         private readonly bool perUser;
