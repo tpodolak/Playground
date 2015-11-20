@@ -231,7 +231,7 @@
     <Compile Include="Controllers\MeasuresV2Controller.cs" />
     <Compile Include="Controllers\MeasuresController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
-    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Converteres\LinkModelJsonConverter.cs" />
     <Compile Include="Filters\BasicAuthorizationAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\RequaireHttpsAttribute.cs" />
@@ -251,12 +251,14 @@
     <Compile Include="Models\DiaryModel.cs" />
     <Compile Include="Models\DiarySummaryModel.cs" />
     <Compile Include="Models\FoodModel.cs" />
+    <Compile Include="Models\LinkModel.cs" />
     <Compile Include="Models\MeasureModel.cs" />
     <Compile Include="Models\MeasureV2Model.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\PageResult.cs" />
     <Compile Include="Models\TokenRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ExpressionProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\accordion.css" />

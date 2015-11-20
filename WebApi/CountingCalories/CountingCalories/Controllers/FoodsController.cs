@@ -36,11 +36,14 @@ namespace CountingCalories.Controllers
 
             var results = modelFactory.Create(resultQuery);
 
-            var pageResult = new PageResult<FoodModel>(results, totalPages, totalCount)
+            var pageResult = new PageResult<FoodModel>(results, totalPages, totalCount);
+            if (page > 0)
+                pageResult.Links.Add(modelFactory.CreateLink(urlHelper.Link("Foods", new {page = page - 1}), "previousPage"));
+
+            if (page < totalPages - 1)
             {
-                PreviousPageUrl = page > 0 ? urlHelper.Link("Foods", new { page = page - 1 }) : string.Empty,
-                NextPageUrl = page < totalPages - 1 ? urlHelper.Link("Foods", new { page = page + 1 }) : string.Empty
-            };
+                pageResult.Links.Add(modelFactory.CreateLink(urlHelper.Link("Foods", new {page = page + 1}), "nextPage"));
+            }
             return pageResult;
         }
 

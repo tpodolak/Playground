@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using CacheCow.Server;
+using CountingCalories.Converteres;
 using CountingCalories.Infrastructure;
 using Newtonsoft.Json.Serialization;
 
@@ -66,6 +67,7 @@ namespace CountingCalories
             foreach (var formatter in config.Formatters.OfType<JsonMediaTypeFormatter>())
             {
                 formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                formatter.SerializerSettings.Converters.Add(new LinkModelJsonConverter());
                 CreateMediatypes(formatter);
             }
         }

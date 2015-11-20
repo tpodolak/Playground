@@ -24,9 +24,9 @@ namespace CountingCalories.Infrastructure
             var result = new FoodModel
             {
                 Id = food.Id,
-                Url = urlHelper.Link("Foods", new { foodid = food.Id }),
                 Description = food.Description,
-                Measures = food.Measures.Select(Create).ToList()
+                Measures = food.Measures.Select(Create).ToList(),
+                Links = new List<LinkModel> { this.CreateLink(urlHelper.Link("Foods", new { foodid = food.Id }), "self") }
             };
             return result;
         }
@@ -44,9 +44,9 @@ namespace CountingCalories.Infrastructure
             var result = new MeasureModel
             {
                 Id = measure.Id,
-                Url = urlHelper.Link("Measures", new { id = measure.Id, foodid = measure.Food.Id }),
                 Calories = measure.Calories,
                 Description = measure.Description,
+                Links = new List<LinkModel> { this.CreateLink(urlHelper.Link("Measures", new { id = measure.Id, foodid = measure.Food.Id }), "self") }
             };
             return result;
         }
@@ -56,7 +56,6 @@ namespace CountingCalories.Infrastructure
             return new MeasureV2Model
             {
                 Id = measure.Id,
-                Url = urlHelper.Link("Measures", new { id = measure.Id, foodid = measure.Food.Id, v = 2 }),
                 Calories = measure.Calories,
                 Description = measure.Description,
                 TotalFat = measure.TotalFat,
@@ -68,6 +67,7 @@ namespace CountingCalories.Infrastructure
                 Sodium = measure.Sodium,
                 Iron = measure.Iron,
                 Cholestrol = measure.Cholestrol,
+                Links = new List<LinkModel> { this.CreateLink(urlHelper.Link("Measures", new { id = measure.Id, foodid = measure.Food.Id }), "self") }
             };
         }
 
@@ -87,13 +87,19 @@ namespace CountingCalories.Infrastructure
 
         public DiaryModel Create(Diary diary)
         {
+            var href = urlHelper.Link("Diaries", new { diaryid = diary.CurrentDate.ToString("yyyy-MM-dd") });
+            var diaryEntries = urlHelper.Link("DiaryEntries", new { diaryid = diary.CurrentDate.ToString("yyyy-MM-dd") });
             return new DiaryModel
             {
                 Id = diary.Id,
-                Url = urlHelper.Link("Diaries", new { diaryid = diary.CurrentDate.ToString("yyyy-MM-dd") }),
                 CurrentDate = diary.CurrentDate,
                 UserName = diary.UserName,
-                Entries = diary.Entries.Select(Create).ToList()
+                Entries = diary.Entries.Select(Create).ToList(),
+                Links = new List<LinkModel>
+                {
+                    CreateLink(href, "self"),
+                    CreateLink(diaryEntries, "newDiaryEntry", "POST", false)
+                }
             };
         }
 
@@ -108,11 +114,11 @@ namespace CountingCalories.Infrastructure
         {
             return new DiaryEntryModel
             {
-                Url = urlHelper.Link("DiaryEntries", new { diaryid = diaryEntry.Diary.CurrentDate.ToString("yyyy-MM-dd"), id = diaryEntry.Id }),
                 Quantity = diaryEntry.Quantity,
                 FoodDescription = diaryEntry.FoodItem.Description,
                 MeasureDescription = diaryEntry.Measure.Description,
-                MeasureUrl = urlHelper.Link("Measures", new { foodid = diaryEntry.FoodItem.Id, id = diaryEntry.Measure.Id })
+                MeasureUrl = urlHelper.Link("Measures", new { foodid = diaryEntry.FoodItem.Id, id = diaryEntry.Measure.Id }),
+                Links = new List<LinkModel> { this.CreateLink(urlHelper.Link("DiaryEntries", new { diaryid = diaryEntry.Diary.CurrentDate.ToString("yyyy-MM-dd"), id = diaryEntry.Id }), "self") }
             };
         }
 
@@ -164,6 +170,17 @@ namespace CountingCalories.Infrastructure
             if (diaryEntries == null)
                 return Enumerable.Empty<DiaryEntryModel>();
             return diaryEntries.Select(Create);
+        }
+
+        public LinkModel CreateLink(string href, string rel, string method = "GET", bool isTempleted = false)
+        {
+            return new LinkModel
+            {
+                Href = href,
+                Rel = rel,
+                Method = method,
+                IsTempleted = isTempleted
+            };
         }
     }
 }

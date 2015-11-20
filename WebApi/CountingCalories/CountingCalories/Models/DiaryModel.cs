@@ -9,5 +9,6 @@ namespace CountingCalories.Models
         public DateTime CurrentDate { get; set; }
         public ICollection<DiaryEntryModel> Entries { get; set; }
         public string UserName { get; set; }
+        public ICollection<LinkModel> Links { get; set; } 
     }
 }

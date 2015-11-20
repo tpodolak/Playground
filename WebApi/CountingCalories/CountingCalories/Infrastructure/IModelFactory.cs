@@ -19,5 +19,6 @@ namespace CountingCalories.Infrastructure
         DiaryEntry Parse(DiaryEntryModel diaryEntry);
         DiarySummaryModel CreateSummary(Diary diary);
         AuthTokenModel Create(AuthToken authToken);
+        LinkModel CreateLink(string href, string rel, string method = "GET", bool isTempleted = false);
     }
 }
