@@ -18,6 +18,7 @@ namespace CountingCalories
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.ConfigureHttps(GlobalConfiguration.Configuration);
             WebApiConfig.ConfigureFormatters(GlobalConfiguration.Configuration);
+            WebApiConfig.ConfigureETagSupport(GlobalConfiguration.Configuration);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

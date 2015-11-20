@@ -3,6 +3,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
+using CacheCow.Server;
 using CountingCalories.Infrastructure;
 using Newtonsoft.Json.Serialization;
 
@@ -95,6 +96,12 @@ namespace CountingCalories
 
             foreach (var media in mediaTypes.Select(val => new MediaTypeHeaderValue(val)))
                 mediafFormatter.SupportedMediaTypes.Add(media);
+        }
+
+        public static void ConfigureETagSupport(HttpConfiguration httpConfiguration)
+        {
+            var cacheHandler = new CachingHandler(httpConfiguration);
+            httpConfiguration.MessageHandlers.Add(cacheHandler);
         }
     }
 }
