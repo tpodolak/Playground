@@ -230,6 +230,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeasuresV2Controller.cs" />
     <Compile Include="Controllers\MeasuresController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Converteres\LinkModelJsonConverter.cs" />
     <Compile Include="Filters\BasicAuthorizationAttribute.cs" />

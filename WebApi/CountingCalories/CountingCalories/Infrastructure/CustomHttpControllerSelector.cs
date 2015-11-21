@@ -22,6 +22,13 @@ namespace CountingCalories.Infrastructure
             var routeData = request.GetRouteData();
             var controllerName = (string)routeData.Values["controller"];
             HttpControllerDescriptor defaultController;
+
+            // skip versioning for attribute routing
+            if (string.IsNullOrWhiteSpace(controllerName))
+            {
+                return base.SelectController(request);
+            }
+
             if (controllers.TryGetValue(controllerName, out defaultController))
             {
                 // var apiVersion = GetVersionFromQueryString(request);

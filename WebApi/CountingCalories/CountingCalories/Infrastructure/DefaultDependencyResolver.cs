@@ -22,8 +22,13 @@ namespace CountingCalories.Infrastructure
             builder.RegisterInstance(GlobalConfiguration.Configuration);
             builder.RegisterHttpRequestMessage(httpConfiguration);
             builder.RegisterApiControllers(assemblies);
-            builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>().AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(assemblies).Except<ModelFactory>();
+            builder.RegisterAssemblyTypes(assemblies)
+                   .Except<ModelFactory>()
+                   .Except<CustomHttpControllerSelector>()
+                   .AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(assemblies)
+                   .Except<ModelFactory>()
+                   .Except<CustomHttpControllerSelector>();
             builder.Register<IModelFactory>(c => new ModelFactory(c.Resolve<ICountingCaloriesRepository>(), new UrlHelper(c.Resolve<HttpRequestMessage>()))).InstancePerRequest();
             var container = builder.Build();
             dependencyResolver = new AutofacWebApiDependencyResolver(container);

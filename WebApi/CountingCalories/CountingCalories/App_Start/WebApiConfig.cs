@@ -14,6 +14,8 @@ namespace CountingCalories
     {
         public static void Register(HttpConfiguration config)
         {
+            config.MapHttpAttributeRoutes();
+            ConfigureControllerSelector(config);
             config.Routes.MapHttpRoute(
                 name: "Foods",
                 routeTemplate: "api/nutrition/foods/{foodid}",
@@ -81,10 +83,10 @@ namespace CountingCalories
 
         public static void ConfigureControllerSelector(HttpConfiguration config)
         {
-            config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
+           config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
         }
 
-        private static void CreateMediatypes(JsonMediaTypeFormatter mediafFormatter)
+        private static void CreateMediatypes(JsonMediaTypeFormatter mediaFormatter)
         {
             // this supports only one media type, for prod we should also take care of others like application/xml etc
             var mediaTypes = new[]
@@ -97,7 +99,7 @@ namespace CountingCalories
             };
 
             foreach (var media in mediaTypes.Select(val => new MediaTypeHeaderValue(val)))
-                mediafFormatter.SupportedMediaTypes.Add(media);
+                mediaFormatter.SupportedMediaTypes.Add(media);
         }
 
         public static void ConfigureETagSupport(HttpConfiguration httpConfiguration)
