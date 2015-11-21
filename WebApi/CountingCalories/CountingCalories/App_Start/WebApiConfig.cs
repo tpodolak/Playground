@@ -2,6 +2,7 @@
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using CacheCow.Server;
 using CountingCalories.Converteres;
@@ -58,6 +59,9 @@ namespace CountingCalories
                 defaults: new { id = RouteParameter.Optional }
                 );
 
+            var corsAttr = new EnableCorsAttribute("*", "*", "GET");
+            config.EnableCors();
+
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
             // To avoid processing unexpected or malicious queries, use the validation settings on QueryableAttribute to validate incoming queries.
             // For more information, visit http://go.microsoft.com/fwlink/?LinkId=279712.
@@ -83,7 +87,7 @@ namespace CountingCalories
 
         public static void ConfigureControllerSelector(HttpConfiguration config)
         {
-           config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
+            config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
         }
 
         private static void CreateMediatypes(JsonMediaTypeFormatter mediaFormatter)
