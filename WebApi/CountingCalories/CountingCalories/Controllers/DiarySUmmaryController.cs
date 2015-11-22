@@ -3,7 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CountingCalories.Data;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Mappers;
+using CountingCalories.Infrastructure.Security;
 
 namespace CountingCalories.Controllers
 {

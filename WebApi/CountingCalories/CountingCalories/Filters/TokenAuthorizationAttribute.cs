@@ -1,9 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Http.Controllers;
-using CountingCalories.Data;
+﻿using System.Web.Http.Controllers;
 
 namespace CountingCalories.Filters
 {

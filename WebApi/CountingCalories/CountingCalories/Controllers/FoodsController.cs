@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Routing;
 using CountingCalories.Data;
 using CountingCalories.Filters;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Mappers;
 using CountingCalories.Models;
 
 namespace CountingCalories.Controllers

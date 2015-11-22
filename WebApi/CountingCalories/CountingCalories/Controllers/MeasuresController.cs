@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using CountingCalories.Data;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Mappers;
 using CountingCalories.Models;
 
 namespace CountingCalories.Controllers

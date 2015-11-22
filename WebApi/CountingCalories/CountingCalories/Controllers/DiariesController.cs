@@ -6,7 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using CountingCalories.Data;
 using CountingCalories.Filters;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Mappers;
+using CountingCalories.Infrastructure.Security;
 using CountingCalories.Models;
 
 namespace CountingCalories.Controllers

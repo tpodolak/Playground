@@ -4,7 +4,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using CountingCalories.Data;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.DependencyInjection;
+using CountingCalories.Infrastructure.Routing;
 
 namespace CountingCalories
 {
@@ -15,8 +16,12 @@ namespace CountingCalories
     {
         protected void Application_Start()
         {
+            ConfigureDependencyResolver();
+            var service = (IRouteVersionFinder)(GlobalConfiguration.Configuration.DependencyResolver).GetService(typeof (IRouteVersionFinder));
+
+
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configure(configuration => WebApiConfig.Register(configuration, service));
             WebApiConfig.ConfigureHttps(GlobalConfiguration.Configuration);
             WebApiConfig.ConfigureFormatters(GlobalConfiguration.Configuration);
             WebApiConfig.ConfigureETagSupport(GlobalConfiguration.Configuration);
@@ -24,7 +29,6 @@ namespace CountingCalories
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            ConfigureDependencyResolver();
         }
 
         private void ConfigureDependencyResolver()

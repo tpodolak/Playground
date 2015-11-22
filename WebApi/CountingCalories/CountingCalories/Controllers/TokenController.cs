@@ -6,7 +6,7 @@ using System.Text;
 using System.Web.Http;
 using CountingCalories.Data;
 using CountingCalories.Data.Entities;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Mappers;
 using CountingCalories.Models;
 
 namespace CountingCalories.Controllers

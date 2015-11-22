@@ -6,17 +6,17 @@ using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using CacheCow.Server;
 using CountingCalories.Converteres;
-using CountingCalories.Infrastructure;
+using CountingCalories.Infrastructure.Routing;
 using Newtonsoft.Json.Serialization;
 
 namespace CountingCalories
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static void Register(HttpConfiguration config, IRouteVersionFinder routeVersionFinder)
         {
             config.MapHttpAttributeRoutes();
-            ConfigureControllerSelector(config);
+            ConfigureControllerSelector(config, routeVersionFinder);
             config.Routes.MapHttpRoute(
                 name: "Foods",
                 routeTemplate: "api/nutrition/foods/{foodid}",
@@ -60,7 +60,7 @@ namespace CountingCalories
                 );
 
             var corsAttr = new EnableCorsAttribute("*", "*", "GET");
-            config.EnableCors();
+            config.EnableCors(corsAttr);
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
             // To avoid processing unexpected or malicious queries, use the validation settings on QueryableAttribute to validate incoming queries.
@@ -85,9 +85,9 @@ namespace CountingCalories
 #endif
         }
 
-        public static void ConfigureControllerSelector(HttpConfiguration config)
+        public static void ConfigureControllerSelector(HttpConfiguration config, IRouteVersionFinder versionFinder)
         {
-            config.Services.Replace(typeof(IHttpControllerSelector), new CustomHttpControllerSelector(config));
+            config.Services.Replace(typeof(IHttpControllerSelector), new VersionedRouteHttpControllerSelector(config, versionFinder));
         }
 
         private static void CreateMediatypes(JsonMediaTypeFormatter mediaFormatter)

@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Web.Http;
 using CountingCalories.Data;
+using CountingCalories.Infrastructure.Routing;
 
 namespace CountingCalories.Controllers
 {
@@ -28,7 +29,7 @@ namespace CountingCalories.Controllers
         }
 
         // tilde overrides default prefix
-        [Route("~/api/stat/{id:int}")]
+        [VersionedRoute("~/api/stat/{id:int}")]
         public HttpResponseMessage Get(int id)
         {
             var result = new
@@ -42,7 +43,7 @@ namespace CountingCalories.Controllers
         }
 
         // tilde overrides default prefix
-        [Route("~/api/stat/{name:alpha}")]
+        [VersionedRoute("~/api/stat/{name:alpha}")]
         public HttpResponseMessage Get(string name)
         {
             var result = new
