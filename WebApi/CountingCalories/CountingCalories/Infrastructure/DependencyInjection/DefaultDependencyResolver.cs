@@ -20,18 +20,15 @@ namespace CountingCalories.Infrastructure.DependencyInjection
         {
             var builder = new ContainerBuilder();
             var httpConfiguration = GlobalConfiguration.Configuration;
-            builder.RegisterInstance(GlobalConfiguration.Configuration);
+            builder.RegisterInstance(httpConfiguration);
             builder.RegisterHttpRequestMessage(httpConfiguration);
             builder.RegisterApiControllers(assemblies);
             builder.RegisterAssemblyTypes(assemblies)
                    .Except<ModelFactory>()
                    .Except<VersionedRouteHttpControllerSelector>()
                    .Except<IRouteVersionFinder>()
-                   .AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(assemblies)
-                   .Except<ModelFactory>()
-                   .Except<VersionedRouteHttpControllerSelector>()
-                   .Except<IRouteVersionFinder>();
+                   .AsImplementedInterfaces()
+                   .AsSelf();
 
             builder.Register<IModelFactory>(c => new ModelFactory(c.Resolve<ICountingCaloriesRepository>(), new UrlHelper(c.Resolve<HttpRequestMessage>()))).InstancePerRequest();
             builder.RegisterType<RouteVersionFinder>().As<IRouteVersionFinder>().InstancePerLifetimeScope();
