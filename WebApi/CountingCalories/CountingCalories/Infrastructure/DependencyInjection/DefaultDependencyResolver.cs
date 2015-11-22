@@ -8,9 +8,10 @@ using System.Web.Http.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CountingCalories.Data;
-using CountingCalories.Filters;
+using CountingCalories.Infrastructure.Mappers;
+using CountingCalories.Infrastructure.Routing;
 
-namespace CountingCalories.Infrastructure
+namespace CountingCalories.Infrastructure.DependencyInjection
 {
     public class DefaultDependencyResolver : IDependencyResolver
     {
@@ -24,12 +25,16 @@ namespace CountingCalories.Infrastructure
             builder.RegisterApiControllers(assemblies);
             builder.RegisterAssemblyTypes(assemblies)
                    .Except<ModelFactory>()
-                   .Except<CustomHttpControllerSelector>()
+                   .Except<VersionedRouteHttpControllerSelector>()
+                   .Except<IRouteVersionFinder>()
                    .AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(assemblies)
                    .Except<ModelFactory>()
-                   .Except<CustomHttpControllerSelector>();
+                   .Except<VersionedRouteHttpControllerSelector>()
+                   .Except<IRouteVersionFinder>();
+
             builder.Register<IModelFactory>(c => new ModelFactory(c.Resolve<ICountingCaloriesRepository>(), new UrlHelper(c.Resolve<HttpRequestMessage>()))).InstancePerRequest();
+            builder.RegisterType<RouteVersionFinder>().As<IRouteVersionFinder>().InstancePerLifetimeScope();
             var container = builder.Build();
             dependencyResolver = new AutofacWebApiDependencyResolver(container);
         }

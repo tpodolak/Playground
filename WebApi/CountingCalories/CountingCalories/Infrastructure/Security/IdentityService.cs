@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace CountingCalories.Infrastructure
+﻿namespace CountingCalories.Infrastructure.Security
 {
     public class IdentityService : IIdentityService
     {

@@ -6,7 +6,7 @@ using CountingCalories.Data;
 using CountingCalories.Data.Entities;
 using CountingCalories.Models;
 
-namespace CountingCalories.Infrastructure
+namespace CountingCalories.Infrastructure.Mappers
 {
     public class ModelFactory : IModelFactory
     {

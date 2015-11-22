@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CountingCalories.Data.Entities;
 using CountingCalories.Models;
 
-namespace CountingCalories.Infrastructure
+namespace CountingCalories.Infrastructure.Mappers
 {
     public interface IModelFactory
     {
