@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.OData;
 using NorthwindOData.Data;
 using NorthwindOData.Entities;
 
@@ -15,11 +16,11 @@ namespace NorthwindOData.Web.Controllers
         {
             _Context.Configuration.LazyLoadingEnabled = false;
         }
-
-        // GET /api/Customers
-        public IEnumerable<Customer> GetCustomers()
+        
+        [EnableQuery]
+        public IQueryable<Customer> GetCustomers()
         {
-            return _Context.Customers.ToArray();
+            return _Context.Customers;
         }
 
         // GET /api/Customers/ALFKI
