@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Results;
+using System.Web.Http.OData.Routing;
 using Microsoft.Data.OData;
 using NorthwindOData.Data;
 using NorthwindOData.Entities;
@@ -18,6 +20,15 @@ namespace NorthwindOData.Web.Controllers
         public CustomersController()
         {
             context.Configuration.LazyLoadingEnabled = false;
+        }
+
+        [HttpPost]
+        public int AddLoyaltyPoints([FromODataUri] string key, ODataActionParameters @params)
+        {
+            string category = @params["category"] as string;
+            int points = (int) @params["points"];
+            var currentPoints = 1;
+            return currentPoints + points;
         }
 
         [EnableQuery]

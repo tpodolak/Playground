@@ -12,5 +12,6 @@ namespace NorthwindOData.Entities
         public DateTime? RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public Customer Customer { get; set; }
     }
 }

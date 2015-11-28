@@ -22,9 +22,14 @@ namespace NorthwindOData.Web
         private static IEdmModel GetImplicitEDM()
         {
             ODataModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Customer>("Customers");
+            var customers = builder.EntitySet<Customer>("Customers");
             builder.EntitySet<Order>("Orders");
             builder.EntitySet<OrderDetail>("OrderDetails");
+            var customer = customers.EntityType;
+            var action = customer.Action("AddLoyaltyPoints");
+            action.Parameter<string>("category");
+            action.Parameter<int>("points");
+            action.Returns<int>();
             return builder.GetEdmModel();
         }
     }
