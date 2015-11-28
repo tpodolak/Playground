@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 using NorthwindOData.Data;
 using NorthwindOData.Entities;
 
@@ -16,8 +17,8 @@ namespace NorthwindOData.Web.Controllers
         {
             _Context.Configuration.LazyLoadingEnabled = false;
         }
-        
-        [EnableQuery]
+
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.Filter)]
         public IQueryable<Customer> GetCustomers()
         {
             return _Context.Customers;
