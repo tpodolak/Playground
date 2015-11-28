@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web.Http;
+﻿using System.Linq;
 using System.Web.Http.OData;
-using System.Web.Http.OData.Query;
 using NorthwindOData.Data;
 using NorthwindOData.Entities;
 
 namespace NorthwindOData.Web.Controllers
 {
-    public class CustomersController : ApiController
+    public class CustomersController : EntitySetController<Customer, string>
     {
         NorthwindDbContext _Context = new NorthwindDbContext();
 
@@ -18,19 +14,21 @@ namespace NorthwindOData.Web.Controllers
             _Context.Configuration.LazyLoadingEnabled = false;
         }
 
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.Filter)]
-        public IQueryable<Customer> GetCustomers()
+        [EnableQuery]
+        public override IQueryable<Customer> Get()
         {
             return _Context.Customers;
         }
 
-        // GET /api/Customers/ALFKI
-        public Customer GetCustomer(string id)
+        protected override Customer GetEntityByKey(string key)
         {
-            Customer customer = _Context.Customers.FirstOrDefault(c => c.CustomerID == id);
-            if (customer == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            return customer;
+            return _Context.Customers.FirstOrDefault(val => val.CustomerID == key);
+        }
+
+        [EnableQuery]
+        public IQueryable<Order> GetOrdersFromCustomer([FromODataUri] string key)
+        {
+            return _Context.Orders.Where(val => val.CustomerID == key);
         }
 
         protected override void Dispose(bool disposing)
