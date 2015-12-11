@@ -14,8 +14,12 @@ namespace IntroducingWF
         {
             WriteToConsole("Hello", "World from sequence");
             WriteToConsoleParallel("Hello", "World from parallel");
+            // without flowchart
             RequestVacations(DateTime.UtcNow, DateTime.UtcNow.AddDays(7));
             RequestVacations(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
+            // with flowchart
+            RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(7));
+            RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
             Console.ReadKey();
         }
 
@@ -45,6 +49,35 @@ namespace IntroducingWF
             if (response.TryGetValue("Result", out result))
             {
                 Console.WriteLine($"Finished processing vacation request. RequestStatus is {result}");
+            }
+        }
+
+        private static void RequestVacationFlowChart(DateTime startDate, DateTime endDate)
+        {
+            Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart");
+            var requestVacationTimeFlow = new VacationFlowChart();
+            var request = new VacationRequest
+            {
+                RequestingEmployee = new Employee
+                {
+                    Name = "John",
+                    Email = "John@John.com",
+                    Manager = new Employee
+                    {
+                        Name = "Manager",
+                        Email = "Manager@Manager.com"
+                    }
+                },
+                StartDate = startDate,
+                EndDate = endDate
+            };
+            var dictionary = new Dictionary<string, object> {["Request"] = request };
+
+            var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, dictionary);
+            object result;
+            if (response.TryGetValue("Result", out result))
+            {
+                Console.WriteLine($"Finished processing vacation request using FlowChart. RequestStatus is {result}");
             }
         }
 
