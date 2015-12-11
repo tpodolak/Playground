@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("IntroducingWWF")]
+[assembly: AssemblyTitle("IntroducingWF.CustomActivities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IntroducingWWF")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyProduct("IntroducingWF.CustomActivities")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,8 +19,9 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
+
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7eab141b-bb79-4466-8258-76ef37d573bf")]
+[assembly: Guid("DEA55EC9-5A25-48CE-BCFD-3BB08A5F2B15")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,0 +1,205 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="IntroducingWF.Workflows.RequestVacationTime"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:ic="clr-namespace:IntroducingWF.CustomActivities;assembly=IntroducingWF.CustomActivities"
+ xmlns:ie="clr-namespace:IntroducingWF.EmployeeLibrary;assembly=IntroducingWF.EmployeeLibrary"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Request" Type="InArgument(ie:VacationRequest)" />
+    <x:Property Name="Result" Type="OutArgument(ie:RequestStatus)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>IntroducingWF.Workflows.requestVacationTime_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>IntroducingWF.EmployeeLibrary</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Http</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>IntroducingWF.EmployeeLibrary</AssemblyReference>
+      <AssemblyReference>IntroducingWF.CustomActivities</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>IntroducingWF.Workflows</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="remainingDays" />
+      <Variable x:TypeArguments="x:Int32" Name="requestedDays" />
+    </Sequence.Variables>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">
+          <mca:CSharpReference x:TypeArguments="x:Int32">remainingDays</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">Request.RequestingEmployee.GetRemainingVacationDays()</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">
+          <mca:CSharpReference x:TypeArguments="x:Int32">requestedDays</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">Request.EndDate.Subtract(Request.StartDate).Days</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <If sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <mca:CSharpValue x:TypeArguments="x:Boolean">remainingDays &gt;= requestedDays</mca:CSharpValue>
+        </InArgument>
+      </If.Condition>
+      <If.Then>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ie:RequestStatus">
+              <mca:CSharpReference x:TypeArguments="ie:RequestStatus">Result</mca:CSharpReference>
+            </OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ie:RequestStatus">
+              <mca:CSharpValue x:TypeArguments="ie:RequestStatus">RequestStatus.Approved</mca:CSharpValue>
+            </InArgument>
+          </Assign.Value>
+        </Assign>
+      </If.Then>
+      <If.Else>
+        <If sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Condition>
+            <InArgument x:TypeArguments="x:Boolean">
+              <mca:CSharpValue x:TypeArguments="x:Boolean">remainingDays &lt;= 0</mca:CSharpValue>
+            </InArgument>
+          </If.Condition>
+          <If.Then>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="ie:RequestStatus">
+                  <mca:CSharpReference x:TypeArguments="ie:RequestStatus">Result</mca:CSharpReference>
+                </OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="ie:RequestStatus">
+                  <mca:CSharpValue x:TypeArguments="ie:RequestStatus">RequestStatus.Rejected</mca:CSharpValue>
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="ManagerApproval" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="managerEmail" />
+              </Sequence.Variables>
+              <ic:GetManager ManagerName="{x:Null}" sap2010:WorkflowViewState.IdRef="GetManager_1">
+                <ic:GetManager.EmployeeEmailAddress>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Request.RequestingEmployee.Email</mca:CSharpValue>
+                  </InArgument>
+                </ic:GetManager.EmployeeEmailAddress>
+                <ic:GetManager.ManagerEmail>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">managerEmail</mca:CSharpReference>
+                  </OutArgument>
+                </ic:GetManager.ManagerEmail>
+              </ic:GetManager>
+              <ic:SendMail sap2010:WorkflowViewState.IdRef="SendMail_1">
+                <ic:SendMail.FromAddress>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">Request.RequestingEmployee.Email</mca:CSharpValue>
+                  </InArgument>
+                </ic:SendMail.FromAddress>
+                <ic:SendMail.MailBody>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">string.Format("You have request from {0} for {1} days of vacation, but they only have {2} in reserve", Request.RequestingEmployee.Name,requestedDays,remainingDays)</mca:CSharpValue>
+                  </InArgument>
+                </ic:SendMail.MailBody>
+                <ic:SendMail.Subject>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">string.Format("Vacation request from {0}", Request.RequestingEmployee.Name)</mca:CSharpValue>
+                  </InArgument>
+                </ic:SendMail.Subject>
+                <ic:SendMail.ToAddress>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">managerEmail</mca:CSharpValue>
+                  </InArgument>
+                </ic:SendMail.ToAddress>
+              </ic:SendMail>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="ie:RequestStatus">
+                    <mca:CSharpReference x:TypeArguments="ie:RequestStatus">Result</mca:CSharpReference>
+                  </OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="ie:RequestStatus">
+                    <mca:CSharpValue x:TypeArguments="ie:RequestStatus">RequestStatus.Verification</mca:CSharpValue>
+                  </InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Else>
+        </If>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d2NFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcSW50cm9kdWNpbmdXRlxJbnRyb2R1Y2luZ1dGLldvcmtmbG93c1xSZXF1ZXN0VmFjYXRpb25UaW1lLnhhbWwdMQOwAQ4CAQE2BUEOAgFjQgVNDgIBWE4FrgEKAgECPgs+fQIBaTkLOV0CAWRKC0p4AgFeRQtFXQIBWVELUWsCAQNVCWASAgFNYwmsAQ4CAQhdD11rAgFTWA9YYwIBTmYPZmMCAQlqDXUWAgFCeA2qARgCAQ5yE3JvAgFIbRNtZwIBQ3wPhwEfAgE1iAEPnQEdAgEcngEPqQEYAgEPhAEVhAFnAgE8fxV/cwIBNosBFYsBcwIBL5UBFZUBngECASmQARWQAfYBAgEjmgEVmgFfAgEdpgEVpgF1AgEWoQEVoQFpAgEQ</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="798,62" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="798,62" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="GetManager_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="SendMail_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,310">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="531,460" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="798,610" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="820,938">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="IntroducingWF.Workflows.requestVacationTime_1" sap:VirtualizedContainerService.HintSize="860,1018" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
