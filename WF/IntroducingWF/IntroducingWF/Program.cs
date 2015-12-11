@@ -2,6 +2,7 @@
 using System.Activities;
 using System.Activities.Statements;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using IntroducingWF.EmployeeLibrary;
 using IntroducingWF.Workflows;
 using Parallel = System.Activities.Statements.Parallel;
@@ -20,6 +21,9 @@ namespace IntroducingWF
             // with flowchart
             RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(7));
             RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
+
+            RequestVacationFlowChartAsync(DateTime.UtcNow, DateTime.UtcNow.AddDays(1)).Wait();
+
             Console.ReadKey();
         }
 
@@ -27,24 +31,9 @@ namespace IntroducingWF
         {
             Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd}");
             var requestVacationTimeFlow = new RequestVacationTime();
-            var request = new VacationRequest
-            {
-                RequestingEmployee = new Employee
-                {
-                    Name = "John",
-                    Email = "John@John.com",
-                    Manager = new Employee
-                    {
-                        Name = "Manager",
-                        Email = "Manager@Manager.com"
-                    }
-                },
-                StartDate = startDate,
-                EndDate = endDate
-            };
-            var dictionary = new Dictionary<string, object> {["Request"] = request };
+            var requestParams = CreateRequestParams(startDate, endDate);
 
-            var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, dictionary);
+            var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, requestParams);
             object result;
             if (response.TryGetValue("Result", out result))
             {
@@ -56,6 +45,33 @@ namespace IntroducingWF
         {
             Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart");
             var requestVacationTimeFlow = new VacationFlowChart();
+            var requestParams = CreateRequestParams(startDate, endDate);
+            var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, requestParams);
+            object result;
+            if (response.TryGetValue("Result", out result))
+            {
+                Console.WriteLine($"Finished processing vacation request using FlowChart. RequestStatus is {result}");
+            }
+        }
+
+        private static async Task RequestVacationFlowChartAsync(DateTime startDate, DateTime endDate)
+        {
+            Console.WriteLine($"Requesting vacation async from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart ");
+            var requestVacationTimeFlow = new VacationFlowChart();
+            var requestParams = CreateRequestParams(startDate, endDate);
+            var workflowInvoker = new WorkflowInvoker(requestVacationTimeFlow);
+
+            var response = await Task.Factory.FromAsync((callback, o) => workflowInvoker.BeginInvoke(requestParams, callback, o), workflowInvoker.EndInvoke, null);
+
+            object result;
+            if (response.TryGetValue("Result", out result))
+            {
+                Console.WriteLine($"Finished processing vacation async request using FlowChart. RequestStatus is {result}");
+            }
+        }
+
+        private static Dictionary<string, object> CreateRequestParams(DateTime startDate, DateTime endDate)
+        {
             var request = new VacationRequest
             {
                 RequestingEmployee = new Employee
@@ -72,13 +88,7 @@ namespace IntroducingWF
                 EndDate = endDate
             };
             var dictionary = new Dictionary<string, object> {["Request"] = request };
-
-            var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, dictionary);
-            object result;
-            if (response.TryGetValue("Result", out result))
-            {
-                Console.WriteLine($"Finished processing vacation request using FlowChart. RequestStatus is {result}");
-            }
+            return dictionary;
         }
 
         private static void WriteToConsole(string hello, string world)
