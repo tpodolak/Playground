@@ -11,7 +11,8 @@
  xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="employeeMail" Type="InArgument(x:String)" />
+    <x:Property Name="employeeEmail" Type="InArgument(x:String)" />
+    <x:Property Name="emailResult" Type="OutArgument(snm:SmtpStatusCode)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
   <sap2010:WorkflowViewState.IdRef>IntroducingWF.CustomActivities.NotifyManager_1</sap2010:WorkflowViewState.IdRef>
@@ -46,12 +47,11 @@
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="managerEmail" />
       <Variable x:TypeArguments="x:String" Name="managerName" />
-      <Variable x:TypeArguments="snm:SmtpStatusCode" Name="emailResult" />
     </Sequence.Variables>
     <local:GetManager sap2010:WorkflowViewState.IdRef="GetManager_1">
       <local:GetManager.EmployeeEmailAddress>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">employeeMail</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">employeeEmail</mca:CSharpValue>
         </InArgument>
       </local:GetManager.EmployeeEmailAddress>
       <local:GetManager.ManagerEmail>
@@ -68,12 +68,12 @@
     <local:SendMailCode sap2010:WorkflowViewState.IdRef="SendMailCode_1">
       <local:SendMailCode.FromAddress>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">employeeMail</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">employeeEmail</mca:CSharpValue>
         </InArgument>
       </local:SendMailCode.FromAddress>
       <local:SendMailCode.MailBody>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">$"Body from {employeeMail}"</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">$"Body from {employeeEmail}"</mca:CSharpValue>
         </InArgument>
       </local:SendMailCode.MailBody>
       <local:SendMailCode.Result>
@@ -83,7 +83,7 @@
       </local:SendMailCode.Result>
       <local:SendMailCode.Subject>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">$"Email from {employeeMail}"</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">$"Email from {employeeEmail}"</mca:CSharpValue>
         </InArgument>
       </local:SendMailCode.Subject>
       <local:SendMailCode.ToAddress>
@@ -92,7 +92,7 @@
         </InArgument>
       </local:SendMailCode.ToAddress>
     </local:SendMailCode>
-    <sads:DebugSymbol.Symbol>d2RFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcSW50cm9kdWNpbmdXRlxJbnRyb2R1Y2luZ1dGLkN1c3RvbUFjdGl2aXRpZXNcTm90aWZ5TWFuYWdlci54YW1sCy0DYA4CAQEzBUMYAgEcRAVeGgIBAjsLO10CASc2CzZVAgEiQAtAXAIBHUcLR1UCARdWC1ZlAgESTAtMZAIBDVELUWYCAQhbC1tVAgED</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d2RFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcSW50cm9kdWNpbmdXRlxJbnRyb2R1Y2luZ1dGLkN1c3RvbUFjdGl2aXRpZXNcTm90aWZ5TWFuYWdlci54YW1sCy4DYA4CAQEzBUMYAgEcRAVeGgIBAjsLO10CASc2CzZWAgEiQAtAXAIBHUcLR1YCARdWC1ZmAgESTAtMZQIBDVELUWYCAQhbC1tVAgED</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
