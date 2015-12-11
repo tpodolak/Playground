@@ -50,9 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetManager.cs" />
-    <Compile Include="GetOData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMailCode.cs" />
     <Compile Include="SendMail.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamlAppDef Include="NotifyManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppDef>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

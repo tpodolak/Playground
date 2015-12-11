@@ -1,0 +1,111 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="IntroducingWF.CustomActivities.NotifyManager"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:IntroducingWF.CustomActivities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="employeeMail" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>IntroducingWF.CustomActivities.NotifyManager_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Net.Mail</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Services.Client</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>IntroducingWF.CustomActivities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="managerEmail" />
+      <Variable x:TypeArguments="x:String" Name="managerName" />
+      <Variable x:TypeArguments="snm:SmtpStatusCode" Name="emailResult" />
+    </Sequence.Variables>
+    <local:GetManager sap2010:WorkflowViewState.IdRef="GetManager_1">
+      <local:GetManager.EmployeeEmailAddress>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">employeeMail</mca:CSharpValue>
+        </InArgument>
+      </local:GetManager.EmployeeEmailAddress>
+      <local:GetManager.ManagerEmail>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">managerEmail</mca:CSharpReference>
+        </OutArgument>
+      </local:GetManager.ManagerEmail>
+      <local:GetManager.ManagerName>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">managerName</mca:CSharpReference>
+        </OutArgument>
+      </local:GetManager.ManagerName>
+    </local:GetManager>
+    <local:SendMailCode sap2010:WorkflowViewState.IdRef="SendMailCode_1">
+      <local:SendMailCode.FromAddress>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">employeeMail</mca:CSharpValue>
+        </InArgument>
+      </local:SendMailCode.FromAddress>
+      <local:SendMailCode.MailBody>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">$"Body from {employeeMail}"</mca:CSharpValue>
+        </InArgument>
+      </local:SendMailCode.MailBody>
+      <local:SendMailCode.Result>
+        <OutArgument x:TypeArguments="snm:SmtpStatusCode">
+          <mca:CSharpReference x:TypeArguments="snm:SmtpStatusCode">emailResult</mca:CSharpReference>
+        </OutArgument>
+      </local:SendMailCode.Result>
+      <local:SendMailCode.Subject>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">$"Email from {employeeMail}"</mca:CSharpValue>
+        </InArgument>
+      </local:SendMailCode.Subject>
+      <local:SendMailCode.ToAddress>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">managerEmail</mca:CSharpValue>
+        </InArgument>
+      </local:SendMailCode.ToAddress>
+    </local:SendMailCode>
+    <sads:DebugSymbol.Symbol>d2RFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcSW50cm9kdWNpbmdXRlxJbnRyb2R1Y2luZ1dGLkN1c3RvbUFjdGl2aXRpZXNcTm90aWZ5TWFuYWdlci54YW1sCy0DYA4CAQEzBUMYAgEcRAVeGgIBAjsLO10CASc2CzZVAgEiQAtAXAIBHUcLR1UCARdWC1ZlAgESTAtMZAIBDVELUWYCAQhbC1tVAgED</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetManager_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="SendMailCode_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="IntroducingWF.CustomActivities.NotifyManager_1" sap:VirtualizedContainerService.HintSize="262,288" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

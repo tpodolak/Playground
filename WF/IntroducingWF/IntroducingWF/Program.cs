@@ -15,14 +15,18 @@ namespace IntroducingWF
         {
             WriteToConsole("Hello", "World from sequence");
             WriteToConsoleParallel("Hello", "World from parallel");
-            // without flowchart
-            RequestVacations(DateTime.UtcNow, DateTime.UtcNow.AddDays(7));
-            RequestVacations(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
-            // with flowchart
-            RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(7));
-            RequestVacationFlowChart(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
+            var startDate = DateTime.UtcNow;
+            var endDateWithVerification = startDate.AddDays(7);
+            var endDateWithApproval = startDate.AddDays(1);
 
-            RequestVacationFlowChartAsync(DateTime.UtcNow, DateTime.UtcNow.AddDays(1)).Wait();
+            // without flowchart
+            RequestVacations(startDate, endDateWithVerification);
+            RequestVacations(startDate, endDateWithApproval);
+            // with flowchart
+            RequestVacationFlowChart(startDate, endDateWithVerification);
+            RequestVacationFlowChart(startDate, endDateWithApproval);
+            // with flowchart and instance WorkflowInvoker
+            RequestVacationFlowChartAsync(startDate, endDateWithApproval).Wait();
 
             Console.ReadKey();
         }
