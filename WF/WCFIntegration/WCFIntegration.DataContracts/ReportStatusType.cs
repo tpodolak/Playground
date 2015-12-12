@@ -1,4 +1,4 @@
-﻿namespace WCFIntegration
+﻿namespace WCFIntegration.DataContracts
 {
     public enum ReportStatusType
     {

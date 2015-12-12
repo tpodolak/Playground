@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace WCFIntegration
+namespace WCFIntegration.DataContracts
 {
     [DataContract]
     public class Person

@@ -59,11 +59,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpenseReport.cs" />
-    <Compile Include="ExpenseReportConfirmation.cs" />
-    <Compile Include="ManagerResponse.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="ReportStatusType.cs" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -81,6 +76,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WCFIntegration.CustomActivities\WCFIntegration.CustomActivities.csproj">
+      <Project>{0106bef4-d9dc-42b8-9692-fe49a74bf26d}</Project>
+      <Name>WCFIntegration.CustomActivities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WCFIntegration.DataContracts\WCFIntegration.DataContracts.csproj">
+      <Project>{381349b8-bd2b-430e-9d56-e3581695a239}</Project>
+      <Name>WCFIntegration.DataContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
