@@ -1,0 +1,179 @@
+﻿<WorkflowService x:Class="ExpenseService" mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID2}" p1:TextExpression.References="{x:Reference __ReferenceID3}" ConfigurationName="ExpenseService" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="ExpenseService"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:w="clr-namespace:WCFIntegration;assembly=WCFIntegration"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <p1:TextExpression.Namespaces>
+      <sco:Collection x:TypeArguments="x:String" x:Name="__ReferenceID2">
+        <x:String>System</x:String>
+        <x:String>System.Collections.Generic</x:String>
+        <x:String>System.Data</x:String>
+        <x:String>System.Linq</x:String>
+        <x:String>System.Text</x:String>
+        <x:String>WCFIntegration</x:String>
+        <x:String>System.ServiceModel</x:String>
+      </sco:Collection>
+    </p1:TextExpression.Namespaces>
+    <p1:TextExpression.References>
+      <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID3">
+        <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.DynamicData</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web.ApplicationServices</p1:AssemblyReference>
+        <p1:AssemblyReference>System</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Core</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Data.Entity</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Runtime.Serialization</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Activities</p1:AssemblyReference>
+        <p1:AssemblyReference>System.ServiceModel.Channels</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Web</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
+        <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
+        <p1:AssemblyReference>WCFIntegration</p1:AssemblyReference>
+      </sco:Collection>
+    </p1:TextExpression.References>
+    <p1:Sequence DisplayName="FirstOperation" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <p1:Sequence.Variables>
+        <x:Reference>__ReferenceID1</x:Reference>
+        <p1:Variable x:TypeArguments="w:ExpenseReport" Name="report" />
+        <p1:Variable x:TypeArguments="w:ExpenseReportConfirmation" Name="confirmation" />
+      </p1:Sequence.Variables>
+      <Receive x:Name="__ReferenceID0" CanCreateInstance="True" DisplayName="ReceiveExpenseReport" sap2010:WorkflowViewState.IdRef="Receive_2" OperationName="SubmitReport" ServiceContractName="p:IExpenseService">
+        <Receive.CorrelationInitializers>
+          <RequestReplyCorrelationInitializer>
+            <RequestReplyCorrelationInitializer.CorrelationHandle>
+              <p1:InArgument x:TypeArguments="CorrelationHandle">
+                <p1:VariableValue x:TypeArguments="CorrelationHandle">
+                  <p1:VariableValue.Variable>
+                    <p1:Variable x:TypeArguments="CorrelationHandle" x:Name="__ReferenceID1" Name="__handle1" />
+                  </p1:VariableValue.Variable>
+                </p1:VariableValue>
+              </p1:InArgument>
+            </RequestReplyCorrelationInitializer.CorrelationHandle>
+          </RequestReplyCorrelationInitializer>
+        </Receive.CorrelationInitializers>
+        <ReceiveMessageContent DeclaredMessageType="w:ExpenseReport">
+          <p1:OutArgument x:TypeArguments="w:ExpenseReport">
+            <mca:CSharpReference x:TypeArguments="w:ExpenseReport">report</mca:CSharpReference>
+          </p1:OutArgument>
+        </ReceiveMessageContent>
+      </Receive>
+      <p1:If sap2010:WorkflowViewState.IdRef="If_1">
+        <p1:If.Condition>
+          <p1:InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">report.Employee == null</mca:CSharpValue>
+          </p1:InArgument>
+        </p1:If.Condition>
+        <p1:If.Then>
+          <p1:Sequence DisplayName="FaultSequence" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <p1:Sequence.Variables>
+              <p1:Variable x:TypeArguments="x:String" Name="faultMessage" />
+            </p1:Sequence.Variables>
+            <p1:Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+              <p1:Assign.To>
+                <p1:OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">faultMessage</mca:CSharpReference>
+                </p1:OutArgument>
+              </p1:Assign.To>
+              <p1:Assign.Value>
+                <p1:InArgument x:TypeArguments="x:String">No employee provided</p1:InArgument>
+              </p1:Assign.Value>
+            </p1:Assign>
+            <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendFaultToReceiveExpenseReport" sap2010:WorkflowViewState.IdRef="SendReply_3">
+              <SendMessageContent DeclaredMessageType="FaultException">
+                <p1:InArgument x:TypeArguments="FaultException">
+                  <mca:CSharpValue x:TypeArguments="FaultException">new FaultException(faultMessage)</mca:CSharpValue>
+                </p1:InArgument>
+              </SendMessageContent>
+            </SendReply>
+          </p1:Sequence>
+        </p1:If.Then>
+        <p1:If.Else>
+          <p1:Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <p1:Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+              <p1:Assign.To>
+                <p1:OutArgument x:TypeArguments="w:ExpenseReportConfirmation">
+                  <mca:CSharpReference x:TypeArguments="w:ExpenseReportConfirmation">confirmation</mca:CSharpReference>
+                </p1:OutArgument>
+              </p1:Assign.To>
+              <p1:Assign.Value>
+                <p1:InArgument x:TypeArguments="w:ExpenseReportConfirmation">
+                  <mca:CSharpValue x:TypeArguments="w:ExpenseReportConfirmation">new ExpenseReportConfirmation(){ Client = report.Client, Amount = report.Amount, City = report.City, Employee = report.Employee, EndDate = report.EndDate, ReportID = 1, StartDate = report.StartDate, Status = ReportStatusType.Submitted };</mca:CSharpValue>
+                </p1:InArgument>
+              </p1:Assign.Value>
+            </p1:Assign>
+            <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_2">
+              <SendMessageContent DeclaredMessageType="w:ExpenseReportConfirmation">
+                <p1:InArgument x:TypeArguments="w:ExpenseReportConfirmation">
+                  <mca:CSharpValue x:TypeArguments="w:ExpenseReportConfirmation">confirmation</mca:CSharpValue>
+                </p1:InArgument>
+              </SendMessageContent>
+            </SendReply>
+          </p1:Sequence>
+        </p1:If.Else>
+      </p1:If>
+    </p1:Sequence>
+    <sads:DebugSymbol.Symbol>d1dFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb25cRXhwZW5zZVNlcnZpY2UueGFtbHgTDgOEAREBATIFggETAQI4B0sRASlMB4EBDwEDSA1IYAErPRFBJAEqTw1PYwEEUwtoGQEZawt/GQEIVw1gGQEiYQ1nGQEabA13GQEQeA1+GQEJXjteTwEoWhNaZQEjZBNkdwEbdBN00QIBFW8Tb3gBEXsTe3ABCg==</sads:DebugSymbol.Symbol>
+  </p1:Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Receive_2" sap:VirtualizedContainerService.HintSize="579,86" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="255,62" />
+      <sap2010:ViewStateData Id="SendReply_3" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="277,312">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="255,62" />
+      <sap2010:ViewStateData Id="SendReply_2" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="277,312">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="579,462" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="601,712">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WorkflowService_1" sap:VirtualizedContainerService.HintSize="252,245">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</WorkflowService>
