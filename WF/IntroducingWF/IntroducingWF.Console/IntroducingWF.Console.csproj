@@ -7,8 +7,8 @@
     <ProjectGuid>{7EAB141B-BB79-4466-8258-76EF37D573BF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IntroducingWF</RootNamespace>
-    <AssemblyName>IntroducingWF</AssemblyName>
+    <RootNamespace>IntroducingWF.Console</RootNamespace>
+    <AssemblyName>IntroducingWF.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

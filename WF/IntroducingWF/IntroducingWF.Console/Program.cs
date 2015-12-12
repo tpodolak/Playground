@@ -7,7 +7,7 @@ using IntroducingWF.EmployeeLibrary;
 using IntroducingWF.Workflows;
 using Parallel = System.Activities.Statements.Parallel;
 
-namespace IntroducingWF
+namespace IntroducingWF.Console
 {
     class Program
     {
@@ -28,12 +28,12 @@ namespace IntroducingWF
             // with flowchart and instance WorkflowInvoker
             RequestVacationFlowChartAsync(startDate, endDateWithApproval).Wait();
 
-            Console.ReadKey();
+            System.Console.ReadKey();
         }
 
         private static void RequestVacations(DateTime startDate, DateTime endDate)
         {
-            Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd}");
+            System.Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd}");
             var requestVacationTimeFlow = new RequestVacationTime();
             var requestParams = CreateRequestParams(startDate, endDate);
 
@@ -41,26 +41,26 @@ namespace IntroducingWF
             object result;
             if (response.TryGetValue("Result", out result))
             {
-                Console.WriteLine($"Finished processing vacation request. RequestStatus is {result}");
+                System.Console.WriteLine($"Finished processing vacation request. RequestStatus is {result}");
             }
         }
 
         private static void RequestVacationFlowChart(DateTime startDate, DateTime endDate)
         {
-            Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart");
+            System.Console.WriteLine($"Requesting vacation from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart");
             var requestVacationTimeFlow = new VacationFlowChart();
             var requestParams = CreateRequestParams(startDate, endDate);
             var response = WorkflowInvoker.Invoke(requestVacationTimeFlow, requestParams);
             object result;
             if (response.TryGetValue("Result", out result))
             {
-                Console.WriteLine($"Finished processing vacation request using FlowChart. RequestStatus is {result}");
+                System.Console.WriteLine($"Finished processing vacation request using FlowChart. RequestStatus is {result}");
             }
         }
 
         private static async Task RequestVacationFlowChartAsync(DateTime startDate, DateTime endDate)
         {
-            Console.WriteLine($"Requesting vacation async from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart ");
+            System.Console.WriteLine($"Requesting vacation async from: {startDate:yyyy MMMM dd} to: {endDate:yyyy MMMM dd} using FlowChart ");
             var requestVacationTimeFlow = new VacationFlowChart();
             var requestParams = CreateRequestParams(startDate, endDate);
             var workflowInvoker = new WorkflowInvoker(requestVacationTimeFlow);
@@ -70,7 +70,7 @@ namespace IntroducingWF
             object result;
             if (response.TryGetValue("Result", out result))
             {
-                Console.WriteLine($"Finished processing vacation async request using FlowChart. RequestStatus is {result}");
+                System.Console.WriteLine($"Finished processing vacation async request using FlowChart. RequestStatus is {result}");
             }
         }
 
