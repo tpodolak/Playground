@@ -21,7 +21,5 @@ namespace IntroducingWF.CustomActivities
             ManagerEmail?.Set(context, "manager@contoso.com");
             ManagerName?.Set(context, "manager doe");
         }
-    }
-
-   
+    }  
 }
