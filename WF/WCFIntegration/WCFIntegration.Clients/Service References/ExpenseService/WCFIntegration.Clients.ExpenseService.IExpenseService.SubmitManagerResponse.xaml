@@ -60,7 +60,7 @@
         <OutArgument x:TypeArguments="wce:SubmitManagerResponseResponse">
           <VariableReference x:TypeArguments="wce:SubmitManagerResponseResponse">
             <VariableReference.Variable>
-              <Variable x:TypeArguments="wce:SubmitManagerResponseResponse" x:Name="__ReferenceID1" Name="tempResult_6bb194a385314afda1179c9219db6fe8" />
+              <Variable x:TypeArguments="wce:SubmitManagerResponseResponse" x:Name="__ReferenceID1" Name="tempResult_237b1239de814c0cabf8b938376b3bd0" />
             </VariableReference.Variable>
           </VariableReference>
         </OutArgument>

@@ -49,6 +49,9 @@
           </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
         </p1:RequestReplyCorrelationInitializer>
       </p1:Send.CorrelationInitializers>
+      <p1:Send.KnownTypes>
+        <x:Type Type="wce:ReportSubmissionFault" />
+      </p1:Send.KnownTypes>
       <p1:SendMessageContent>
         <InArgument x:TypeArguments="wce:SubmitReportRequest">[New WCFIntegration.Clients.ExpenseService.SubmitReportRequest() With { .ExpenseReport = ExpenseReport }]</InArgument>
       </p1:SendMessageContent>
@@ -61,7 +64,7 @@
         <OutArgument x:TypeArguments="wce:SubmitReportResponse">
           <VariableReference x:TypeArguments="wce:SubmitReportResponse">
             <VariableReference.Variable>
-              <Variable x:TypeArguments="wce:SubmitReportResponse" x:Name="__ReferenceID1" Name="tempResult_72bf092a59da45b69e51f8d799e1fc1e" />
+              <Variable x:TypeArguments="wce:SubmitReportResponse" x:Name="__ReferenceID1" Name="tempResult_40e054fdb16447c89814ca07c6639f60" />
             </VariableReference.Variable>
           </VariableReference>
         </OutArgument>
@@ -72,9 +75,9 @@
         <OutArgument x:TypeArguments="wce:ExpenseReportConfirmation">[ExpenseReportConfirmation]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="wce:ExpenseReportConfirmation">[tempResult_72bf092a59da45b69e51f8d799e1fc1e.ExpenseReportConfirmation]</InArgument>
+        <InArgument x:TypeArguments="wce:ExpenseReportConfirmation">[tempResult_40e054fdb16447c89814ca07c6639f60.ExpenseReportConfirmation]</InArgument>
       </Assign.Value>
     </Assign>
-    <sads:DebugSymbol.Symbol>d7QBRTpcVG9tZWtcUHJvZ3JhbW93YW5pZVxQbGF5Z3JvdW5kXFdGXFdDRkludGVncmF0aW9uXFdDRkludGVncmF0aW9uLkNsaWVudHNcU2VydmljZSBSZWZlcmVuY2VzXEV4cGVuc2VTZXJ2aWNlXFdDRkludGVncmF0aW9uLkNsaWVudHMuRXhwZW5zZVNlcnZpY2UuSUV4cGVuc2VTZXJ2aWNlLlN1Ym1pdFJlcG9ydC54YW1sCSEDTw4CAQEmBToPAgEKOwVFFwIBB0YFTQ4CAQI1PzWoAQIBDCsPLx8CAQs+C0IfAgEJS0VLjAECAQVIRkhhAgED</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d7QBRTpcVG9tZWtcUHJvZ3JhbW93YW5pZVxQbGF5Z3JvdW5kXFdGXFdDRkludGVncmF0aW9uXFdDRkludGVncmF0aW9uLkNsaWVudHNcU2VydmljZSBSZWZlcmVuY2VzXEV4cGVuc2VTZXJ2aWNlXFdDRkludGVncmF0aW9uLkNsaWVudHMuRXhwZW5zZVNlcnZpY2UuSUV4cGVuc2VTZXJ2aWNlLlN1Ym1pdFJlcG9ydC54YW1sCSEDUg4CAQEmBT0PAgEKPgVIFwIBB0kFUA4CAQI4PzioAQIBDCsPLx8CAQtBC0UfAgEJTkVOjAECAQVLRkthAgED</sads:DebugSymbol.Symbol>
   </Sequence>
 </Activity>

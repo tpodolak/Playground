@@ -253,6 +253,66 @@ namespace WCFIntegration.Clients.ExpenseService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportSubmissionFault", Namespace="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts")]
+    [System.SerializableAttribute()]
+    public partial class ReportSubmissionFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FieldField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Field {
+            get {
+                return this.FieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FieldField, value) != true)) {
+                    this.FieldField = value;
+                    this.RaisePropertyChanged("Field");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ManagerResponse", Namespace="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts")]
     [System.SerializableAttribute()]
     public partial class ManagerResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -332,6 +392,7 @@ namespace WCFIntegration.Clients.ExpenseService {
     public interface IExpenseService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExpenseService/SubmitReport", ReplyAction="http://tempuri.org/IExpenseService/SubmitReportResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(WCFIntegration.Clients.ExpenseService.ReportSubmissionFault), Action="http://tempuri.org/IExpenseService/SubmitReportReportSubmissionFaultFault", Name="ReportSubmissionFault", Namespace="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts")]
         WCFIntegration.Clients.ExpenseService.SubmitReportResponse SubmitReport(WCFIntegration.Clients.ExpenseService.SubmitReportRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IExpenseService/SubmitReport", ReplyAction="http://tempuri.org/IExpenseService/SubmitReportResponse")]

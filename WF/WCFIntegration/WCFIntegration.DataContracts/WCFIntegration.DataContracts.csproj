@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ExpenseReport.cs" />
     <Compile Include="ExpenseReportConfirmation.cs" />
+    <Compile Include="ReportSubmitionFault.cs" />
     <Compile Include="ManagerResponse.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

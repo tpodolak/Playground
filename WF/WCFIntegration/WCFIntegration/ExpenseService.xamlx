@@ -46,10 +46,10 @@
         <p1:AssemblyReference>System.Xaml</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
-        <p1:AssemblyReference>WCFIntegration.DataContracts</p1:AssemblyReference>
         <p1:AssemblyReference>WCFIntegration.CustomActivities</p1:AssemblyReference>
+        <p1:AssemblyReference>WCFIntegration.DataContracts</p1:AssemblyReference>
         <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
-        <p1:AssemblyReference>WCFIntegration</p1:AssemblyReference>
+        <p1:AssemblyReference>WCFIntegration.Services</p1:AssemblyReference>
       </sco:Collection>
     </p1:TextExpression.References>
     <p1:Sequence.Variables>
@@ -103,9 +103,9 @@
               </p1:Assign.Value>
             </p1:Assign>
             <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendFaultToReceiveExpenseReport" sap2010:WorkflowViewState.IdRef="SendReply_3">
-              <SendMessageContent DeclaredMessageType="FaultException">
-                <p1:InArgument x:TypeArguments="FaultException">
-                  <mca:CSharpValue x:TypeArguments="FaultException">new FaultException(faultMessage)</mca:CSharpValue>
+              <SendMessageContent DeclaredMessageType="FaultException(wd:ReportSubmissionFault)">
+                <p1:InArgument x:TypeArguments="FaultException(wd:ReportSubmissionFault)">
+                  <mca:CSharpValue x:TypeArguments="FaultException(wd:ReportSubmissionFault)">new FaultException&lt;ReportSubmissionFault&gt;(new ReportSubmissionFault() { Message = faultMessage, Field = "Employee" })</mca:CSharpValue>
                 </p1:InArgument>
               </SendMessageContent>
             </SendReply>
@@ -208,7 +208,7 @@
         <SendReply Request="{x:Reference __ReferenceID2}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_4" />
       </p1:Sequence>
     </p1:Sequence>
-    <sads:DebugSymbol.Symbol>d1dFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb25cRXhwZW5zZVNlcnZpY2UueGFtbHgnEAPUAREBAToFmQETASCaAQXSARMBAkAHUxEBUlQHmAEPASGeAQfRARUBA1ANUGEBVEURSSQBU1cNV2MBIlsLcBkBQHMLlgEZASeiAQnCARMBFsMBCc8BEQEH0AEJ0AGMAQEEXw1oGQFKaQ1vGQFBdA1/GQE1gAENlQEZASitAQ+tAWIBHL8BD78BbgEYtAETuAEmARfGAQ/GAWYBCMoBDcoBtAEBEc0BDc0BtAEBDGY7Zk8BUWITYmUBS2wTbHcBQnwTfP4CATt3E3d5ATaSAROSAXEBLoUBF4UBagEpygEmygE7ARXKAYUBygGPAQEUygFyygF8ARPKAZoBygGxAQESzQEmzQE7ARDNAYUBzQGPAQEPzQFyzQF8AQ7NAZoBzQGxAQEN</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d1dFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb25cRXhwZW5zZVNlcnZpY2UueGFtbHgnEAPUAREBAToFmQETASCaAQXSARMBAkAHUxEBUlQHmAEPASGeAQfRARUBA1ANUGEBVEURSSQBU1cNV2MBIlsLcBkBQHMLlgEZASeiAQnCARMBFsMBCc8BEQEH0AEJ0AGMAQEEXw1oGQFKaQ1vGQFBdA1/GQE1gAENlQEZASitAQ+tAWIBHL8BD78BbgEYtAETuAEmARfGAQ/GAWYBCMoBDcoBtAEBEc0BDc0BtAEBDGY7Zk8BUWITYmUBS2wTbOwBAUJ8E3z+AgE7dxN3eQE2kgETkgFxAS6FAReFAWoBKcoBJsoBOwEVygGFAcoBjwEBFMoBcsoBfAETygGaAcoBsQEBEs0BJs0BOwEQzQGFAc0BjwEBD80Bcs0BfAEOzQGaAc0BsQEBDQ==</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>

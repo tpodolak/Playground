@@ -19,14 +19,18 @@
   <wsdl:message name="IExpenseService_SubmitReport_OutputMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" name="ExpenseReportConfirmation" element="q2:ExpenseReportConfirmation" />
   </wsdl:message>
+  <wsdl:message name="IExpenseService_SubmitReport_ReportSubmissionFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" name="detail" element="q3:ReportSubmissionFault" />
+  </wsdl:message>
   <wsdl:message name="IExpenseService_SubmitManagerResponse_InputMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" name="ManagerResponse" element="q3:ManagerResponse" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" name="ManagerResponse" element="q4:ManagerResponse" />
   </wsdl:message>
   <wsdl:message name="IExpenseService_SubmitManagerResponse_OutputMessage" />
   <wsdl:portType name="IExpenseService">
     <wsdl:operation name="SubmitReport">
       <wsdl:input wsaw:Action="http://tempuri.org/IExpenseService/SubmitReport" message="tns:IExpenseService_SubmitReport_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IExpenseService/SubmitReportResponse" message="tns:IExpenseService_SubmitReport_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IExpenseService/SubmitReportReportSubmissionFaultFault" name="ReportSubmissionFaultFault" message="tns:IExpenseService_SubmitReport_ReportSubmissionFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SubmitManagerResponse">
       <wsdl:input wsaw:Action="http://tempuri.org/IExpenseService/SubmitManagerResponse" message="tns:IExpenseService_SubmitManagerResponse_InputMessage" />
@@ -44,6 +48,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ReportSubmissionFaultFault">
+        <soap:fault use="literal" name="ReportSubmissionFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SubmitManagerResponse">
       <soap:operation soapAction="http://tempuri.org/IExpenseService/SubmitManagerResponse" style="document" />

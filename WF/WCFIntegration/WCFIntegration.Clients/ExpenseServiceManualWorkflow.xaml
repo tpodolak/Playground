@@ -48,7 +48,7 @@
         <x:Reference>__ReferenceID3</x:Reference>
         <Variable x:TypeArguments="local:ExpenseReport" Name="expenseReport">
           <Variable.Default>
-            <mca:CSharpValue x:TypeArguments="local:ExpenseReport">new ExpenseReport() { Employee = new Person()}</mca:CSharpValue>
+            <mca:CSharpValue x:TypeArguments="local:ExpenseReport">new ExpenseReport()</mca:CSharpValue>
           </Variable.Default>
         </Variable>
         <Variable x:TypeArguments="local:ExpenseReportConfirmation" Name="reportConfirmation" />
@@ -68,6 +68,9 @@
             </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
           </p1:RequestReplyCorrelationInitializer>
         </p1:Send.CorrelationInitializers>
+        <p1:Send.KnownTypes>
+          <x:Type Type="local:ReportSubmissionFault" />
+        </p1:Send.KnownTypes>
         <p1:SendMessageContent DeclaredMessageType="local:ExpenseReport">
           <InArgument x:TypeArguments="local:ExpenseReport">
             <mca:CSharpValue x:TypeArguments="local:ExpenseReport">expenseReport</mca:CSharpValue>
@@ -75,78 +78,153 @@
         </p1:SendMessageContent>
       </p1:Send>
       <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="Report submited" />
-      <p1:ReceiveReply Request="{x:Reference __ReferenceID0}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_1">
-        <p1:ReceiveMessageContent DeclaredMessageType="local:ExpenseReportConfirmation">
-          <OutArgument x:TypeArguments="local:ExpenseReportConfirmation">
-            <mca:CSharpReference x:TypeArguments="local:ExpenseReportConfirmation">reportConfirmation</mca:CSharpReference>
-          </OutArgument>
-        </p1:ReceiveMessageContent>
-      </p1:ReceiveReply>
+      <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_1">
+        <TryCatch.Try>
+          <p1:ReceiveReply Request="{x:Reference __ReferenceID0}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_1">
+            <p1:ReceiveMessageContent DeclaredMessageType="local:ExpenseReportConfirmation">
+              <OutArgument x:TypeArguments="local:ExpenseReportConfirmation">
+                <mca:CSharpReference x:TypeArguments="local:ExpenseReportConfirmation">reportConfirmation</mca:CSharpReference>
+              </OutArgument>
+            </p1:ReceiveMessageContent>
+          </p1:ReceiveReply>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="p1:FaultException(local:ReportSubmissionFault)" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+            <ActivityAction x:TypeArguments="p1:FaultException(local:ReportSubmissionFault)">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="p1:FaultException(local:ReportSubmissionFault)" Name="exception" />
+              </ActivityAction.Argument>
+              <WriteLine>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">string.Format("There was an exception during processing your request {0}", exception.Message)</mca:CSharpValue>
+                </InArgument>
+                <sap2010:WorkflowViewState.IdRef>WriteLine_9</sap2010:WorkflowViewState.IdRef>
+              </WriteLine>
+            </ActivityAction>
+          </Catch>
+          <Catch x:TypeArguments="p1:FaultException">
+            <ActivityAction x:TypeArguments="p1:FaultException">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="p1:FaultException" Name="exception" />
+              </ActivityAction.Argument>
+              <WriteLine>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">string.Format("There was an exception during processing your request {0}", exception.Message)</mca:CSharpValue>
+                </InArgument>
+                <sap2010:WorkflowViewState.IdRef>WriteLine_10</sap2010:WorkflowViewState.IdRef>
+              </WriteLine>
+            </ActivityAction>
+            <sap2010:WorkflowViewState.IdRef>Catch`1_3</sap2010:WorkflowViewState.IdRef>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
       <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="Reply received" />
       <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
         <Sequence.Variables>
           <x:Reference>__ReferenceID2</x:Reference>
         </Sequence.Variables>
         <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="About to submit manager's response" />
-        <p1:Send x:Name="__ReferenceID1" EndpointConfigurationName="*" sap2010:WorkflowViewState.IdRef="Send_2" OperationName="SubmitManagerResponse" ServiceContractName="p:IExpenseService">
-          <p1:Send.CorrelationInitializers>
-            <p1:RequestReplyCorrelationInitializer>
-              <p1:RequestReplyCorrelationInitializer.CorrelationHandle>
-                <InArgument x:TypeArguments="p1:CorrelationHandle">
-                  <VariableValue x:TypeArguments="p1:CorrelationHandle">
-                    <VariableValue.Variable>
-                      <Variable x:TypeArguments="p1:CorrelationHandle" x:Name="__ReferenceID2" Name="__handle2" />
-                    </VariableValue.Variable>
-                  </VariableValue>
-                </InArgument>
-              </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
-            </p1:RequestReplyCorrelationInitializer>
-          </p1:Send.CorrelationInitializers>
-          <p1:SendMessageContent DeclaredMessageType="local:ManagerResponse">
-            <InArgument x:TypeArguments="local:ManagerResponse">
-              <mca:CSharpValue x:TypeArguments="local:ManagerResponse">new ManagerResponse() { ItemIdentifier = reportConfirmation.ReportID }</mca:CSharpValue>
+        <If sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Condition>
+            <InArgument x:TypeArguments="x:Boolean">
+              <mca:CSharpValue x:TypeArguments="x:Boolean">reportConfirmation!=null</mca:CSharpValue>
             </InArgument>
-          </p1:SendMessageContent>
-        </p1:Send>
-        <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="Manager's response submited" />
-        <p1:ReceiveReply Request="{x:Reference __ReferenceID1}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_2" />
+          </If.Condition>
+          <If.Then>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <p1:Send x:Name="__ReferenceID1" EndpointConfigurationName="*" sap2010:WorkflowViewState.IdRef="Send_2" OperationName="SubmitManagerResponse" ServiceContractName="p:IExpenseService">
+                <p1:Send.CorrelationInitializers>
+                  <p1:RequestReplyCorrelationInitializer>
+                    <p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+                      <InArgument x:TypeArguments="p1:CorrelationHandle">
+                        <VariableValue x:TypeArguments="p1:CorrelationHandle">
+                          <VariableValue.Variable>
+                            <Variable x:TypeArguments="p1:CorrelationHandle" x:Name="__ReferenceID2" Name="__handle2" />
+                          </VariableValue.Variable>
+                        </VariableValue>
+                      </InArgument>
+                    </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+                  </p1:RequestReplyCorrelationInitializer>
+                </p1:Send.CorrelationInitializers>
+                <p1:SendMessageContent DeclaredMessageType="local:ManagerResponse">
+                  <InArgument x:TypeArguments="local:ManagerResponse">
+                    <mca:CSharpValue x:TypeArguments="local:ManagerResponse">new ManagerResponse() { ItemIdentifier = reportConfirmation.ReportID }</mca:CSharpValue>
+                  </InArgument>
+                </p1:SendMessageContent>
+              </p1:Send>
+              <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="Manager's response submited" />
+              <p1:ReceiveReply Request="{x:Reference __ReferenceID1}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_2" />
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="Could not send manager's response due to previous errors" />
+          </If.Else>
+        </If>
       </Sequence>
     </Sequence>
-    <sads:DebugSymbol.Symbol>d2xFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb24uQ2xpZW50c1xFeHBlbnNlU2VydmljZU1hbnVhbFdvcmtmbG93LnhhbWwXLQN0DgIBAS4FchACAQIzDTOEAQIBAzgHOGACASU5B0wRAgEfTQdNWQIBHU4HVBkCARdVB1VYAgEVVgdxEgIBBzhFOF0CASZJDUljAgEhPhFCIQIBIE1FTVYCAR5RDVF8AgEZVUVVVQIBFloJWm4CARNbCW4TAgEMbwlvZwIBCnAJcJYBAgEIWkdaawIBFGsPa6ABAgEOYBNkIwIBDW9Hb2QCAQs=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d2xFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb24uQ2xpZW50c1xFeHBlbnNlU2VydmljZU1hbnVhbFdvcmtmbG93LnhhbWwhLQOmAQ4CAQEuBaQBEAIBAjMNM2kCAQM4BzhgAgE7OQdPEQIBNVAHUFkCATNRB3gSAgEgeQd5WAIBHnoHowESAgEHOEU4XQIBPEwNTGMCATc+EUIhAgE2UEVQVgIBNFMLWR0CAS1hD2YbAgEnbg9zGwIBIXlFeVUCAR9+CX5uAgEcfwmiAQ4CAQhWEVaAAQIBL2MTY64BAgEocBNwrgECASJ+R35rAgEdggEPggFmAgEJhgENnQEYAgEQoAENoAGIAQIBDocBD5oBGQIBFZsBD5sBbQIBE5wBD5wBnAECARGgAUugAYUBAgEPlwEVlwGmAQIBF4wBGZABKQIBFpsBTZsBagIBFA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="277,62" />
-      <sap2010:ViewStateData Id="Send_1" sap:VirtualizedContainerService.HintSize="277,86" />
-      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="277,62" />
-      <sap2010:ViewStateData Id="ReceiveReply_1" sap:VirtualizedContainerService.HintSize="277,86" />
-      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="277,62" />
-      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="255,62" />
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="534,62" />
+      <sap2010:ViewStateData Id="Send_1" sap:VirtualizedContainerService.HintSize="534,86" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="534,62" />
+      <sap2010:ViewStateData Id="ReceiveReply_1" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="WriteLine_9" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="400,131">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_10" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="Catch`1_3" sap:VirtualizedContainerService.HintSize="400,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="534,315" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="534,62" />
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="512,62" />
       <sap2010:ViewStateData Id="Send_2" sap:VirtualizedContainerService.HintSize="255,86" />
       <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="255,62" />
       <sap2010:ViewStateData Id="ReceiveReply_2" sap:VirtualizedContainerService.HintSize="255,86" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="277,540">
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="277,438">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="299,1222">
+      <sap2010:ViewStateData Id="WriteLine_8" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="512,588" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="534,814">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="321,1346">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="556,1725">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WCFIntegration.Clients.ExpenseServiceManualWorkflow_1" sap:VirtualizedContainerService.HintSize="361,1426" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="458,1443">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WCFIntegration.Clients.ExpenseServiceManualWorkflow_1" sap:VirtualizedContainerService.HintSize="498,1523" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

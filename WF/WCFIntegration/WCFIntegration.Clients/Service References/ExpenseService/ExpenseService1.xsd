@@ -37,6 +37,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ReportStatusType" nillable="true" type="tns:ReportStatusType" />
+  <xs:complexType name="ReportSubmissionFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Field" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportSubmissionFault" nillable="true" type="tns:ReportSubmissionFault" />
   <xs:complexType name="ManagerResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="Approved" type="xs:boolean" />

@@ -101,6 +101,12 @@
     <None Include="Service References\ExpenseService\endpointConfigurationNameResolver.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <XamlAppDef Include="ExpenseServiceManualWorkflow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppDef>
+  </ItemGroup>
+  <ItemGroup>
     <XamlAppDef Include="Service References\ExpenseService\WCFIntegration.Clients.ExpenseService.IExpenseService.SubmitReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -111,12 +117,6 @@
     <XamlAppDef Include="Service References\ExpenseService\WCFIntegration.Clients.ExpenseService.IExpenseService.SubmitManagerResponse.xaml">
       <Generator>MSBuild:Compile</Generator>
       <DependentUpon>Reference.svcmap</DependentUpon>
-      <SubType>Designer</SubType>
-    </XamlAppDef>
-  </ItemGroup>
-  <ItemGroup>
-    <XamlAppDef Include="ExpenseServiceManualWorkflow.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </XamlAppDef>
   </ItemGroup>
