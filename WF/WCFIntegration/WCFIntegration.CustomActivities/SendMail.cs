@@ -1,5 +1,5 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
+using System.Diagnostics;
 using System.Net.Mail;
 
 namespace WCFIntegration.CustomActivities
@@ -21,15 +21,11 @@ namespace WCFIntegration.CustomActivities
                 Subject.Get(context),
                 MailBody.Get(context)
             );
-
-            var color = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Sending email from {msg.From} to {msg.To} with subject {msg.Subject} with body {msg.Body}");
-            Console.ForegroundColor = color;
-
-            //            SmtpClient client = new SmtpClient();
-            //            client.Send(msg);
-
+            Debug.WriteLine($"Sending email from {msg.From} to {msg.To} with subject {msg.Subject} with body {msg.Body}");
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.Send(msg);
+            }
         }
     }
 }

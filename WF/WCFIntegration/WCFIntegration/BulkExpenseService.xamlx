@@ -217,10 +217,22 @@
                 </p1:InArgument>
               </p1:If.Condition>
               <p1:If.Then>
-                <wc:SendMail FromAddress="manager@manager.com" sap2010:WorkflowViewState.IdRef="SendMail_1" MailBody="approved" Subject="approval" ToAddress="employee@employee.com" />
+                <wc:SendMail sap2010:WorkflowViewState.IdRef="SendMail_1" MailBody="approved" Subject="approval" ToAddress="employee@employee.com">
+                  <wc:SendMail.FromAddress>
+                    <p1:InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">string.Format("{0}@manager.com", manager)</mca:CSharpValue>
+                    </p1:InArgument>
+                  </wc:SendMail.FromAddress>
+                </wc:SendMail>
               </p1:If.Then>
               <p1:If.Else>
-                <wc:SendMail FromAddress="manager@manager.com" sap2010:WorkflowViewState.IdRef="SendMail_2" MailBody="rejected" Subject="approval" ToAddress="employee@employee.com" />
+                <wc:SendMail sap2010:WorkflowViewState.IdRef="SendMail_2" MailBody="rejected" Subject="approval" ToAddress="employee@employee.com">
+                  <wc:SendMail.FromAddress>
+                    <p1:InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">string.Format("{0}@manager.com", manager)</mca:CSharpValue>
+                    </p1:InArgument>
+                  </wc:SendMail.FromAddress>
+                </wc:SendMail>
               </p1:If.Else>
             </p1:If>
             <SendReply Request="{x:Reference __ReferenceID1}" DisplayName="SendReplyToReceive" sap2010:WorkflowViewState.IdRef="SendReply_6" />
@@ -228,7 +240,7 @@
         </p1:ActivityAction>
       </p1:ParallelForEach>
     </p1:Sequence>
-    <sads:DebugSymbol.Symbol>d1tFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb25cQnVsa0V4cGVuc2VTZXJ2aWNlLnhhbWx4KxAD6AERAQE6Czp4AQU/Cz+cAQECQwXmARMBCEkHXBECjAFdB2gTAX9pB5cBHAFFmAEHngETATyfAQflARwBCVkNWWECjgFOEVIkAo0BZQ1l+AIChgFgDWBzAoABbA1sZAF5cwuVARkBRpsBDZsBawE9ogENogFkATapAQvjARkBCncNgwElAWCEAQ2UASIBR64BDdQBFwEi1QEN4QEVAQ7iAQ3iAZABAQt+EX5vAXGBARGBAVYBaXoTemYBYZEBE5EBZgFYhwEThwGBAQFQjAETjAFYAUi/ARO/AXABLdEBE9EBcgEkxgEXygEqASPYARPYAWoBD9wBEdwBuAEBHd8BEd8BuAEBGNwBKtwBPwEh3AGJAdwBkwEBINwBdtwBgAEBH9wBngHcAbUBAR7fASrfAT8BHN8BiQHfAZMBARvfAXbfAYABARrfAZ4B3wG1AQEZ</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d1tFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb25cQnVsa0V4cGVuc2VTZXJ2aWNlLnhhbWx4KxAD9AERAQE6Czp4AQU/Cz+cAQECQwXyARMBCEkHXBECnAFdB2gTAo8BaQeXARwBVZgBB54BEwFMnwEH8QEcAQlZDVlhAp4BThFSJAKdAWUNZfgCApYBYA1gcwKQAWwNbGQCiQFzC5UBGQFWmwENmwFrAU2iAQ2iAWQBRqkBC+8BGQEKdw2DASUBcIQBDZQBIgFXrgEN1AEXATLVAQ3tARUBDu4BDe4BkAEBC34Rfm8CgQGBARGBAVYBeXoTemYBcZEBE5EBZgFohwEThwGBAQFgjAETjAFYAVi/ARO/AXABPdEBE9EBcgE0xgEXygEqATPYARPYAWoBD9wBEeIBHwEl5QER6wEfARjfARffAX4BKdwBZ9wBcQEo3AFU3AFeASfcAXzcAZMBASboARfoAX4BHOUBZ+UBcQEb5QFU5QFeARrlAXzlAZMBARk=</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
