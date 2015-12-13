@@ -1,0 +1,152 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="WCFIntegration.Clients.ExpenseServiceManualWorkflow" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WCFIntegration.Clients.ExpenseServiceManualWorkflow_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:WCFIntegration.Clients.ExpenseService"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>WCFIntegration.Clients.ExpenseService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Activities.Presentation</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>WCFIntegration.Clients</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <x:Reference>__ReferenceID3</x:Reference>
+        <Variable x:TypeArguments="local:ExpenseReport" Name="expenseReport">
+          <Variable.Default>
+            <mca:CSharpValue x:TypeArguments="local:ExpenseReport">new ExpenseReport() { Employee = new Person()}</mca:CSharpValue>
+          </Variable.Default>
+        </Variable>
+        <Variable x:TypeArguments="local:ExpenseReportConfirmation" Name="reportConfirmation" />
+      </Sequence.Variables>
+      <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="About to submit report" />
+      <p1:Send x:Name="__ReferenceID0" EndpointConfigurationName="*" sap2010:WorkflowViewState.IdRef="Send_1" OperationName="SubmitReport" ServiceContractName="p:IExpenseService">
+        <p1:Send.CorrelationInitializers>
+          <p1:RequestReplyCorrelationInitializer>
+            <p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+              <InArgument x:TypeArguments="p1:CorrelationHandle">
+                <VariableValue x:TypeArguments="p1:CorrelationHandle">
+                  <VariableValue.Variable>
+                    <Variable x:TypeArguments="p1:CorrelationHandle" x:Name="__ReferenceID3" Name="__handle1" />
+                  </VariableValue.Variable>
+                </VariableValue>
+              </InArgument>
+            </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+          </p1:RequestReplyCorrelationInitializer>
+        </p1:Send.CorrelationInitializers>
+        <p1:SendMessageContent DeclaredMessageType="local:ExpenseReport">
+          <InArgument x:TypeArguments="local:ExpenseReport">
+            <mca:CSharpValue x:TypeArguments="local:ExpenseReport">expenseReport</mca:CSharpValue>
+          </InArgument>
+        </p1:SendMessageContent>
+      </p1:Send>
+      <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="Report submited" />
+      <p1:ReceiveReply Request="{x:Reference __ReferenceID0}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_1">
+        <p1:ReceiveMessageContent DeclaredMessageType="local:ExpenseReportConfirmation">
+          <OutArgument x:TypeArguments="local:ExpenseReportConfirmation">
+            <mca:CSharpReference x:TypeArguments="local:ExpenseReportConfirmation">reportConfirmation</mca:CSharpReference>
+          </OutArgument>
+        </p1:ReceiveMessageContent>
+      </p1:ReceiveReply>
+      <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="Reply received" />
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <Sequence.Variables>
+          <x:Reference>__ReferenceID2</x:Reference>
+        </Sequence.Variables>
+        <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="About to submit manager's response" />
+        <p1:Send x:Name="__ReferenceID1" EndpointConfigurationName="*" sap2010:WorkflowViewState.IdRef="Send_2" OperationName="SubmitManagerResponse" ServiceContractName="p:IExpenseService">
+          <p1:Send.CorrelationInitializers>
+            <p1:RequestReplyCorrelationInitializer>
+              <p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+                <InArgument x:TypeArguments="p1:CorrelationHandle">
+                  <VariableValue x:TypeArguments="p1:CorrelationHandle">
+                    <VariableValue.Variable>
+                      <Variable x:TypeArguments="p1:CorrelationHandle" x:Name="__ReferenceID2" Name="__handle2" />
+                    </VariableValue.Variable>
+                  </VariableValue>
+                </InArgument>
+              </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+            </p1:RequestReplyCorrelationInitializer>
+          </p1:Send.CorrelationInitializers>
+          <p1:SendMessageContent DeclaredMessageType="local:ManagerResponse">
+            <InArgument x:TypeArguments="local:ManagerResponse">
+              <mca:CSharpValue x:TypeArguments="local:ManagerResponse">new ManagerResponse() { ItemIdentifier = reportConfirmation.ReportID }</mca:CSharpValue>
+            </InArgument>
+          </p1:SendMessageContent>
+        </p1:Send>
+        <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="Manager's response submited" />
+        <p1:ReceiveReply Request="{x:Reference __ReferenceID1}" DisplayName="ReceiveReplyForSend" sap2010:WorkflowViewState.IdRef="ReceiveReply_2" />
+      </Sequence>
+    </Sequence>
+    <sads:DebugSymbol.Symbol>d2xFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb24uQ2xpZW50c1xFeHBlbnNlU2VydmljZU1hbnVhbFdvcmtmbG93LnhhbWwXLQN0DgIBAS4FchACAQIzDTOEAQIBAzgHOGACASU5B0wRAgEfTQdNWQIBHU4HVBkCARdVB1VYAgEVVgdxEgIBBzhFOF0CASZJDUljAgEhPhFCIQIBIE1FTVYCAR5RDVF8AgEZVUVVVQIBFloJWm4CARNbCW4TAgEMbwlvZwIBCnAJcJYBAgEIWkdaawIBFGsPa6ABAgEOYBNkIwIBDW9Hb2QCAQs=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="277,62" />
+      <sap2010:ViewStateData Id="Send_1" sap:VirtualizedContainerService.HintSize="277,86" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="277,62" />
+      <sap2010:ViewStateData Id="ReceiveReply_1" sap:VirtualizedContainerService.HintSize="277,86" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="277,62" />
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="255,62" />
+      <sap2010:ViewStateData Id="Send_2" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="255,62" />
+      <sap2010:ViewStateData Id="ReceiveReply_2" sap:VirtualizedContainerService.HintSize="255,86" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="277,540">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="299,1222">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="321,1346">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WCFIntegration.Clients.ExpenseServiceManualWorkflow_1" sap:VirtualizedContainerService.HintSize="361,1426" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

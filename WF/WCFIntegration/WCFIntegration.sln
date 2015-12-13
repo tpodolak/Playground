@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFIntegration", "WCFIntegration\WCFIntegration.csproj", "{9641CC16-DA2C-4267-9FC3-341E57A783D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFIntegration.Services", "WCFIntegration\WCFIntegration.Services.csproj", "{9641CC16-DA2C-4267-9FC3-341E57A783D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFIntegration.DataContracts", "WCFIntegration.DataContracts\WCFIntegration.DataContracts.csproj", "{381349B8-BD2B-430E-9D56-E3581695A239}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFIntegration.CustomActivities", "WCFIntegration.CustomActivities\WCFIntegration.CustomActivities.csproj", "{0106BEF4-D9DC-42B8-9692-FE49A74BF26D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFIntegration.Clients", "WCFIntegration.Clients\WCFIntegration.Clients.csproj", "{BC77F850-4689-4F22-A5CC-CF86B38CFC64}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9641CC16-DA2C-4267-9FC3-341E57A783D6} = {9641CC16-DA2C-4267-9FC3-341E57A783D6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +46,12 @@ Global
 		{0106BEF4-D9DC-42B8-9692-FE49A74BF26D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0106BEF4-D9DC-42B8-9692-FE49A74BF26D}.Release|x86.ActiveCfg = Release|Any CPU
 		{0106BEF4-D9DC-42B8-9692-FE49A74BF26D}.Release|x86.Build.0 = Release|Any CPU
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Debug|x86.ActiveCfg = Debug|x86
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Debug|x86.Build.0 = Debug|x86
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Release|Any CPU.ActiveCfg = Release|x86
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Release|x86.ActiveCfg = Release|x86
+		{BC77F850-4689-4F22-A5CC-CF86B38CFC64}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

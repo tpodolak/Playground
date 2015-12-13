@@ -1,0 +1,98 @@
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="WCFIntegration.Clients.ExpenseServiceWorkflow" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WCFIntegration.Clients.Workflow1_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:WCFIntegration.Clients.ExpenseService"
+ xmlns:local1="clr-namespace:WCFIntegration.Clients.ExpenseService.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:sc="clr-namespace:System.ComponentModel;assembly=System"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:srs="clr-namespace:System.Runtime.Serialization;assembly=System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>WCFIntegration.Clients.ExpenseService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>WCFIntegration.Clients</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="local:ExpenseReport" Name="expenseReport">
+        <Variable.Default>
+          <mca:CSharpValue x:TypeArguments="local:ExpenseReport">new ExpenseReport() { Employee = new Person(),City="Wroclaw" }</mca:CSharpValue>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="local:ExpenseReportConfirmation" Name="expenseReportConfirmation" />
+    </Sequence.Variables>
+    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="About to submit report" />
+    <local1:SubmitReport sap2010:WorkflowViewState.IdRef="SubmitReport_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+      <local1:SubmitReport.ExpenseReport>
+        <InArgument x:TypeArguments="local:ExpenseReport">
+          <mca:CSharpValue x:TypeArguments="local:ExpenseReport">expenseReport</mca:CSharpValue>
+        </InArgument>
+      </local1:SubmitReport.ExpenseReport>
+      <local1:SubmitReport.ExpenseReportConfirmation>
+        <OutArgument x:TypeArguments="local:ExpenseReportConfirmation">
+          <mca:CSharpReference x:TypeArguments="local:ExpenseReportConfirmation">expenseReportConfirmation</mca:CSharpReference>
+        </OutArgument>
+      </local1:SubmitReport.ExpenseReportConfirmation>
+    </local1:SubmitReport>
+    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="Report submited" />
+    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="About to submit maanager's response" />
+    <local1:SubmitManagerResponse sap2010:WorkflowViewState.IdRef="SubmitManagerResponse_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+      <local1:SubmitManagerResponse.ManagerResponse>
+        <InArgument x:TypeArguments="local:ManagerResponse">
+          <mca:CSharpValue x:TypeArguments="local:ManagerResponse">new ManagerResponse { Approved = true,ItemIdentifier = expenseReportConfirmation.ReportID }</mca:CSharpValue>
+        </InArgument>
+      </local1:SubmitManagerResponse.ManagerResponse>
+    </local1:SubmitManagerResponse>
+    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="Managers response submited" />
+    <WriteLine sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="End of the flow" />
+    <sads:DebugSymbol.Symbol>d2ZFOlxUb21la1xQcm9ncmFtb3dhbmllXFBsYXlncm91bmRcV0ZcV0NGSW50ZWdyYXRpb25cV0NGSW50ZWdyYXRpb24uQ2xpZW50c1xFeHBlbnNlU2VydmljZVdvcmtmbG93LnhhbWwRLANODgIBATALMJIBAgECNQU1XgIBGDYFQRsCARFCBUJXAgEPQwVDawIBDUQFSiQCAQlLBUtiAgEHTAVMVwIBBTVDNVsCARk5CzlhAgEVPgs+gQECARJCQ0JUAgEQQ0NDaAIBDkcLR7EBAgEKS0NLXwIBCExDTFQCAQY=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="SubmitReport_1" sap:VirtualizedContainerService.HintSize="210,22" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="SubmitManagerResponse_1" sap:VirtualizedContainerService.HintSize="210,22" />
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="210,62" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="232,718">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WCFIntegration.Clients.Workflow1_1" sap:VirtualizedContainerService.HintSize="272,798" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

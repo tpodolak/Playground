@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WCFIntegration.Services")]
+[assembly: AssemblyTitle("WCFIntegration.Clients")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WCFIntegration.Services")]
+[assembly: AssemblyProduct("WCFIntegration.Clients")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9641cc16-da2c-4267-9fc3-341e57a783d6")]
+[assembly: Guid("bc77f850-4689-4f22-a5cc-cf86b38cfc64")]
 
 // Version information for an assembly consists of the following four values:
 //

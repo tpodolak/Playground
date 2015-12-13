@@ -1,0 +1,71 @@
+<Activity mc:Ignorable="sap2010 sads" x:Class="WCFIntegration.Clients.ExpenseService.Activities.SubmitManagerResponse" this:SubmitManagerResponse.EndpointConfigurationName="BasicHttpContextBinding_IExpenseService"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://tempuri.org/"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:sc="clr-namespace:System.ComponentModel;assembly=System"
+ xmlns:srs="clr-namespace:System.Runtime.Serialization;assembly=System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+ xmlns:this="clr-namespace:WCFIntegration.Clients.ExpenseService.Activities"
+ xmlns:wce="clr-namespace:WCFIntegration.Clients.ExpenseService;assembly=WCFIntegration.Clients"
+ xmlns:wce1="clr-namespace:WCFIntegration.Clients.ExpenseService;assembly=WCFIntegration.Clients, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="EndpointConfigurationName" Type="x:String">
+      <x:Property.Attributes>
+        <sc:DefaultValueAttribute>
+          <x:Arguments>
+            <x:String>BasicHttpContextBinding_IExpenseService</x:String>
+          </x:Arguments>
+        </sc:DefaultValueAttribute>
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="ManagerResponse" Type="InArgument(wce:ManagerResponse)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+  </x:Members>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces serialized as XML namespaces</mva:VisualBasic.Settings>
+  <Sequence>
+    <Sequence.Variables>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
+    </Sequence.Variables>
+    <p1:Send x:Name="__ReferenceID0" Action="http://tempuri.org/IExpenseService/SubmitManagerResponse" OperationName="SubmitManagerResponse" ServiceContractName="p:IExpenseService">
+      <p1:Send.CorrelationInitializers>
+        <p1:RequestReplyCorrelationInitializer>
+          <p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+            <InArgument x:TypeArguments="p1:CorrelationHandle">
+              <VariableValue x:TypeArguments="p1:CorrelationHandle">
+                <VariableValue.Variable>
+                  <Variable x:TypeArguments="p1:CorrelationHandle" x:Name="__ReferenceID2" />
+                </VariableValue.Variable>
+              </VariableValue>
+            </InArgument>
+          </p1:RequestReplyCorrelationInitializer.CorrelationHandle>
+        </p1:RequestReplyCorrelationInitializer>
+      </p1:Send.CorrelationInitializers>
+      <p1:SendMessageContent>
+        <InArgument x:TypeArguments="wce:SubmitManagerResponseRequest">[New WCFIntegration.Clients.ExpenseService.SubmitManagerResponseRequest() With { .ManagerResponse = ManagerResponse }]</InArgument>
+      </p1:SendMessageContent>
+      <p1:Send.EndpointConfigurationName>
+        <PropertyReference x:TypeArguments="x:String" PropertyName="EndpointConfigurationName" />
+      </p1:Send.EndpointConfigurationName>
+    </p1:Send>
+    <p1:ReceiveReply Request="{x:Reference __ReferenceID0}" Action="http://tempuri.org/IExpenseService/SubmitManagerResponseResponse">
+      <p1:ReceiveMessageContent>
+        <OutArgument x:TypeArguments="wce:SubmitManagerResponseResponse">
+          <VariableReference x:TypeArguments="wce:SubmitManagerResponseResponse">
+            <VariableReference.Variable>
+              <Variable x:TypeArguments="wce:SubmitManagerResponseResponse" x:Name="__ReferenceID1" Name="tempResult_6bb194a385314afda1179c9219db6fe8" />
+            </VariableReference.Variable>
+          </VariableReference>
+        </OutArgument>
+      </p1:ReceiveMessageContent>
+    </p1:ReceiveReply>
+    <sads:DebugSymbol.Symbol>d70BRTpcVG9tZWtcUHJvZ3JhbW93YW5pZVxQbGF5Z3JvdW5kXFdGXFdDRkludGVncmF0aW9uXFdDRkludGVncmF0aW9uLkNsaWVudHNcU2VydmljZSBSZWZlcmVuY2VzXEV4cGVuc2VTZXJ2aWNlXFdDRkludGVncmF0aW9uLkNsaWVudHMuRXhwZW5zZVNlcnZpY2UuSUV4cGVuc2VTZXJ2aWNlLlN1Ym1pdE1hbmFnZXJSZXNwb25zZS54YW1sBiADRg4CAQElBTkPAgEFOgVEFwIBAjRINL4BAgEHKg8uHwIBBj0LQR8CAQQ=</sads:DebugSymbol.Symbol>
+  </Sequence>
+</Activity>

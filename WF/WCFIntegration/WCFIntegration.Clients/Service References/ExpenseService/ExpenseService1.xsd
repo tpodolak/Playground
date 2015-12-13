@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFIntegration.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ExpenseReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:double" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Client" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Person" />
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExpenseReport" nillable="true" type="tns:ExpenseReport" />
+  <xs:complexType name="Person">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Person" nillable="true" type="tns:Person" />
+  <xs:complexType name="ExpenseReportConfirmation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ExpenseReport">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ReportID" type="xs:int" />
+          <xs:element minOccurs="0" name="Status" type="tns:ReportStatusType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExpenseReportConfirmation" nillable="true" type="tns:ExpenseReportConfirmation" />
+  <xs:simpleType name="ReportStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submitted" />
+      <xs:enumeration value="Approved" />
+      <xs:enumeration value="Rejected" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReportStatusType" nillable="true" type="tns:ReportStatusType" />
+  <xs:complexType name="ManagerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Approved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemIdentifier" type="xs:int" />
+      <xs:element minOccurs="0" name="Manager" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ManagerResponse" nillable="true" type="tns:ManagerResponse" />
+</xs:schema>
