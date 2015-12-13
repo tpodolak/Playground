@@ -10,5 +10,8 @@ namespace WCFIntegration.DataContracts
 
         [DataMember]
         public bool Approved { get; set; }
+
+        [DataMember]
+        public string Manager { get; set; }
     }
 }
