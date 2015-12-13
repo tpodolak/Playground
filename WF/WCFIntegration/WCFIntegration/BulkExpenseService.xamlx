@@ -129,7 +129,7 @@
                 <mca:CSharpValue x:TypeArguments="x:String">manager</mca:CSharpValue>
               </p1:InArgument>
             </InitializeCorrelation>
-            <wc:AddToDictionary x:TypeArguments="x:String, CorrelationHandle" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1">
+            <wc:AddToDictionary x:TypeArguments="x:String, CorrelationHandle" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_2">
               <wc:AddToDictionary.Dictionary>
                 <p1:InArgument x:TypeArguments="scg:Dictionary(x:String, CorrelationHandle)">
                   <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, CorrelationHandle)">reportHandles</mca:CSharpValue>
@@ -247,7 +247,7 @@
       <sap2010:ViewStateData Id="Receive_2" sap:VirtualizedContainerService.HintSize="516,86" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="516,62" />
       <sap2010:ViewStateData Id="InitializeCorrelation_1" sap:VirtualizedContainerService.HintSize="242,97" />
-      <sap2010:ViewStateData Id="AddToDictionary`2_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="AddToDictionary`2_2" sap:VirtualizedContainerService.HintSize="242,22" />
       <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="264,283">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
