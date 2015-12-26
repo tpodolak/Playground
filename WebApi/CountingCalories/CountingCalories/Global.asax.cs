@@ -16,15 +16,16 @@ namespace CountingCalories
     {
         protected void Application_Start()
         {
+            var httpConfiguration = GlobalConfiguration.Configuration;
             ConfigureDependencyResolver();
-            var service = (IRouteVersionFinder)(GlobalConfiguration.Configuration.DependencyResolver).GetService(typeof (IRouteVersionFinder));
-
+            var service = (IRouteVersionFinder)(httpConfiguration.DependencyResolver).GetService(typeof(IRouteVersionFinder));
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(configuration => WebApiConfig.Register(configuration, service));
-            WebApiConfig.ConfigureHttps(GlobalConfiguration.Configuration);
-            WebApiConfig.ConfigureFormatters(GlobalConfiguration.Configuration);
-            WebApiConfig.ConfigureETagSupport(GlobalConfiguration.Configuration);
+            WebApiConfig.ConfigureTracers(httpConfiguration);
+            WebApiConfig.ConfigureHttps(httpConfiguration);
+            WebApiConfig.ConfigureFormatters(httpConfiguration);
+            WebApiConfig.ConfigureETagSupport(httpConfiguration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

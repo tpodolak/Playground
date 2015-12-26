@@ -8,6 +8,8 @@ using CacheCow.Server;
 using CountingCalories.Converteres;
 using CountingCalories.Infrastructure.Routing;
 using Newtonsoft.Json.Serialization;
+using WebApiContrib.Tracing.Log4Net;
+using ITraceWriter = System.Web.Http.Tracing.ITraceWriter;
 
 namespace CountingCalories
 {
@@ -110,6 +112,12 @@ namespace CountingCalories
         {
             var cacheHandler = new CachingHandler(httpConfiguration);
             httpConfiguration.MessageHandlers.Add(cacheHandler);
+        }
+
+        public static void ConfigureTracers(HttpConfiguration httpConfiguration)
+        {
+            httpConfiguration.EnableSystemDiagnosticsTracing();
+            httpConfiguration.Services.Replace(typeof(ITraceWriter), new Log4NetTraceWriter());
         }
     }
 }
