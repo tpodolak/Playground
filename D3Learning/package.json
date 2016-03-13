@@ -12,5 +12,8 @@
     "run-sequence": "1.1.0",
     "jshint-stylish": "1.0.1",
     "rimraf": "2.3.3"
+  },
+   "scripts": {
+    "postinstall": "bower install && gulp"
   }
 }
