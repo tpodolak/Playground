@@ -23,4 +23,4 @@ Enter in browser
 http://localhost:3000
 ```
 
-
+**Build status:** [![Build status](https://ci.appveyor.com/api/projects/status/b8hr9flgpcnkxw6q?svg=true)](https://ci.appveyor.com/project/tpodolak/playground-kg1jw)
