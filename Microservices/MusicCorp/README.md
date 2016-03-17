@@ -1,1 +1,0 @@
-Microservices' based application from "Building Microservices" by Sam Newman

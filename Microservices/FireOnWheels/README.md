@@ -1,1 +1,0 @@
-Learning basics of microservices architecture through Pluralsight examples
