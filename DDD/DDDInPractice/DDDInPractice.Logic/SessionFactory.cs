@@ -36,6 +36,8 @@ namespace DddInPractice.Logic
                     .Conventions.Add<TableNameConvention>()
                     .Conventions.Add<HiLoConvention>()
                 );
+
+	        // new NHibernate.Tool.hbm2ddl.SchemaExport(configuration.BuildConfiguration()).Execute(true, true, true);
             return configuration.BuildSessionFactory();
         }
 
