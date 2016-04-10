@@ -83,5 +83,12 @@ namespace DDDInPractice.Logic
                    OneDollarCount == other.OneDollarCount && FiveDollarCount == other.FiveDollarCount && TwentyDollarCount == other.TwentyDollarCount;
         }
 
+        public override string ToString()
+        {
+            if (Amount < 1)
+                return "¢" + (Amount * 100).ToString("0");
+
+            return "$" + Amount.ToString("0.00");
+        }
     }
 }
