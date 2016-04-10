@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Initer.cs" />
     <Compile Include="SnackMachineViewModel.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Page Include="Common\CustomWindow.xaml">

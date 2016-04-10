@@ -1,4 +1,6 @@
-﻿using System.Runtime.Remoting.Messaging;
+﻿using System;
+using System.Runtime.Remoting.Messaging;
+using NHibernate.Proxy;
 
 namespace DDDInPractice.Logic
 {
@@ -21,7 +23,7 @@ namespace DDDInPractice.Logic
 
 			if (ReferenceEquals(this, other)) return true;
 
-			if (obj.GetType() != this.GetType()) return false;
+			if (other.GetRealType() != this.GetRealType()) return false;
 
 			if (Id == 0 && other.Id == 0)
 				return false;
@@ -29,12 +31,7 @@ namespace DDDInPractice.Logic
 			return Equals((Entity) obj);
 		}
 
-		public override int GetHashCode()
-		{
-			return Id.GetHashCode();
-		}
-
-		public static bool operator ==(Entity left, Entity right)
+	    public static bool operator ==(Entity left, Entity right)
 		{
 			if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
 				return true;
@@ -45,9 +42,19 @@ namespace DDDInPractice.Logic
 			return left.Equals(right);
 		}
 
-		public static bool operator !=(Entity left, Entity right)
+	    public static bool operator !=(Entity left, Entity right)
 		{
 			return !(left == right);
 		}
+
+	    public override int GetHashCode()
+	    {
+	        return (this.GetRealType().ToString() + Id).GetHashCode();
+	    }
+
+	    private Type GetRealType()
+	    {
+	        return NHibernateProxyHelper.GetClassWithoutInitializingProxy(this);
+	    }
 	}
 }
