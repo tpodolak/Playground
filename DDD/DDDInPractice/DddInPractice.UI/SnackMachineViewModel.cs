@@ -49,7 +49,7 @@ namespace DddInPractice.UI
 
         private void BuySnack()
         {
-            _snackMachine.BuySnack();
+            _snackMachine.BuySnack(1);
             using (var session = SessionFactory.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())

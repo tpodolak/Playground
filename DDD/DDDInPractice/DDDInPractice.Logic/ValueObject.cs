@@ -17,7 +17,7 @@ namespace DDDInPractice.Logic
 
 		protected abstract int GetHashCodeInternal();
 
-		protected abstract bool EqualsInternal(T valueObject);
+		protected abstract bool EqualsInternal(T other);
 
 		public static bool operator ==(ValueObject<T> left, ValueObject<T> right)
 		{

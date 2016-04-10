@@ -4,6 +4,7 @@ using DDDInPractice.Logic;
 using FluentAssertions;
 using Xunit;
 using static DDDInPractice.Logic.Money;
+
 namespace DDDInPractice.Tests
 {
     public class SnackMachineSpecs
@@ -37,14 +38,15 @@ namespace DDDInPractice.Tests
         public void BuySnackTradesInsertedMoneyForSnack()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnack(1, new Snack("Snickers"), 10, 1m);
+            snackMachine.LoadSnack(1, new SnackPile(new Snack("Snickers"), 10, 1m));
             snackMachine.InsertMoney(Dollar);
 
             snackMachine.BuySnack(1);
 
-            snackMachine.Slots.Single(val => val.Position == 1).Quantity.Should().Be(9);
+            snackMachine.Slots.Single(val => val.Position == 1).SnackPile.Quantity.Should().Be(9);
             snackMachine.MoneyInTransaction.Should().Be(None);
             snackMachine.MoneyInside.Amount.Should().Be(1m);
+            snackMachine.GetSnackPile(1).Quantity.Should().Be(9);
         }
     }
 }
