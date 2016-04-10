@@ -22,6 +22,11 @@ namespace DDDInPractice.Logic
         public decimal Amount
             => OneCentCount * 0.01m + TenCentCount * 0.1m + QuarterCount * 0.25m + OneDollarCount + FiveDollarCount * 5 + TwentyDollarCount * 20;
 
+        private Money()
+        {
+            
+        }
+
         public Money(int oneCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount)
         {
             const string msg = "Value cannot be negative";

@@ -49,6 +49,7 @@
     <Compile Include="SessionFactory.cs" />
     <Compile Include="SnackMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnackMachineMap.cs" />
     <Compile Include="ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
