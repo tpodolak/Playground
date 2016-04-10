@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DDDInPractice.Logic
+﻿namespace DDDInPractice.Logic
 {
-	public class SnackMachine
+	public class SnackMachine : Entity
 	{
 		public Money MoneyInside { get; set; }
 		public Money MoneyInTransaction { get; set; }
@@ -12,14 +10,14 @@ namespace DDDInPractice.Logic
 			MoneyInTransaction += money;
 		}
 
-		public void BuySnack()
-		{
-			MoneyInside += MoneyInTransaction;
-		}
-
 		public void ReturnMoney()
 		{
 			// MoneyInTransaction = 0x0;
+		}
+
+		public void BuySnack()
+		{
+			MoneyInside += MoneyInTransaction;
 		}
 	}
 }
