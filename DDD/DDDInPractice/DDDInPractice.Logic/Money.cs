@@ -4,12 +4,23 @@ namespace DDDInPractice.Logic
 {
     public class Money : ValueObject<Money>
     {
-        public int OneCentCount { get; set; }
-        public int TenCentCount { get; set; }
-        public int QuarterCount { get; set; }
-        public int OneDollarCount { get; set; }
-        public int FiveDollarCount { get; set; }
-        public int TwentyDollarCount { get; set; }
+        public static Money None { get; } = new Money(0, 0, 0, 0, 0, 0);
+        public static Money Cent { get; } = new Money(1, 0, 0, 0, 0, 0);
+        public static Money TenCent { get; } = new Money(0, 1, 0, 0, 0, 0);
+        public static Money Quarter { get; } = new Money(0, 0, 1, 0, 0, 0);
+        public static Money Dollar { get; } = new Money(0, 0, 0, 1, 0, 0);
+        public static Money FiveDollar { get; } = new Money(0, 0, 0, 0, 1, 0);
+        public static Money TwentyDollar { get; } = new Money(0, 0, 0, 0, 0, 1);
+
+        public int OneCentCount { get; }
+        public int TenCentCount { get; }
+        public int QuarterCount { get; }
+        public int OneDollarCount { get; }
+        public int FiveDollarCount { get; }
+        public int TwentyDollarCount { get; }
+
+        public decimal Amount
+            => OneCentCount * 0.01m + TenCentCount * 0.1m + QuarterCount * 0.25m + OneDollarCount + FiveDollarCount * 5 + TwentyDollarCount * 20;
 
         public Money(int oneCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount)
         {
@@ -40,6 +51,15 @@ namespace DDDInPractice.Logic
         {
             return new Money(left.OneCentCount + right.OneCentCount, left.TenCentCount + right.TenCentCount, left.QuarterCount + right.QuarterCount,
                 left.OneDollarCount + right.OneDollarCount, left.FiveDollarCount + right.FiveDollarCount, left.TwentyDollarCount + right.TwentyDollarCount);
+        }
+
+        public static Money operator -(Money left, Money right)
+        {
+            if (left.Amount < right.Amount)
+                throw new InvalidOperationException();
+
+            return new Money(left.OneCentCount - right.OneCentCount, left.TenCentCount - right.TenCentCount, left.QuarterCount - right.QuarterCount,
+                left.OneDollarCount - right.OneDollarCount, left.FiveDollarCount - right.FiveDollarCount, left.TwentyDollarCount - right.TwentyDollarCount);
         }
 
         protected override int GetHashCodeInternal()
