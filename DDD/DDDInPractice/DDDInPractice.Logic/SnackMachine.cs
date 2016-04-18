@@ -8,7 +8,7 @@ namespace DDDInPractice.Logic
     public class SnackMachine : AggregateRoot
     {
         public virtual Money MoneyInside { get; protected set; } = None;
-        public virtual Money MoneyInTransaction { get; protected set; } = None;
+        public virtual decimal MoneyInTransaction { get; protected set; } = 0m;
         public virtual IList<Slot> Slots { get; protected set; }
 
         public SnackMachine()
@@ -31,21 +31,29 @@ namespace DDDInPractice.Logic
             Money[] allowedCoins = new[] { Cent, TenCent, Quarter, Dollar, FiveDollar, TwentyDollar };
             if (!allowedCoins.Contains(money))
                 throw new InvalidOperationException();
-
-            MoneyInTransaction += money;
+            MoneyInside += money;
+            MoneyInTransaction += money.Amount;
         }
 
         public virtual void ReturnMoney()
         {
-            MoneyInTransaction = None;
+            var money = MoneyInside.Allocate(MoneyInTransaction);
+            MoneyInside -= money;
+            MoneyInTransaction = 0m;
         }
 
         public virtual void BuySnack(int position)
         {
             var slot = GetSlot(position);
+            if (slot.SnackPile.Price > MoneyInTransaction)
+                throw new InvalidOperationException();
+
             slot.SnackPile = slot.SnackPile.SubtractOne();
-            MoneyInside += MoneyInTransaction;
-            MoneyInTransaction = None;
+            var change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
+            if(change.Amount < MoneyInTransaction - slot.SnackPile.Price)
+                throw new InvalidOperationException();
+            MoneyInside -= change;
+            MoneyInTransaction = 0m;
         }
 
         public virtual void LoadSnack(int position, SnackPile snackPile)
@@ -55,9 +63,14 @@ namespace DDDInPractice.Logic
 
         }
 
-        public Slot GetSlot(int position)
+        public virtual Slot GetSlot(int position)
         {
             return Slots.Single(val => val.Position == position);
+        }
+
+        public virtual void LoadMoney(Money dollar)
+        {
+            MoneyInside += dollar;
         }
     }
 }

@@ -6,7 +6,7 @@
         public virtual SnackMachine SnackMachine { get; set; }
         public virtual int Position { get; set; }
 
-        private Slot()
+        public Slot()
         {
 
         }

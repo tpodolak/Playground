@@ -4,7 +4,7 @@
 	{
 		public virtual string Name { get; set; }
 
-		private Snack()
+		public Snack()
 		{
 
 		}
