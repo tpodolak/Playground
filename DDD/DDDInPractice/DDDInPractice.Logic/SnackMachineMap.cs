@@ -18,7 +18,7 @@ namespace DDDInPractice.Logic
 				val.Map(x => x.TwentyDollarCount);
 			});
 
-		    HasMany<Slot>(Reveal.Member<SnackMachine>("Slots")).Not.LazyLoad();
+		    HasMany<Slot>(Reveal.Member<SnackMachine>("Slots")).Not.LazyLoad().Cascade.SaveUpdate();
 		}
 	}
 }
