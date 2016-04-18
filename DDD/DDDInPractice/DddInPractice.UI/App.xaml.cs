@@ -1,6 +1,4 @@
-﻿using DddInPractice.UI;
-
-namespace DddInPractice.Logic.UI
+﻿namespace DDDInPractice.UI
 {
     public partial class App
     {

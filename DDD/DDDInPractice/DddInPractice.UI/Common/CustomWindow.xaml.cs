@@ -1,4 +1,4 @@
-﻿namespace DddInPractice.UI.Common
+﻿namespace DDDInPractice.UI.Common
 {
     public partial class CustomWindow
     {

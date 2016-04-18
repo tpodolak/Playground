@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DddInPractice.UI.Common
+namespace DDDInPractice.UI.Common
 {
     public class MainDataTemplateSelector : DataTemplateSelector
     {

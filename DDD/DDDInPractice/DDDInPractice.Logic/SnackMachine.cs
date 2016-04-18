@@ -72,5 +72,28 @@ namespace DDDInPractice.Logic
         {
             MoneyInside += dollar;
         }
+        public virtual string CanBuySnack(int position)
+        {
+            SnackPile snackPile = GetSnackPile(position);
+
+            if (snackPile.Quantity == 0)
+                return "The snack pile is empty";
+
+            if (MoneyInTransaction < snackPile.Price)
+                return "Not enough money";
+
+            if (!MoneyInside.CanAllocate(MoneyInTransaction - snackPile.Price))
+                return "Not enough change";
+
+            return string.Empty;
+        }
+
+        public virtual IReadOnlyList<SnackPile> GetAllSnackPiles()
+        {
+            return Slots
+                .OrderBy(x => x.Position)
+                .Select(x => x.SnackPile)
+                .ToList();
+        }
     }
 }

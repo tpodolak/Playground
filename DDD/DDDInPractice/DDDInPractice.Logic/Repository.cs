@@ -1,11 +1,9 @@
-﻿using DddInPractice.Logic;
-
-namespace DDDInPractice.Logic
+﻿namespace DDDInPractice.Logic
 {
     // TODO exception handling etc
     public abstract class Repository<T> where T: AggregateRoot
     {
-        public T GetById(long id)
+        public T GetById(int id)
         {
             using (var session = SessionFactory.OpenSession())
             {

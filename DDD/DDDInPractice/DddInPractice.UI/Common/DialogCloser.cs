@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DddInPractice.UI.Common
+namespace DDDInPractice.UI.Common
 {
     public static class DialogCloser
     {

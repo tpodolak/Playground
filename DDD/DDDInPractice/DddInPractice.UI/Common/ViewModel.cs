@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using DddInPractice.UI.Utils;
+using DDDInPractice.UI.Utils;
 
-namespace DddInPractice.UI.Common
+namespace DDDInPractice.UI.Common
 {
     public abstract class ViewModel : INotifyPropertyChanged
     {

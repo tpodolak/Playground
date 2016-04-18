@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace DddInPractice.UI.Common
+namespace DDDInPractice.UI.Common
 {
     public class Command<T> : ICommand
     {

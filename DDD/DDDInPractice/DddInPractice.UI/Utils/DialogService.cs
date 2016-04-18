@@ -1,6 +1,6 @@
-﻿using DddInPractice.UI.Common;
+﻿using DDDInPractice.UI.Common;
 
-namespace DddInPractice.UI.Utils
+namespace DDDInPractice.UI.Utils
 {
     public class DialogService
     {

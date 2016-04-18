@@ -7,7 +7,7 @@ using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 
-namespace DddInPractice.Logic
+namespace DDDInPractice.Logic
 {
     public static class SessionFactory
     {
@@ -37,7 +37,7 @@ namespace DddInPractice.Logic
                     .Conventions.Add<HiLoConvention>()
                 );
 
-            new NHibernate.Tool.hbm2ddl.SchemaExport(configuration.BuildConfiguration()).Execute(false, true, false);
+            // new NHibernate.Tool.hbm2ddl.SchemaExport(configuration.BuildConfiguration()).Execute(false, true, false);
             return configuration.BuildSessionFactory();
         }
 

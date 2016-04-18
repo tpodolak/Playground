@@ -1,6 +1,4 @@
-﻿using System.Data.SqlTypes;
-
-namespace DDDInPractice.Logic
+﻿namespace DDDInPractice.Logic
 {
 	public abstract class ValueObject<T> where T:ValueObject<T>
 	{

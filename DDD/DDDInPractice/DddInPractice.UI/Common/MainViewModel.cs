@@ -1,19 +1,13 @@
-﻿using DddInPractice.Logic;
-using DDDInPractice.Logic;
+﻿using DDDInPractice.Logic;
 using NHibernate;
 
-namespace DddInPractice.UI.Common
+namespace DDDInPractice.UI.Common
 {
     public class MainViewModel : ViewModel
     {
         public MainViewModel()
         {
-            SnackMachine snackMachine;
-            using (var session = SessionFactory.OpenSession())
-            {
-                snackMachine = session.Get<SnackMachine>(1);
-            }
-
+            SnackMachine snackMachine = new SnackMachineRepository().GetById(1);
             var viewModel = new SnackMachineViewModel(snackMachine);
             _dialogService.ShowDialog(viewModel);
         }

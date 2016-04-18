@@ -4,7 +4,7 @@ using DDDInPractice.Logic;
 using FluentAssertions;
 using Xunit;
 using static DDDInPractice.Logic.Money;
-
+using static DDDInPractice.Logic.Snack;
 namespace DDDInPractice.Tests
 {
     public class SnackMachineSpecs
@@ -38,7 +38,7 @@ namespace DDDInPractice.Tests
         public void BuySnackTradesInsertedMoneyForSnack()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnack(1, new SnackPile(new Snack("Snickers"), 10, 1m));
+            snackMachine.LoadSnack(1, new SnackPile(Snack.Chocolate, 10, 1m));
             snackMachine.InsertMoney(Dollar);
 
             snackMachine.BuySnack(1);
@@ -54,7 +54,7 @@ namespace DDDInPractice.Tests
         {
             var snackMachine = new SnackMachine();
             snackMachine.InsertMoney(Dollar);
-            snackMachine.LoadSnack(1, new SnackPile(new Snack("snack"), 1, 2));
+            snackMachine.LoadSnack(1, new SnackPile(Chocolate, 1, 2));
             Assert.Throws<InvalidOperationException>(() => snackMachine.BuySnack(1));
         }
 
@@ -77,7 +77,7 @@ namespace DDDInPractice.Tests
         public void ChangeIsReturnedAfterPurchaseTest()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnack(1, new SnackPile(new Snack("snack"), 1, 0.5m));
+            snackMachine.LoadSnack(1, new SnackPile(Chocolate, 1, 0.5m));
             snackMachine.LoadMoney(new Money(0, 10, 0, 0, 0, 0));
             snackMachine.InsertMoney(Dollar);
             snackMachine.BuySnack(1);

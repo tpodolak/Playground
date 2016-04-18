@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using NHibernate.Proxy;
 
 namespace DDDInPractice.Logic
 {
 	public class Entity
 	{
-		public virtual int Id { get; private set; }
-
-
+		public virtual int Id { get; protected set; }
 
 		protected bool Equals(Entity other)
 		{

@@ -1,6 +1,6 @@
-﻿using DddInPractice.Logic;
+﻿using DDDInPractice.Logic;
 
-namespace DddInPractice.UI
+namespace DDDInPractice.UI
 {
     public static class Initer
     {
