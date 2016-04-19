@@ -1,5 +1,5 @@
 ﻿using DDDInPractice.Logic;
-using DDDInPractice.Logic.SharkedKernel;
+using DDDInPractice.Logic.SharedKernel;
 using DDDInPractice.Logic.SnackMachines;
 using DDDInPractice.Logic.Utils;
 using Xunit;

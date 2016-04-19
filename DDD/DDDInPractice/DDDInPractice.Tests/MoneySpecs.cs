@@ -1,6 +1,6 @@
 ﻿using System;
 using DDDInPractice.Logic;
-using DDDInPractice.Logic.SharkedKernel;
+using DDDInPractice.Logic.SharedKernel;
 using FluentAssertions;
 using Xunit;
 

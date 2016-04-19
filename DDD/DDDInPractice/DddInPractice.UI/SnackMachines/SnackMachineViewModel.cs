@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DDDInPractice.Logic.SharkedKernel;
+using DDDInPractice.Logic.SharedKernel;
 using DDDInPractice.Logic.SnackMachines;
 using DDDInPractice.UI.Common;
 

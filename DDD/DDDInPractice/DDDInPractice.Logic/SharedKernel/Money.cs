@@ -1,7 +1,7 @@
 ﻿using System;
 using DDDInPractice.Logic.Common;
 
-namespace DDDInPractice.Logic.SharkedKernel
+namespace DDDInPractice.Logic.SharedKernel
 {
     public class Money : ValueObject<Money>
     {

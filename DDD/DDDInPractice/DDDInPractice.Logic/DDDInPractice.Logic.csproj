@@ -44,9 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atms\Atm.cs" />
+    <Compile Include="Atms\AtmMap.cs" />
+    <Compile Include="Atms\AtmRepository.cs" />
+    <Compile Include="Atms\PaymentGateway.cs" />
     <Compile Include="Common\AggregateRoot.cs" />
     <Compile Include="Common\Entity.cs" />
-    <Compile Include="SharkedKernel\Money.cs" />
+    <Compile Include="SharedKernel\Money.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Utils\Initer.cs" />
     <Compile Include="Utils\SessionFactory.cs" />
@@ -64,9 +68,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Atms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
