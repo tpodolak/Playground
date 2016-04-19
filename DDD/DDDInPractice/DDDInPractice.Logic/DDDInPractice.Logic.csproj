@@ -44,24 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateRoot.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="Money.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="SessionFactory.cs" />
-    <Compile Include="Slot.cs" />
-    <Compile Include="SlotMap.cs" />
-    <Compile Include="Snack.cs" />
-    <Compile Include="SnackMachine.cs" />
+    <Compile Include="Common\AggregateRoot.cs" />
+    <Compile Include="Common\Entity.cs" />
+    <Compile Include="SharkedKernel\Money.cs" />
+    <Compile Include="Common\Repository.cs" />
+    <Compile Include="Utils\Initer.cs" />
+    <Compile Include="Utils\SessionFactory.cs" />
+    <Compile Include="SnackMachines\Slot.cs" />
+    <Compile Include="SnackMachines\SlotMap.cs" />
+    <Compile Include="SnackMachines\Snack.cs" />
+    <Compile Include="SnackMachines\SnackMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SnackMachineMap.cs" />
-    <Compile Include="SnackMachineRepository.cs" />
-    <Compile Include="SnackMap.cs" />
-    <Compile Include="SnackPile.cs" />
-    <Compile Include="ValueObject.cs" />
+    <Compile Include="SnackMachines\SnackMachineMap.cs" />
+    <Compile Include="SnackMachines\SnackMachineRepository.cs" />
+    <Compile Include="SnackMachines\SnackMap.cs" />
+    <Compile Include="SnackMachines\SnackPile.cs" />
+    <Compile Include="Common\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Atms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

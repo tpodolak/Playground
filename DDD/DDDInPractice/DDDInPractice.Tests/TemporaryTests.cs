@@ -1,4 +1,7 @@
 ﻿using DDDInPractice.Logic;
+using DDDInPractice.Logic.SharkedKernel;
+using DDDInPractice.Logic.SnackMachines;
+using DDDInPractice.Logic.Utils;
 using Xunit;
 
 namespace DDDInPractice.Tests

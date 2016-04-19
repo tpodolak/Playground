@@ -1,4 +1,5 @@
-﻿using DDDInPractice.UI.Common;
+﻿
+using DDDInPractice.UI.Common;
 
 namespace DDDInPractice.UI.Utils
 {

@@ -63,9 +63,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Initer.cs" />
-    <Compile Include="SnackMachineViewModel.cs" />
-    <Compile Include="SnackPileViewModel.cs" />
+    <Compile Include="SnackMachines\SnackMachineViewModel.cs" />
+    <Compile Include="SnackMachines\SnackPileViewModel.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Page Include="Common\CustomWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,7 +93,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ViewModel.cs" />
-    <Page Include="SnackMachineViewModel.xaml">
+    <Page Include="SnackMachines\SnackMachineViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -144,6 +143,9 @@
       <Project>{FE588159-B06E-4EEC-A5D9-0F7C8DBFC06A}</Project>
       <Name>DDDInPractice.Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Atms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿using System;
 using NHibernate.Proxy;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.Common
 {
 	public class Entity
 	{

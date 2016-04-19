@@ -1,4 +1,6 @@
-﻿namespace DDDInPractice.UI
+﻿using DDDInPractice.Logic.Utils;
+
+namespace DDDInPractice.UI
 {
     public partial class App
     {

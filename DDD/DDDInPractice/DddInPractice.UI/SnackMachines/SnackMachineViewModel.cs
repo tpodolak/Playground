@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DDDInPractice.Logic;
+using DDDInPractice.Logic.SharkedKernel;
+using DDDInPractice.Logic.SnackMachines;
 using DDDInPractice.UI.Common;
-using NHibernate;
 
-namespace DDDInPractice.UI
+namespace DDDInPractice.UI.SnackMachines
 {
     public class SnackMachineViewModel : ViewModel
     {

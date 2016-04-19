@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static DDDInPractice.Logic.Money;
+using DDDInPractice.Logic.Common;
+using DDDInPractice.Logic.SharkedKernel;
 
-namespace DDDInPractice.Logic
+namespace DDDInPractice.Logic.SnackMachines
 {
     public class SnackMachine : AggregateRoot
     {
-        public virtual Money MoneyInside { get; protected set; } = None;
+        public virtual Money MoneyInside { get; protected set; } = Money.None;
         public virtual decimal MoneyInTransaction { get; protected set; } = 0m;
         public virtual IList<Slot> Slots { get; protected set; }
 
@@ -28,7 +29,7 @@ namespace DDDInPractice.Logic
 
         public virtual void InsertMoney(Money money)
         {
-            Money[] allowedCoins = new[] { Cent, TenCent, Quarter, Dollar, FiveDollar, TwentyDollar };
+            Money[] allowedCoins = new[] { Money.Cent, Money.TenCent, Money.Quarter, Money.Dollar, Money.FiveDollar, Money.TwentyDollar };
             if (!allowedCoins.Contains(money))
                 throw new InvalidOperationException();
             MoneyInside += money;
