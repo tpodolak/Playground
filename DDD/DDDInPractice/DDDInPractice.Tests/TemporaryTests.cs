@@ -1,4 +1,5 @@
 ﻿using DDDInPractice.Logic;
+using DDDInPractice.Logic.Management;
 using DDDInPractice.Logic.SharedKernel;
 using DDDInPractice.Logic.SnackMachines;
 using DDDInPractice.Logic.Utils;
@@ -18,6 +19,7 @@ namespace DDDInPractice.Tests
                 {
                     var id = 1;
                     var result = session.Get<SnackMachine>(1);
+                    var headoffice = session.Get<HeadOffice>(1);
                     result.InsertMoney(Money.Dollar);
                     result.BuySnack(1);
                     session.SaveOrUpdate(result);

@@ -40,5 +40,16 @@ namespace DDDInPractice.Tests
 
             atm.MoneyCharged.Should().Be(1.12m);
         }
+
+        [Fact]
+        public void Take_Money_Raises_An_Event()
+        {
+            var atm = new Atm();
+            atm.LoadMoney(Dollar);
+            atm.TakeMoney(1m);
+            var balanceChangeEvent = atm.DomainEvents[0] as BalanceChangedEvent;
+            balanceChangeEvent.Should().NotBeNull();
+            balanceChangeEvent.Delta.Should().Be(1.01m);
+        }
     }
 }
