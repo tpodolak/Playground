@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\OutputCaching.cs" />
     <Compile Include="Features\RetreivingHome.cs" />
     <Compile Include="HomeFeature.cs" />
     <Compile Include="IssuesFeature.cs" />
