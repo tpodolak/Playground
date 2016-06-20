@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="RIDER_MODULE" version="4">
   <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/AppData/Local/JetBrains/Shared/v06/DecompilerCache/decompiler/2A55D587-43EC-479C-866B-425E85A3236D/59/ef7a84fb/DateTimeOffset.cs">
+      <sourceFolder url="file://$USER_HOME$/AppData/Local/JetBrains/Shared/v06/DecompilerCache/decompiler/2A55D587-43EC-479C-866B-425E85A3236D/59/ef7a84fb/DateTimeOffset.cs" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/AppData/Local/JetBrains/Shared/v06/DecompilerCache/decompiler/432C438A-5C35-4A95-AE26-A9890E906C4B/62/57ea50d3/Enumerable.cs">
+      <sourceFolder url="file://$USER_HOME$/AppData/Local/JetBrains/Shared/v06/DecompilerCache/decompiler/432C438A-5C35-4A95-AE26-A9890E906C4B/62/57ea50d3/Enumerable.cs" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/..">
       <sourceFolder url="file://$MODULE_DIR$/.." isTestSource="false" />
     </content>
