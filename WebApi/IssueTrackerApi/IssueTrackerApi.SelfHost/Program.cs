@@ -11,7 +11,7 @@ namespace IssueTrackerApi.SelfHost
             var config = new HttpSelfHostConfiguration("http://localhost:8080");
             WebApiConfig.Register(config);
             var host = new HttpSelfHostServer(config);
-            host.OpenAsync().Wait();
+            host.OpenAsync().Wait(TimeSpan.FromSeconds(10));
             Console.WriteLine($"IssueApi hosted at: {config.BaseAddress}");
             Console.ReadLine();
         }
