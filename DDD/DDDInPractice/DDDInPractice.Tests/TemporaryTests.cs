@@ -9,7 +9,7 @@ namespace DDDInPractice.Tests
 {
     public class TemporaryTests
     {
-        [Fact]
+        [Fact(Skip = "Database not ready on CI")]
         public void Test()
         {
             SessionFactory.Init(@"Data Source=DESKTOP-OBST7NQ;Initial Catalog=DDDInPractice;Integrated Security=True");
