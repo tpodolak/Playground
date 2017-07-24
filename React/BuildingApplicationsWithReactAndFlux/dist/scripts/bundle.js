@@ -50428,6 +50428,26 @@ var Home = React.createClass({displayName: "Home",
 module.exports = Home;
 
 },{"react":355,"react-router":185}],364:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Link = require('react-router').Link;
+
+var NotFoundPage = React.createClass({displayName: "NotFoundPage",
+    render: function() {
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", null, "Page Not Found"), 
+                React.createElement("p", null, "Whoops! Sorry, there is nothing to see here."), 
+                React.createElement("p", null, React.createElement(Link, {to: "app"}, "Back to Home"))
+            )
+        );
+    }
+});
+
+module.exports = NotFoundPage;
+
+},{"react":355,"react-router":185}],365:[function(require,module,exports){
 $ = JQuery = require("jquery");
 var React = require("react");
 var routes = require("./routes");
@@ -50439,20 +50459,25 @@ Router.run(routes, function(Handler){
     React.render(React.createElement(Handler, null), document.getElementById("app"));
 });
 
-},{"./routes":365,"jquery":158,"react":355,"react-router":185}],365:[function(require,module,exports){
+},{"./routes":366,"jquery":158,"react":355,"react-router":185}],366:[function(require,module,exports){
 var React = require("react");
 var Router = require("react-router");
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
+var NoFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
 
 var routes = (
     React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
         React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 
         React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
-        React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')})
+        React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
+        React.createElement(NoFoundRoute, {handler: require('./components/notFoundPage')}), 
+        React.createElement(Redirect, {fomm: "abount-us", to: "about"}), 
+        React.createElement(Redirect, {fomm: "abount/*", to: "about"})
     )
 );
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":358,"./components/app":359,"./components/authors/authorPage":361,"./components/homePage":363,"react":355,"react-router":185}]},{},[364]);
+},{"./components/about/aboutPage":358,"./components/app":359,"./components/authors/authorPage":361,"./components/homePage":363,"./components/notFoundPage":364,"react":355,"react-router":185}]},{},[365]);
