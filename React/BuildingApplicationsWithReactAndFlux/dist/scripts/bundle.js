@@ -50273,24 +50273,40 @@ module.exports = {
 "use strict";
 var React = require("React");
 var About = React.createClass({displayName: "About",
+    statics: {
+        willTransitionTo: function (transition, params, query, callback) {
+            if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
+                transition.about();
+            } else {
+                callback();
+            }
+        },
+
+        willTransitionFrom: function (transition, component) {
+            if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
+                transition.about();
+            }
+        }
+    },
+
     render: function () {
-       return (
-           React.createElement("div", null, 
-               React.createElement("h1", null, "About"), 
-               React.createElement("p", null, 
-                   "This application uses the following technologies:", 
-                   React.createElement("ul", null, 
-                       React.createElement("li", null, "React"), 
-                       React.createElement("li", null, "React Router"), 
-                       React.createElement("li", null, "Flux"), 
-                       React.createElement("li", null, "Node"), 
-                       React.createElement("li", null, "Gulp"), 
-                       React.createElement("li", null, "Browserify"), 
-                       React.createElement("li", null, "Bootstrap")
-                   )
-               )
-           )
-       );
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", null, "About"), 
+                React.createElement("p", null, 
+                    "This application uses the following technologies:", 
+                    React.createElement("ul", null, 
+                        React.createElement("li", null, "React"), 
+                        React.createElement("li", null, "React Router"), 
+                        React.createElement("li", null, "Flux"), 
+                        React.createElement("li", null, "Node"), 
+                        React.createElement("li", null, "Gulp"), 
+                        React.createElement("li", null, "Browserify"), 
+                        React.createElement("li", null, "Bootstrap")
+                    )
+                )
+            )
+        );
     }
 });
 
