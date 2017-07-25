@@ -50353,7 +50353,7 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
                        value: this.props.author.lastName, 
                        onChange: this.props.onChange}), 
 
-                React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default"})
+                React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", onClick: this.props.onSave})
             )
         );
     }
@@ -50430,9 +50430,14 @@ module.exports = Authors;
 
 },{"../../api/authorApi":356,"./authorList":361,"react":355,"react-router":185}],363:[function(require,module,exports){
 var React = require("react");
+var Router = require('react-router');
 var AuthorForm = require("./authorForm");
+var AuthorApi = require("../../api/authorApi");
 
 var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
+    mixins:[
+        Router.Navigation
+    ],
 
     getInitialState: function () {
         return {
@@ -50451,16 +50456,22 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
         });
     },
 
+    saveAuthor: function (event) {
+        event.preventDefault();
+        AuthorApi.saveAuthor(this.state.author);
+        this.transitionTo("authors");
+    },
+
     render: function () {
         return (
-            React.createElement(AuthorForm, {author: this.state.author, onChange: this.setAuthorState})
+            React.createElement(AuthorForm, {author: this.state.author, onChange: this.setAuthorState, onSave: this.saveAuthor})
         );
     }
 });
 
 module.exports = ManageAuthorPage;
 
-},{"./authorForm":360,"react":355}],364:[function(require,module,exports){
+},{"../../api/authorApi":356,"./authorForm":360,"react":355,"react-router":185}],364:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -50581,9 +50592,7 @@ var routes = (
         React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
         React.createElement(Route, {name: "addAuthor", path: "author", handler: require('./components/authors/manageAuthorPage')}), 
         React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
-        React.createElement(NoFoundRoute, {handler: require('./components/notFoundPage')}), 
-        React.createElement(Redirect, {fomm: "abount-us", to: "about"}), 
-        React.createElement(Redirect, {fomm: "abount/*", to: "about"})
+        React.createElement(NoFoundRoute, {handler: require('./components/notFoundPage')})
     )
 );
 

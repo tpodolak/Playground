@@ -12,8 +12,6 @@ var routes = (
         <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')} />
         <Route name="about" handler={require('./components/about/aboutPage')} />
         <NoFoundRoute handler={require('./components/notFoundPage')} />
-        <Redirect fomm="abount-us" to="about" />
-        <Redirect fomm="abount/*" to="about" />
     </Route>
 );
 
