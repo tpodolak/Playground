@@ -5,6 +5,14 @@ var AuthorForm = require("./authorForm");
 var AuthorApi = require("../../api/authorApi");
 
 var ManageAuthorPage = React.createClass({
+
+    statics: {
+        willTransitionFrom: function (transition, component) {
+            if (component.state.dirty && !confirm("Leave without saving?")) {
+                transition.abort();
+            }
+        }
+    },
     mixins: [
         Router.Navigation
     ],
@@ -12,11 +20,21 @@ var ManageAuthorPage = React.createClass({
     getInitialState: function () {
         return {
             author: {id: '', firstName: '', lastName: ''},
-            errors: {}
+            errors: {},
+            dirty: false
         }
     },
 
-    authorFormIsValid: function() {
+    componentWillMount: function () {
+        var authorId = this.props.params.id;
+        if (authorId) {
+            this.setState({
+                author: AuthorApi.getAuthorById(authorId)
+            });
+        }
+    },
+
+    authorFormIsValid: function () {
         var formIsValid = true;
         this.state.errors = {}; //clear any previous errors.
 
@@ -37,18 +55,20 @@ var ManageAuthorPage = React.createClass({
     setAuthorState: function (event) {
         this.state.author[event.target.name] = event.target.value;
         this.setState({
-            author: this.state.author
+            author: this.state.author,
+            dirty: true
         });
     },
 
     saveAuthor: function (event) {
         event.preventDefault();
-        if(!this.authorFormIsValid()){
+        if (!this.authorFormIsValid()) {
             return;
         }
 
         AuthorApi.saveAuthor(this.state.author);
         Toastr.success('Author saved.');
+        this.setState({dirty: false});
         this.transitionTo("authors");
     },
 
@@ -57,7 +77,7 @@ var ManageAuthorPage = React.createClass({
             <AuthorForm author={this.state.author}
                         onChange={this.setAuthorState}
                         onSave={this.saveAuthor}
-                        errors={this.state.errors} />
+                        errors={this.state.errors}/>
         );
     }
 });
