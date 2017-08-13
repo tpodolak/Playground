@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbusingLightBDD", "AbusingLightBDD\AbusingLightBDD.csproj", "{75269104-A470-4123-A1F9-C7CF5020D55B}"
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75269104-A470-4123-A1F9-C7CF5020D55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75269104-A470-4123-A1F9-C7CF5020D55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75269104-A470-4123-A1F9-C7CF5020D55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75269104-A470-4123-A1F9-C7CF5020D55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74AB0A96-D9A9-40C2-9743-A9913BBD8479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74AB0A96-D9A9-40C2-9743-A9913BBD8479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74AB0A96-D9A9-40C2-9743-A9913BBD8479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74AB0A96-D9A9-40C2-9743-A9913BBD8479}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
