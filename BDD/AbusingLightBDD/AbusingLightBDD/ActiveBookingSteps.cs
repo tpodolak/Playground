@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace AbusingLightBDD
 {
@@ -14,6 +15,11 @@ namespace AbusingLightBDD
 
         public void AddBags()
         {
+        }
+        
+        public Task AddBagsAsync()
+        {
+            return Task.FromResult(1);
         }
         
         public void AddBags2()

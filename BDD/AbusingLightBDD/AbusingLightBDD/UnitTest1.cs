@@ -18,19 +18,27 @@ namespace AbusingLightBDD
 
         [Label("Story-6")]
         [Scenario]
-        public void Test1()
+        public async Task Test1()
         {
-            Compose().Run(Runner);
+            await Runner.RunAsync(Compose());
         }
 
-        private CompositeStep Compose()
+        private IExtendedCompositeStepBuilder<ActiveBookingSteps> Compose()
         {
             return ExtendedCompositeStepBuilderPresets.AvailabilityBuilder(null)
                 .SelectOneWayFlight()
+                .SelectOneWayFlight2()
+                .AddAsyncSteps(x => x.SelectFlightAsync2())
                 .SelectFlight()
-                .AddBags()
-              //  .AddBags2()
-                .Build();
+                .AddBagsAsyc()
+                .AddBags();
+            //  .AddBags2()
+            // .Build();
+        }
+
+        private async Task SomeStep()
+        {
+            await Task.Delay(100);
         }
     }
 }

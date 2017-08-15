@@ -11,6 +11,10 @@ namespace AbusingLightBDD
         public void OneWayFlight()
         {
         }
+        
+        public void OneWayFlight2()
+        {
+        }
     }
 
     public abstract class DotRezSteps
