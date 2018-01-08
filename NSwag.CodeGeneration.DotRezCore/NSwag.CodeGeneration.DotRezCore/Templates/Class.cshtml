@@ -1,0 +1,12 @@
+﻿@model NSwag.CodeGeneration.DotRezCore.DotRezClassTemplateModel
+namespace @Model.Namespace
+{
+    @Model.TypeAccessModifier @(Model.IsAbstract ? "abstract " : string.Empty)partial class @Model.ClassName @Model.InheritanceCode
+    {
+        @foreach (var property in Model.Properties)
+        {
+        @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.Name")]
+        @:public @Raw(property.Type) @property.PropertyName { get; @(property.HasSetter ? "set;" : string.Empty) } @if (property.HasDefaultValue) { <text>=</text> @property.DefaultValue; }
+        }
+    }
+}

@@ -1,0 +1,206 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1",
+        "title": "Sample API",
+        "description": "A sample application with Swagger, Swashbuckle, and API versioning.",
+        "termsOfService": "Shareware",
+        "contact": {
+            "name": "Bill Mei",
+            "email": "bill.mei@somewhere.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "basePath": "/",
+    "paths": {
+        "/api/Orders": {
+            "get": {
+                "tags": ["Orders"],
+                "operationId": "ApiOrdersGet",
+                "consumes": [],
+                "produces": ["text/plain", "application/json", "text/json"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Order"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Orders"],
+                "operationId": "ApiOrdersPost",
+                "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+                "produces": ["text/plain", "application/json", "text/json"],
+                "parameters": [{
+                    "name": "order",
+                    "in": "body",
+                    "required": false,
+                    "schema": {
+                        "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Order"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Order"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/Orders/{id}": {
+            "get": {
+                "tags": ["Orders"],
+                "operationId": "ApiOrdersByIdGet",
+                "consumes": [],
+                "produces": ["text/plain", "application/json", "text/json"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer",
+                    "format": "int32"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Order"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/People": {
+            "get": {
+                "tags": ["People"],
+                "operationId": "ApiPeopleGet",
+                "consumes": [],
+                "produces": ["text/plain", "application/json", "text/json"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Person"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/People/{id}": {
+            "get": {
+                "tags": ["People"],
+                "operationId": "ApiPeopleByIdGet",
+                "consumes": [],
+                "produces": ["text/plain", "application/json", "text/json"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer",
+                    "format": "int32"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.Person"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AspNetCoreManuallyRetrieveSwaggerSchema.Models.Order": {
+            "required": ["customer"],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "effectiveDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "customer": {
+                    "type": "string"
+                },
+                "gender": {
+                    "enum": ["Male", "Female"],
+                    "type": "string"
+                }
+            }
+        },
+        "AspNetCoreManuallyRetrieveSwaggerSchema.Models.Person": {
+            "required": ["firstName", "lastName"],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "firstName": {
+                    "maxLength": 25,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "lastName": {
+                    "maxLength": 25,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "city": {
+                    "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.City"
+                },
+                "cities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AspNetCoreManuallyRetrieveSwaggerSchema.Models.City"
+                    }
+                }
+            }
+        },
+        "AspNetCoreManuallyRetrieveSwaggerSchema.Models.City": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {}
+}

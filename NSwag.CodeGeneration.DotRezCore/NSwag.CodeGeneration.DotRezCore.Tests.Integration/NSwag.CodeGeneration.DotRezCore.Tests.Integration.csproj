@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Data\GenerateModels\**" />
+    <Compile Remove="TestCases\**" />
+    <EmbeddedResource Remove="Data\GenerateModels\**" />
+    <EmbeddedResource Remove="TestCases\**" />
+    <None Remove="Data\GenerateModels\**" />
+    <None Remove="TestCases\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\Input\GenerateClient\ActionsWithMultipleReturnsTypes.json" />
+    <None Remove="Data\Input\GenerateClient\DotRezV3.json" />
+    <None Remove="Data\Input\GenerateContract\DotRezV3.json" />
+    <None Remove="Data\Input\GenerateContract\NestedModelsWithNamespaces.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Input\GenerateClient\ActionsWithMultipleReturnsTypes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Input\GenerateClient\DotRezV3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Input\GenerateContract\DotRezV3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Input\GenerateContract\NestedModelsWithNamespaces.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NSwag.CodeGeneration.DotRezCore\NSwag.CodeGeneration.DotRezCore.csproj">
+      <Project>{E1550610-6793-44A0-BBCF-F258BD16A2F2}</Project>
+      <Name>NSwag.CodeGeneration.DotRezCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Data\Output\GenerateClient\ActionsWithMultipleReturnsTypes.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Data\Output\GenerateClient\DotRezV3.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Data\Output\GenerateContract\DotRezV3.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Data\Output\GenerateContract\NestedModelsWithNamespaces.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+</Project>

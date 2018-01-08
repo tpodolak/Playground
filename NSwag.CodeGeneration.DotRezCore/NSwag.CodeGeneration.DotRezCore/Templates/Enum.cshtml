@@ -1,0 +1,15 @@
+﻿@model NSwag.CodeGeneration.DotRezCore.DotRezEnumTemplateModel
+namespace @Model.Namespace
+{
+    @Model.TypeAccessModifier enum @Model.Name
+    {
+        @foreach (var enumeration in @Model.Enums)
+        {
+            if (@Model.IsStringEnum)
+            {
+        @:[System.Runtime.Serialization.EnumMember(Value = "@enumeration.Value")]
+            }
+        @:@enumeration.Name = @enumeration.InternalValue,
+        }
+    }
+}

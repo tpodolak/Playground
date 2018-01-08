@@ -1,0 +1,2274 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "v3",
+    "description": "API v3",
+    "title": "Sample API"
+  },
+  "basePath": "/",
+  "paths": {
+    "/v3/{culture}/Availability": {
+      "get": {
+        "tags": ["v3/{culture}/Availability"],
+        "operationId": "V3ByCultureAvailabilityGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "Origin",
+          "in": "query",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "Destination",
+          "in": "query",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "ADT",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "TEEN",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "CHD",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "DateOut",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "DateIn",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "RoundTrip",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "FlexDaysOut",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 6,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "FlexDaysBeforeOut",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 6,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "FlexDaysIn",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "FlexDaysBeforeIn",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "OutboundDaysOfAvailability",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "InboundDaysOfAvailability",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "PromoCode",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "ToUs",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "Disc",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "IncludeConnectingFlights",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/Calendar": {
+      "get": {
+        "tags": ["v3/{culture}/Calendar"],
+        "operationId": "V3ByCultureCalendarGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "Origin",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "Destination",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "StartDate",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "EndDate",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "IsTwoWay",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "Months",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 24,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "IncludeConnectingFlights",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Calendar.Responses.CalendarResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/Health": {
+      "get": {
+        "tags": ["v3/{culture}/Health"],
+        "operationId": "V3ByCultureHealthGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Health.Responses.HealthInformationResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/countries": {
+      "get": {
+        "tags": ["v3/{culture}/res/countries"],
+        "operationId": "V3ByCultureResCountriesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Country"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/currencies": {
+      "get": {
+        "tags": ["v3/{culture}/res/currencies"],
+        "operationId": "V3ByCultureResCurrenciesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "*": {
+                  "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Currency"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/exchangerates": {
+      "get": {
+        "tags": ["v3/{culture}/res/exchangerates"],
+        "operationId": "V3ByCultureResExchangeratesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.CurrencyConversion"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/idealbanks": {
+      "get": {
+        "tags": ["v3/{culture}/res/idealbanks"],
+        "operationId": "V3ByCultureResIdealbanksGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.IdealBank"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/insurancecountries": {
+      "get": {
+        "tags": ["v3/{culture}/res/insurancecountries"],
+        "operationId": "V3ByCultureResInsurancecountriesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.InsuranceCountry"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/stations": {
+      "get": {
+        "tags": ["v3/{culture}/res/stations"],
+        "operationId": "V3ByCultureResStationsGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "*": {
+                  "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Station"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/titles": {
+      "get": {
+        "tags": ["v3/{culture}/res/titles"],
+        "operationId": "V3ByCultureResTitlesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Title"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/traveldocuments": {
+      "get": {
+        "tags": ["v3/{culture}/res/traveldocuments"],
+        "operationId": "V3ByCultureResTraveldocumentsGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.TravelDocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/{culture}/res/vouchers": {
+      "get": {
+        "tags": ["v3/{culture}/res/vouchers"],
+        "operationId": "V3ByCultureResVouchersGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "culture",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherResourceResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/Availability": {
+      "get": {
+        "tags": ["v3/Availability"],
+        "operationId": "V3AvailabilityGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "Origin",
+          "in": "query",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "Destination",
+          "in": "query",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "ADT",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "TEEN",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "CHD",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "DateOut",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "DateIn",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "RoundTrip",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "FlexDaysOut",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 6,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "FlexDaysBeforeOut",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 6,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "FlexDaysIn",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "FlexDaysBeforeIn",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "OutboundDaysOfAvailability",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "InboundDaysOfAvailability",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "PromoCode",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "ToUs",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "Disc",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "IncludeConnectingFlights",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/Calendar": {
+      "get": {
+        "tags": ["v3/Calendar"],
+        "operationId": "V3CalendarGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{
+          "name": "Origin",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "Destination",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "StartDate",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "EndDate",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "format": "date-time"
+        }, {
+          "name": "IsTwoWay",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "Months",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "maximum": 24,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
+        }, {
+          "name": "IncludeConnectingFlights",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Calendar.Responses.CalendarResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/Health": {
+      "get": {
+        "tags": ["v3/Health"],
+        "operationId": "V3HealthGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Health.Responses.HealthInformationResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/countries": {
+      "get": {
+        "tags": ["v3/res/countries"],
+        "operationId": "V3ResCountriesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Country"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/currencies": {
+      "get": {
+        "tags": ["v3/res/currencies"],
+        "operationId": "V3ResCurrenciesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "*": {
+                  "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Currency"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/exchangerates": {
+      "get": {
+        "tags": ["v3/res/exchangerates"],
+        "operationId": "V3ResExchangeratesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.CurrencyConversion"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/idealbanks": {
+      "get": {
+        "tags": ["v3/res/idealbanks"],
+        "operationId": "V3ResIdealbanksGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.IdealBank"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/insurancecountries": {
+      "get": {
+        "tags": ["v3/res/insurancecountries"],
+        "operationId": "V3ResInsurancecountriesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.InsuranceCountry"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/stations": {
+      "get": {
+        "tags": ["v3/res/stations"],
+        "operationId": "V3ResStationsGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "*": {
+                  "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Station"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/titles": {
+      "get": {
+        "tags": ["v3/res/titles"],
+        "operationId": "V3ResTitlesGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Title"
+              }
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/traveldocuments": {
+      "get": {
+        "tags": ["v3/res/traveldocuments"],
+        "operationId": "V3ResTraveldocumentsGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.TravelDocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v3/res/vouchers": {
+      "get": {
+        "tags": ["v3/res/vouchers"],
+        "operationId": "V3ResVouchersGet",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherResourceResponse"
+            }
+          },
+          "400": {
+            "description": "Client Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FluentValidation.Results.ValidationFailure"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityResponse": {
+      "type": "object",
+      "properties": {
+        "termsOfUse": {
+          "type": "string",
+          "example": ""
+        },
+        "currency": {
+          "type": "string",
+          "example": ""
+        },
+        "currPrecision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "trips": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityTrip"
+          }
+        },
+        "serverTimeUTC": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "promoCodeValidationError": {
+          "type": "string",
+          "example": ""
+        },
+        "fareOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.FareOption"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityTrip": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "example": ""
+        },
+        "originName": {
+          "type": "string",
+          "example": ""
+        },
+        "destination": {
+          "type": "string",
+          "example": ""
+        },
+        "destinationName": {
+          "type": "string",
+          "example": ""
+        },
+        "dates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityDate"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.FareOption": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "vat": {
+          "format": "double",
+          "type": "number"
+        },
+        "amt": {
+          "format": "double",
+          "type": "number"
+        },
+        "total": {
+          "format": "double",
+          "type": "number"
+        },
+        "journeyNum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "segmentNum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "includedSsrs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "totalDiscount": {
+          "format": "double",
+          "type": "number"
+        },
+        "percentageDiscount": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityDate": {
+      "type": "object",
+      "properties": {
+        "dateOut": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "flights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityFlight"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityFlight": {
+      "type": "object",
+      "properties": {
+        "flightNumber": {
+          "type": "string",
+          "example": ""
+        },
+        "time": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "timeUTC": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "duration": {
+          "type": "string",
+          "example": ""
+        },
+        "faresLeft": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "flightKey": {
+          "type": "string",
+          "example": ""
+        },
+        "infantsLeft": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "regularFare": {
+          "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityFare"
+        },
+        "operatedBy": {
+          "type": "string",
+          "example": ""
+        },
+        "freeMoveRange": {
+          "type": "boolean"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilitySegment"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityFare": {
+      "type": "object",
+      "properties": {
+        "fareKey": {
+          "type": "string",
+          "example": ""
+        },
+        "fareClass": {
+          "type": "string",
+          "example": ""
+        },
+        "fares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.AvailabilityPaxFare"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilitySegment": {
+      "type": "object",
+      "properties": {
+        "flightNumber": {
+          "type": "string",
+          "example": ""
+        },
+        "time": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "timeUTC": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "duration": {
+          "type": "string",
+          "example": ""
+        },
+        "segmentNr": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "origin": {
+          "type": "string",
+          "example": ""
+        },
+        "destination": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.AvailabilityPaxFare": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": ""
+        },
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasDiscount": {
+          "type": "boolean",
+          "example": false
+        },
+        "publishedFare": {
+          "format": "double",
+          "type": "number"
+        },
+        "mandatorySeatFee": {
+          "$ref": "#/definitions/DotRez.Api.Models.V3.Availability.Responses.BookingItem"
+        },
+        "discountInPercent": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasPromoDiscount": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Availability.Responses.BookingItem": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "qty": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vat": {
+          "format": "double",
+          "type": "number"
+        },
+        "amt": {
+          "format": "double",
+          "type": "number"
+        },
+        "total": {
+          "format": "double",
+          "type": "number"
+        },
+        "totalDiscount": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "FluentValidation.Results.ValidationFailure": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "readOnly": true,
+          "example": ""
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "example": ""
+        },
+        "attemptedValue": {
+          "type": "object",
+          "readOnly": true
+        },
+        "customState": {
+          "type": "object"
+        },
+        "severity": {
+          "enum": ["Error", "Warning", "Info"],
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string",
+          "example": ""
+        },
+        "formattedMessageArguments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "formattedMessagePlaceholderValues": {
+          "type": "object",
+          "properties": {
+            "*": {
+              "type": "object"
+            }
+          }
+        },
+        "resourceName": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Calendar.Responses.CalendarResponse": {
+      "type": "object",
+      "properties": {
+        "outboundDates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "returnDates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Health.Responses.HealthInformationResponse": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": ""
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Health.Responses.HealthResult"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Health.Responses.HealthResult": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "example": ""
+        },
+        "value": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.CurrencyConversion": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "exchangeRate": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Station": {
+      "type": "object",
+      "properties": {
+        "stationCode": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        },
+        "country": {
+          "type": "string",
+          "example": ""
+        },
+        "timeZone": {
+          "type": "string",
+          "example": ""
+        },
+        "latitude": {
+          "type": "string",
+          "example": ""
+        },
+        "longitude": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Title": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "description": {
+          "type": "string",
+          "example": ""
+        },
+        "gender": {
+          "type": "string",
+          "example": ""
+        },
+        "weightCategory": {
+          "type": "string",
+          "example": ""
+        },
+        "paxType": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Country": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        },
+        "phoneCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "iseu": {
+          "type": "boolean",
+          "example": false
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.CountryState"
+          }
+        },
+        "nationality": {
+          "type": "string",
+          "example": ""
+        },
+        "postalCodeDetails": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.CountryState": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.InsuranceCountry": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherResourceResponse": {
+      "type": "object",
+      "properties": {
+        "issuanceReasonCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "voucherBases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherResourceBasis"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherResourceBasis": {
+      "type": "object",
+      "properties": {
+        "basis": {
+          "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherBasis"
+        },
+        "currency": {
+          "type": "string",
+          "example": ""
+        },
+        "amounts": {
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherBasis": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        },
+        "description": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherType": {
+          "type": "string",
+          "example": ""
+        },
+        "issuanceType": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherUsageType": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherTripType": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherExpirationControl": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherExpirationType": {
+          "type": "string",
+          "example": ""
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationDays": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "currencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "amountControl": {
+          "type": "string",
+          "example": ""
+        },
+        "calculatedAmountControl": {
+          "type": "string",
+          "example": ""
+        },
+        "maximumAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "maximumPax": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxVouchersPerBooking": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "travelDOWRestriction": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherNameRestriction": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherRequirements": {
+          "type": "string",
+          "example": ""
+        },
+        "nextReferenceNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "restrictionNote": {
+          "type": "string",
+          "example": ""
+        },
+        "maxAmountIsPerPax": {
+          "type": "boolean",
+          "example": false
+        },
+        "calculatedPercentage": {
+          "format": "double",
+          "type": "number"
+        },
+        "issuanceControl": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherBasisFareClasses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherBasisFareClass"
+          }
+        },
+        "voucherBasisMarketRestrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherBasisMarketRestriction"
+          }
+        },
+        "voucherBasisTravelRestrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherBasisTravelRestriction"
+          }
+        },
+        "voucherIssuances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherIssuance"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherBasisFareClass": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "classOfService": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherBasisMarketRestriction": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "sequence": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "marketRestrictionType": {
+          "type": "string",
+          "example": ""
+        },
+        "directionality": {
+          "type": "string",
+          "example": ""
+        },
+        "regionType": {
+          "type": "string",
+          "example": ""
+        },
+        "regionCode": {
+          "type": "string",
+          "example": ""
+        },
+        "travelRegionType": {
+          "type": "string",
+          "example": ""
+        },
+        "travelRegionCode": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherBasisTravelRestriction": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "sequence": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "travelRestrictionType": {
+          "type": "string",
+          "example": ""
+        },
+        "startTravelDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTravelDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherIssuance": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherIssuanceID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "issuanceReasonCode": {
+          "type": "string",
+          "example": ""
+        },
+        "note": {
+          "type": "string",
+          "example": ""
+        },
+        "currencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "inventorySegmentKey": {
+          "type": "string",
+          "example": ""
+        },
+        "vouchers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.Voucher"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Voucher": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "voucherType": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherBasisCode": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherIssuanceID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "status": {
+          "type": "string",
+          "example": ""
+        },
+        "voucherReference": {
+          "type": "string",
+          "example": ""
+        },
+        "password": {
+          "type": "string",
+          "example": ""
+        },
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "available": {
+          "format": "double",
+          "type": "number"
+        },
+        "currencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "foreignAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "foreignCurrencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "expiration": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recordLocator": {
+          "type": "string",
+          "example": ""
+        },
+        "lastName": {
+          "type": "string",
+          "example": ""
+        },
+        "firstName": {
+          "type": "string",
+          "example": ""
+        },
+        "personID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "voucherTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.VoucherTransaction"
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.VoucherTransaction": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "example": ""
+        },
+        "createdAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedAgentID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "voucherID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "voucherTransactionID": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "voucherTransactionType": {
+          "type": "string",
+          "example": ""
+        },
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "currencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "foreignAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "foreignCurrencyCode": {
+          "type": "string",
+          "example": ""
+        },
+        "recordLocator": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Seat": {
+      "type": "object",
+      "properties": {
+        "designator": {
+          "type": "string",
+          "example": ""
+        },
+        "row": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "column": {
+          "type": "string",
+          "example": ""
+        },
+        "baseGroup": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "group": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "infantAllowed": {
+          "type": "boolean",
+          "example": false
+        },
+        "childAllowed": {
+          "type": "boolean",
+          "example": false
+        },
+        "disabilityAllowed": {
+          "type": "boolean",
+          "example": false
+        },
+        "extraLegRoom": {
+          "type": "boolean",
+          "example": false
+        },
+        "emergencyExit": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.TravelDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "acceptedDocumentTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DotRez.Api.Models.V3.Resources.Responses.DocumentType"
+          }
+        },
+        "passportOnlyCountries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "eeaNonIssuingCountries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "passportCardCountries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.DocumentType": {
+      "type": "object",
+      "properties": {
+        "typeCode": {
+          "type": "string",
+          "example": ""
+        },
+        "typeName": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.Currency": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        },
+        "precision": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "symbol": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "DotRez.Api.Models.V3.Resources.Responses.IdealBank": {
+      "type": "object",
+      "properties": {
+        "issuerId": {
+          "type": "string",
+          "example": ""
+        },
+        "name": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+    }
+  }
+}
