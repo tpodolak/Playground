@@ -18,5 +18,9 @@ namespace NSwag.CodeGeneration.DotRezCore
             Document = document;
             Settings = settings;
         }
+
+        public string Namespace => string.IsNullOrEmpty(Document.Info.Version)
+            ? Settings.CSharpGeneratorSettings.Namespace
+            : $"{Settings.CSharpGeneratorSettings.Namespace}.V{Document.Info.Version?.ToUpper()}";
     }
 }
