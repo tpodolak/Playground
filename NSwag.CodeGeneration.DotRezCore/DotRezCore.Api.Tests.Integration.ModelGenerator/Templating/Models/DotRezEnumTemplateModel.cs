@@ -3,7 +3,7 @@ using NJsonSchema;
 using NJsonSchema.CodeGeneration.CSharp;
 using NJsonSchema.CodeGeneration.CSharp.Models;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
 {
     public class DotRezEnumTemplateModel : EnumTemplateModel
     {
@@ -19,7 +19,7 @@ namespace NSwag.CodeGeneration.DotRezCore
             get
             {
                 var split = _typeName.Split('.');
-                return string.Join(".", split.TakeWhile((segment, idx) => idx != split.Length - 1));
+                return string.Join(".", split.Take(split.Length - 1));
             }
         }
 

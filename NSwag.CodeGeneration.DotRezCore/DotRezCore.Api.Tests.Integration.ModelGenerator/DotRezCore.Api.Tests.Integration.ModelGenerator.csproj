@@ -6,6 +6,9 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotRezCore.Api\DotRezCore.Api.csproj" />
-    <ProjectReference Include="..\NSwag.CodeGeneration.DotRezCore\NSwag.CodeGeneration.DotRezCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="11.12.16" />
+    <PackageReference Include="RazorLight" Version="1.1.0" />
   </ItemGroup>
 </Project>

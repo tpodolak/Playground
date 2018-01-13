@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using NJsonSchema;
+using NSwag;
 using NSwag.CodeGeneration.CSharp;
 using NSwag.CodeGeneration.CSharp.Models;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
 {
     public class DotRezClientTemplateModel : CSharpClientTemplateModel
     {

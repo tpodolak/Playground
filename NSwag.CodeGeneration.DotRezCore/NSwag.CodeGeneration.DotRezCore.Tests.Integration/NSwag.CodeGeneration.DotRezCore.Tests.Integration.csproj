@@ -39,12 +39,6 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NSwag.CodeGeneration.DotRezCore\NSwag.CodeGeneration.DotRezCore.csproj">
-      <Project>{E1550610-6793-44A0-BBCF-F258BD16A2F2}</Project>
-      <Name>NSwag.CodeGeneration.DotRezCore</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Data\Output\GenerateClient\ActionsWithMultipleReturnsTypes.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -57,5 +51,8 @@
     <Compile Update="Data\Output\GenerateContract\NestedModelsWithNamespaces.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotRezCore.Api.Tests.Integration.ModelGenerator\DotRezCore.Api.Tests.Integration.ModelGenerator.csproj" />
   </ItemGroup>
 </Project>

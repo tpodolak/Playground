@@ -1,7 +1,7 @@
 ﻿using RazorLight;
 using ITemplate = NJsonSchema.CodeGeneration.ITemplate;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Templating
 {
     public class RazorTemplate : ITemplate
     {

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using NSwag;
+using NSwag.CodeGeneration;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
-    public class DotRezParameterNameGenerator : IParameterNameGenerator
+    internal class DotRezParameterNameGenerator : IParameterNameGenerator
     {
         public string Generate(SwaggerParameter parameter, IEnumerable<SwaggerParameter> allParameters)
         {

@@ -12,7 +12,4 @@
   <ItemGroup>
     <ProjectReference Include="..\DotRezCore.Api\DotRezCore.Api.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models" />
-  </ItemGroup>
 </Project>

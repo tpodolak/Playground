@@ -1,4 +1,4 @@
-﻿namespace DotRezCore.Api.Tests.Integration.Models
+namespace DotRezCore.Api.Tests.Integration.Models
 {
     public partial class Person 
     {
@@ -11,8 +11,8 @@
         [Newtonsoft.Json.JsonProperty(PropertyName = "email")]
         public string Email { get; set; } 
         [Newtonsoft.Json.JsonProperty(PropertyName = "city")]
-        public City City { get; set; } 
+        public DotRezCore.Api.Tests.Integration.Models.City City { get; set; } 
         [Newtonsoft.Json.JsonProperty(PropertyName = "cities")]
-        public System.Collections.Generic.List<City> Cities { get; set; } 
+        public System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.City> Cities { get; set; } 
     }
 }

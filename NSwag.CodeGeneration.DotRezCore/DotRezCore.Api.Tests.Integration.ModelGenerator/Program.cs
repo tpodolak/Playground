@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NSwag.CodeGeneration.DotRezCore;
+using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration;
+using DotRezCore.Api.Tests.Integration.ModelGenerator.Composition;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotRezCore.Api.Tests.Integration.ModelGenerator
 {
@@ -14,16 +11,34 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
     {
         static async Task Main(string[] args)
         {
-            var schemaRetriever = new SchemaRetriever();
-            var schema = schemaRetriever.RetrieveSchema("Sample API");
+            IServiceProvider container = null;
+            try
+            {
+                var containerBuilder = new ContainerBuilder();
+                containerBuilder.RegisterModule(new BootstrapperModule());
+                container = containerBuilder.Build();
+                using (var scope = container.CreateScope())
+                {
+                    var integrationTestsRootPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../DotRezCore.Api.Tests.Integration"));
+                    var application = scope.ServiceProvider.GetRequiredService<Application>();
+                    var settings = new DotRezCodeGeneratorSettings
+                    {
+                        ClientFilesDestinationRoot = Path.Combine(integrationTestsRootPath, "ApiClients"),
+                        ContractFilesDestinationRoot = Path.Combine(integrationTestsRootPath, "Models"),
+                        ClientNamespacePrefix = "DotRezCore.Api.Tests.Integration.ApiClients",
+                        ContractNamespacePrefix = "DotRezCore.Api.Tests.Integration.Models",
+                        ClientName = "DotRezCoreApiClient"
+                    };
 
-//            var schema =
-//                File.ReadAllText(
-//                    @"E:\NSwag.CodeGeneration.DotRezCore\NSwag.CodeGeneration.DotRezCore.Tests.Integration\Data\Input\GenerateClient\DotRezV3.json");
-            
-            var generator = new DotRezSwaggerClientGenerator();
-
-            var models = await generator.Generate(schema);
+                    await application.Generate(Api.Program.BuildWebHost(null), settings);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                (container as IDisposable)?.Dispose();
+                throw;
+            }
         }
     }
 }

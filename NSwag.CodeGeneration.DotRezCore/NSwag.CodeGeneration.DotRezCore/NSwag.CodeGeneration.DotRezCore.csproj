@@ -5,12 +5,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Templates\Class.cshtml" />
-    <None Remove="Templates\Class.liquid" />
     <None Remove="Templates\Client.cshtml" />
+    <None Remove="Templates\Enum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Class.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>RazorGenerator</Generator>
     </Content>
     <Content Include="Templates\Client.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -18,12 +19,10 @@
     <Content Include="Templates\Enum.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Class.liquid">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="11.12.16" />
+    <PackageReference Include="RazorGenerator.MsBuild" Version="2.5.0" />
     <PackageReference Include="RazorLight" Version="1.1.0" />
   </ItemGroup>
 </Project>

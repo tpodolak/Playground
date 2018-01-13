@@ -1,4 +1,4 @@
-﻿namespace DotRezCore.Api.Tests.Integration.Models
+namespace DotRezCore.Api.Tests.Integration.Models
 {
     public partial class Order 
     {
@@ -11,6 +11,6 @@
         [Newtonsoft.Json.JsonProperty(PropertyName = "customer")]
         public string Customer { get; set; } 
         [Newtonsoft.Json.JsonProperty(PropertyName = "gender")]
-        public OrderGender? Gender { get; set; } 
+        public DotRezCore.Api.Tests.Integration.Models.OrderGender? Gender { get; set; } 
     }
 }

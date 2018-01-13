@@ -1,8 +1,8 @@
 ﻿@using NSwag
 @using NSwag.CodeGeneration.CSharp.Models
-@using NSwag.CodeGeneration.DotRezCore
 @using RazorLight.Text
-@model NSwag.CodeGeneration.DotRezCore.DotRezClientTemplateModel
+@using DotRezClientTemplateModel = DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezClientTemplateModel
+@model DotRezClientTemplateModel
 namespace @Model.Namespace
 {
     @Model.ClientClassAccessModifier partial class @Model.Class @(Model.HasBaseClass ? $": {@Model.BaseClass}" : string.Empty)
@@ -10,53 +10,52 @@ namespace @Model.Namespace
         private @Model.HttpClientType _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<@Model.Class> _logger;
-        @{
-        <text>
+
         public @(Model.Class)(@Raw(Model.HttpClientType) httpClient, Microsoft.Extensions.Logging.ILogger<@Model.Class> logger)
         {
             _httpClient = httpClient;
             _serializerSettings = new Newtonsoft.Json.JsonSerializerSettings();
             _logger = logger;
         }
-        </text>
-        }
         @foreach (var operation in Model.Operations)
         {
-        <text>
-        @operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@CreateMethodArguments(operation))
-        { 
-            string content = string.Empty;
-            try
-            {
-                var response = await @(operation.ActualOperationName)ResponseAsync(@CreateMethodParameters(operation));
-                response.EnsureSuccessStatusCode();
-                content = await response.Content.ReadAsStringAsync();
-                @if(operation.HasResult)
+        @:
+            
+        @:@operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@CreateMethodArguments(operation))
+        @:{ 
+            @:string content = string.Empty;
+            @:try
+            @:{
+                @:var response = await @(operation.ActualOperationName)ResponseAsync(@CreateMethodParameters(operation));
+                @:response.EnsureSuccessStatusCode();
+                @:content = await response.Content.ReadAsStringAsync();
+                if(operation.HasResult)
                 {
                 @:var result = Newtonsoft.Json.JsonConvert.DeserializeObject<@Raw(operation.SyncResultType)>(content, _serializerSettings);
                 @:return result;
                 }
-            }
-            catch(System.Exception ex)
-            {
-                Microsoft.Extensions.Logging.LoggerExtensions.LogError(_logger, default(Microsoft.Extensions.Logging.EventId), ex, "There was an error while making a API call. Response content is {0}", content);
-                throw;
-            }
-        }
+            @:}
+            @:catch(System.Exception ex)
+            @:{
+                @:Microsoft.Extensions.Logging.LoggerExtensions.LogError(_logger, default(Microsoft.Extensions.Logging.EventId), ex, "There was an error while making a API call. Response content is {0}", content);
+                @:throw;
+            @:}
+        @:}
+        @:
             
-        @operation.MethodAccessModifier async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> @(operation.ActualOperationName)ResponseAsync(@CreateMethodArguments(operation))
-        {
-            using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
-            {
-                var urlStringBuilder = new System.Text.StringBuilder("@operation.Path");
-                @foreach (var parameter in @operation.PathParameters)
+        @:@operation.MethodAccessModifier async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> @(operation.ActualOperationName)ResponseAsync(@CreateMethodArguments(operation))
+        @:{
+            @:using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
+            @:{
+                @:var urlStringBuilder = new System.Text.StringBuilder("@operation.Path");
+                foreach (var parameter in @operation.PathParameters)
                 {
                 
                 @:urlStringBuilder.Replace("{@parameter.VariableName}", @RenderEncodeParameterSegment(parameter));
                 }
-                @if (@operation.HasQueryParameters)
+                if (@operation.HasQueryParameters)
                 {
-                    var queryParametersList = operation.QueryParameters.ToList();
+                var queryParametersList = operation.QueryParameters.ToList();
                 @:urlStringBuilder.Append("?");
                     for (var parameterIndex = 0; parameterIndex < queryParametersList.Count; parameterIndex ++)
                     {
@@ -69,7 +68,7 @@ namespace @Model.Namespace
                                 @:urlStringBuilder.AppendFormat("{0}={1}&", "@property.Key", @($"{operationQueryParameter.VariableName}.{Model.Settings.CodeGeneratorSettings.PropertyNameGenerator.Generate(property.Value)}"));
                             }
                             *@
-                            @:urlStringBuilder.Append(SerializeToQueryString(@operationQueryParameter.VariableName));
+                @:urlStringBuilder.Append(SerializeToQueryString(@operationQueryParameter.VariableName));
                         }
                         else
                         {
@@ -77,36 +76,29 @@ namespace @Model.Namespace
                         }
                     }
                 }
-                httpRequestMessage.Method = new System.Net.Http.HttpMethod("@operation.HttpMethodUpper.ToUpper()");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
-                @if (operation.HasAcceptHeaderParameterParameter)
+                @:httpRequestMessage.Method = new System.Net.Http.HttpMethod("@operation.HttpMethodUpper.ToUpper()");
+                @:httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                if (operation.HasAcceptHeaderParameterParameter)
                 {
                 @:httpRequestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("@operation.Produces"));
                 }
-                @if (operation.HasContent)
+                if (operation.HasContent)
                 {
                     if (operation.HasBinaryBodyParameter || operation.HasXmlBodyParameter)
                     {
-                <text>
-                System.Net.Http.StreamContent content = new System.Net.Http.StreamContent(@operation.ContentParameter.VariableName);
-                </text>
+                @:System.Net.Http.StreamContent content = new System.Net.Http.StreamContent(@operation.ContentParameter.VariableName);
                     }else
                     {
-                <text>
-                System.Net.Http.StringContent content = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(@operation.ContentParameter.VariableName, _serializerSettings));
-                </text>            
+                @:System.Net.Http.StringContent content = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(@operation.ContentParameter.VariableName, _serializerSettings));
                     }
-                <text>
-                content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@operation.Consumes");
-                httpRequestMessage.Content = content;
-                </text>
+                @:content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@operation.Consumes");
+                @:httpRequestMessage.Content = content;
                 }
-                return await _httpClient.SendAsync(httpRequestMessage);
-            }
+                @:return await _httpClient.SendAsync(httpRequestMessage);
+            @:}
+        @:}
         }
-        </text>
-        }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)

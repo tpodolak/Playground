@@ -1,19 +1,19 @@
-﻿using NJsonSchema.CodeGeneration;
+﻿using System;
+using System.IO;
+using NJsonSchema.CodeGeneration;
 using RazorLight;
 using ITemplate = NJsonSchema.CodeGeneration.ITemplate;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Templating
 {
     public class RazorTemplateFactory : ITemplateFactory
     {
         private readonly IRazorLightEngine _razorEngineService;
 
-        private readonly string _templateDirectory;
-
-        public RazorTemplateFactory(string templateDirectory)
+        public RazorTemplateFactory()
         {
-            _templateDirectory = templateDirectory;
-            _razorEngineService = EngineFactory.CreatePhysical(templateDirectory);
+            var templatesLocation = Path.Combine(Environment.CurrentDirectory, "Templating", "Templates");
+            _razorEngineService = EngineFactory.CreatePhysical(templatesLocation);
         }
 
         public ITemplate CreateTemplate(string language, string templateKey, object model)

@@ -1,4 +1,7 @@
-﻿@model NSwag.CodeGeneration.DotRezCore.DotRezClassTemplateModel
+﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator
+@using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
+@using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
+@model DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezClassTemplateModel
 namespace @Model.Namespace
 {
     @Model.TypeAccessModifier @(Model.IsAbstract ? "abstract " : string.Empty)partial class @Model.ClassName @Model.InheritanceCode

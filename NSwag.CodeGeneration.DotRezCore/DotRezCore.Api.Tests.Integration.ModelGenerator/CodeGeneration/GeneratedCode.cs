@@ -1,4 +1,4 @@
-﻿namespace NSwag.CodeGeneration.DotRezCore
+﻿namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
     public class GeneratedCode
     {

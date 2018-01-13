@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
 
-namespace NSwag.CodeGeneration.DotRezCore
+namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
-    public class DotRezCSharpGenerator : CSharpGenerator
+    internal class DotRezCSharpGenerator : CSharpGenerator
     {
         private readonly CSharpTypeResolver _resolver;
 
