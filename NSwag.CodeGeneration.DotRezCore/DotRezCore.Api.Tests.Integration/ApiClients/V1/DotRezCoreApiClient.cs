@@ -13,7 +13,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             _logger = logger;
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.GetOrderRequest request)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         { 
             string content = string.Empty;
             try
@@ -21,7 +21,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiOrdersGetResponseAsync(request);
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.Order>>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)
@@ -31,7 +31,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.GetOrderRequest request)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
@@ -44,7 +44,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.Order order)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         { 
             string content = string.Empty;
             try
@@ -52,7 +52,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiOrdersPostResponseAsync(order);
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.Order>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Order>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)
@@ -62,7 +62,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.Order order)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
@@ -76,7 +76,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
         { 
             string content = string.Empty;
             try
@@ -84,7 +84,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3);
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.Order>>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)
@@ -109,7 +109,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.Order> ApiOrdersByIdGetAsync(int id)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id)
         { 
             string content = string.Empty;
             try
@@ -117,7 +117,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiOrdersByIdGetResponseAsync(id);
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.Order>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Order>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)
@@ -139,7 +139,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.Person>> ApiPeopleGetAsync()
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync()
         { 
             string content = string.Empty;
             try
@@ -147,7 +147,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiPeopleGetResponseAsync();
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.Person>>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)
@@ -168,7 +168,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.Person> ApiPeopleByIdGetAsync(int id)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id)
         { 
             string content = string.Empty;
             try
@@ -176,7 +176,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var response = await ApiPeopleByIdGetResponseAsync(id);
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.Person>(content, _serializerSettings);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Person>(content, _serializerSettings);
                 return result;
             }
             catch(System.Exception ex)

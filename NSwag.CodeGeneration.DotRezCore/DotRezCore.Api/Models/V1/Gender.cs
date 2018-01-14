@@ -1,4 +1,4 @@
-﻿namespace DotRezCore.Api.Models
+﻿namespace DotRezCore.Api.Models.V1
 {
     public enum Gender
     {

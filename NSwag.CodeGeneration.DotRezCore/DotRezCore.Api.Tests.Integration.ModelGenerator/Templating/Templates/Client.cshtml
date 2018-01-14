@@ -3,6 +3,7 @@
 @using RazorLight.Text
 @using DotRezClientTemplateModel = DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezClientTemplateModel
 @model DotRezClientTemplateModel
+
 namespace @Model.Namespace
 {
     @Model.ClientClassAccessModifier partial class @Model.Class @(Model.HasBaseClass ? $": {@Model.BaseClass}" : string.Empty)

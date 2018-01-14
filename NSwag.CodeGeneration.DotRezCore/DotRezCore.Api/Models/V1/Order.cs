@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DotRezCore.Api.Models
+namespace DotRezCore.Api.Models.V1
 {
     public class Order
     {

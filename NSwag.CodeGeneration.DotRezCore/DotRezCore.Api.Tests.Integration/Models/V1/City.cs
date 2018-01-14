@@ -1,4 +1,4 @@
-namespace DotRezCore.Api.Tests.Integration.Models
+namespace DotRezCore.Api.Tests.Integration.Models.V1
 {
     public partial class City 
     {

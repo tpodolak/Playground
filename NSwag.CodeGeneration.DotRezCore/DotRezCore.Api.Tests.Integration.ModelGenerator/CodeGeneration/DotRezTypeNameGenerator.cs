@@ -23,9 +23,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
                 return "System.Object";
             }
 
-            typeNameHint = typeNameHint.Contains(".") ? typeNameHint.Split('.').Last() : typeNameHint;
-
-            return $"{_settings.ContractNamespacePrefix}.{typeNameHint}";
+            return typeNameHint.Replace(_settings.CurrentContractNamespacePrefix, _settings.DesiredContractNamespacePrefix);
         }
     }
 }

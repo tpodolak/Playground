@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DotRezCore.Api.Models
+namespace DotRezCore.Api.Models.V1
 {
     public class Person
     {

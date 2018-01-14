@@ -70,7 +70,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
                     TypeNameGenerator = new DotRezTypeNameGenerator(settings),
                     ClassStyle = CSharpClassStyle.Poco,
                     TemplateFactory = new RazorTemplateFactory(),
-                    Namespace = settings.ClientNamespacePrefix
+                    Namespace = settings.DesiredClientNamespacePrefix
                 },
                 ClassName = settings.ClientName
             };

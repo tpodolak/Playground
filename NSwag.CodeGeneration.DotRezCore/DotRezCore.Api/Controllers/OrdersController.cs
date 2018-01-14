@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DotRezCore.Api.Models;
+using DotRezCore.Api.Models.V1;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -65,13 +66,5 @@ namespace DotRezCore.Api.Controllers
 
             return CreatedAtRoute(new {id = order.Id}, order);
         }
-    }
-
-
-    public class GetOrderRequest
-    {
-        public string Id { get; set; }
-
-        public string Type { get; set; }
     }
 }

@@ -2,14 +2,17 @@
 {
     public class DotRezCodeGeneratorSettings
     {        
-        public string ContractNamespacePrefix { get; set; }
+        public string DesiredContractNamespacePrefix { get; set; }
         
-        public string ClientNamespacePrefix { get; set; }
+        public string CurrentContractNamespacePrefix { get; set; }
+        
+        public string DesiredClientNamespacePrefix { get; set; }
         
         public string ContractFilesDestinationRoot { get; set; }
         
         public string ClientFilesDestinationRoot { get; set; }
         
         public string ClientName { get; set; }
+        
     }
 }

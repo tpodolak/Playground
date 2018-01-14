@@ -19,8 +19,8 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.FileSystem
 
         public async Task WriteAsync(GeneratedCode generatedCode, DotRezCodeGeneratorSettings settings)
         {
-            await WriteAsync(generatedCode.ClientCode, settings.ClientFilesDestinationRoot, settings.ClientNamespacePrefix);
-            await WriteAsync(generatedCode.ContractCode, settings.ContractFilesDestinationRoot, settings.ContractNamespacePrefix);
+            await WriteAsync(generatedCode.ClientCode, settings.ClientFilesDestinationRoot, settings.DesiredClientNamespacePrefix);
+            await WriteAsync(generatedCode.ContractCode, settings.ContractFilesDestinationRoot, settings.DesiredContractNamespacePrefix);
         }
 
         private async Task WriteAsync(string generatedCode, string destinationRoot, string namespacePrefix)

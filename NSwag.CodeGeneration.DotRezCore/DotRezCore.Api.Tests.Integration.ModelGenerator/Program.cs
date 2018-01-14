@@ -25,8 +25,9 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
                     {
                         ClientFilesDestinationRoot = Path.Combine(integrationTestsRootPath, "ApiClients"),
                         ContractFilesDestinationRoot = Path.Combine(integrationTestsRootPath, "Models"),
-                        ClientNamespacePrefix = "DotRezCore.Api.Tests.Integration.ApiClients",
-                        ContractNamespacePrefix = "DotRezCore.Api.Tests.Integration.Models",
+                        CurrentContractNamespacePrefix = "DotRezCore.Api.Models",
+                        DesiredClientNamespacePrefix = "DotRezCore.Api.Tests.Integration.ApiClients",
+                        DesiredContractNamespacePrefix = "DotRezCore.Api.Tests.Integration.Models",
                         ClientName = "DotRezCoreApiClient"
                     };
 

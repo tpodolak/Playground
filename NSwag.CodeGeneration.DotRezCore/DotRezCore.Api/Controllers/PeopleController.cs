@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DotRezCore.Api.Models;
+using DotRezCore.Api.Models.V1;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotRezCore.Api.Controllers
