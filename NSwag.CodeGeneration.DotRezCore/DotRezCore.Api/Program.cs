@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotRezCore.Api
 {
@@ -17,7 +20,9 @@ namespace DotRezCore.Api
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
+                .ConfigureServices(service =>
+                    service.AddSingleton(provider => new ConfigurationBuilder().AddCommandLine(args)))
+                .ConfigureServices(service => service.AddSingleton<IStartup, Startup>())
                 .Build();
         }
     }

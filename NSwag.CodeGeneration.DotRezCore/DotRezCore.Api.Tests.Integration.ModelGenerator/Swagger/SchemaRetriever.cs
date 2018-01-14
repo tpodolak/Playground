@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,14 +14,10 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Swagger
 {
     public class SchemaRetriever : ISchemaRetriever
-    {
-        private readonly Lazy<IWebHost> _webHostProxy = new Lazy<IWebHost>(() => Api.Program.BuildWebHost(new string[0]));
-
-        private IWebHost WebHost => _webHostProxy.Value;
-        
+    {        
         public List<string> RetrieveSchemas(IWebHost webhost)
         {
-            var serviceProvider = WebHost.Services;
+            var serviceProvider = webhost.Services;
             var swaggerProvider = serviceProvider.GetRequiredService<ISwaggerProvider>();
             var mvcJsonOptions = serviceProvider.GetRequiredService<IOptions<MvcJsonOptions>>();
             var serializer = new JsonSerializer

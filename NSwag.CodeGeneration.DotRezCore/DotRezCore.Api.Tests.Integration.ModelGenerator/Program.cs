@@ -19,7 +19,8 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
                 container = containerBuilder.Build();
                 using (var scope = container.CreateScope())
                 {
-                    var integrationTestsRootPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../DotRezCore.Api.Tests.Integration"));
+                    var integrationTestsRootPath =
+                        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../DotRezCore.Api.Tests.Integration"));
                     var application = scope.ServiceProvider.GetRequiredService<Application>();
                     var settings = new DotRezCodeGeneratorSettings
                     {
@@ -31,7 +32,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
                         ClientName = "DotRezCoreApiClient"
                     };
 
-                    await application.Generate(Api.Program.BuildWebHost(null), settings);
+                    await application.Generate(Api.Program.BuildWebHost(new[] {$"--{Constants.CommandLineArguments.UseCustomSwaggerSchema}", bool.TrueString}), settings);
                 }
             }
             catch (Exception e)
