@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace DotRezCore.Api.OperationFilters
 {
-    public class UseOpenApi3OperationId : IOperationFilter
+    public class UseComplexParametersOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
@@ -46,25 +46,23 @@ namespace DotRezCore.Api.OperationFilters
                     Schema = schema
                 };
             }
-            else
+
+            var nonBodyParam = new NonBodyParameter
             {
-                var nonBodyParam = new NonBodyParameter
-                {
-                    Name = paramDesc.Name,
-                    In = source,
-                    Required = (source == "path")
-                };
+                Name = paramDesc.Name,
+                In = source,
+                Required = (source == "path")
+            };
 
-                if (schema == null)
-                    nonBodyParam.Type = "string";
-                else
-                    nonBodyParam.PopulateFrom(schema);
+            if (schema == null)
+                nonBodyParam.Type = "string";
+            else
+                nonBodyParam.PopulateFrom(schema);
 
-                if (nonBodyParam.Type == "array")
-                    nonBodyParam.CollectionFormat = "multi";
+            if (nonBodyParam.Type == "array")
+                nonBodyParam.CollectionFormat = "multi";
 
-                return nonBodyParam;
-            }
+            return nonBodyParam;
         }
     }
 

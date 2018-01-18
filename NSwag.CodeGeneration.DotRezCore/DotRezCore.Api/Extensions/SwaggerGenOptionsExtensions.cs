@@ -7,7 +7,8 @@ namespace DotRezCore.Api.Extensions
     {
         public static void UseCodeGeneratorFilters(this SwaggerGenOptions options)
         {
-            options.OperationFilter<UseOpenApi3OperationId>();
+            options.SchemaFilter<EnumSchemaFilter>();
+            options.OperationFilter<UseComplexParametersOperationFilter>();
         }
     }
 }

@@ -20,9 +20,7 @@ namespace DotRezCore.Api
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .ConfigureServices(service =>
-                    service.AddSingleton(provider => new ConfigurationBuilder().AddCommandLine(args)))
-                .ConfigureServices(service => service.AddSingleton<IStartup, Startup>())
+                .UseStartup<Startup>()
                 .Build();
         }
     }

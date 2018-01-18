@@ -5,6 +5,7 @@ using System.Reflection;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.Swagger.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -18,8 +19,10 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Swagger
         public List<string> RetrieveSchemas(IWebHost webhost)
         {
             var serviceProvider = webhost.Services;
+            
             var swaggerProvider = serviceProvider.GetRequiredService<ISwaggerProvider>();
             var mvcJsonOptions = serviceProvider.GetRequiredService<IOptions<MvcJsonOptions>>();
+
             var serializer = new JsonSerializer
             {
                 NullValueHandling = NullValueHandling.Ignore,

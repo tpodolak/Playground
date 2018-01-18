@@ -11,6 +11,6 @@ namespace DotRezCore.Api.Tests.Integration.Models.V1
         [Newtonsoft.Json.JsonProperty(PropertyName = "customer")]
         public string Customer { get; set; } 
         [Newtonsoft.Json.JsonProperty(PropertyName = "gender")]
-        public DotRezCore.Api.Tests.Integration.Models.V1.OrderGender? Gender { get; set; } 
+        public DotRezCore.Api.Tests.Integration.Models.V1.Gender? Gender { get; set; } 
     }
 }
