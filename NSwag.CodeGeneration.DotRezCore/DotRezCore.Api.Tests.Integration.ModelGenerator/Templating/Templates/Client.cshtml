@@ -1,7 +1,4 @@
 ﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
-@using NSwag
-@using NSwag.CodeGeneration.CSharp.Models
-@using RazorLight.Text
 @using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
 @inherits RazorLight.TemplatePage<DotRezClientTemplateModel>
 @this.FileHeader();
@@ -23,12 +20,12 @@ namespace @Model.Namespace
         {
         @:
             
-        @:@operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@CreateMethodArguments(operation))
+        @:@operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@this.CreateMethodArguments(operation))
         @:{ 
             @:string content = string.Empty;
             @:try
             @:{
-                @:var response = await @(operation.ActualOperationName)ResponseAsync(@CreateMethodParameters(operation));
+                @:var response = await @(operation.ActualOperationName)ResponseAsync(@this.CreateMethodParameters(operation));
                 @:response.EnsureSuccessStatusCode();
                 @:content = await response.Content.ReadAsStringAsync();
                 if(operation.HasResult)
@@ -45,7 +42,7 @@ namespace @Model.Namespace
         @:}
         @:
             
-        @:@operation.MethodAccessModifier async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> @(operation.ActualOperationName)ResponseAsync(@CreateMethodArguments(operation))
+        @:@operation.MethodAccessModifier async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> @(operation.ActualOperationName)ResponseAsync(@this.CreateMethodArguments(operation))
         @:{
             @:using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             @:{
@@ -53,7 +50,7 @@ namespace @Model.Namespace
                 foreach (var parameter in @operation.PathParameters)
                 {
                 
-                @:urlStringBuilder.Replace("{@parameter.VariableName}", @RenderEncodeParameterSegment(parameter));
+                @:urlStringBuilder.Replace("{@parameter.VariableName}", @this.RenderEncodeParameterSegment(parameter));
                 }
                 if (@operation.HasQueryParameters)
                 {
@@ -62,7 +59,7 @@ namespace @Model.Namespace
                     for (var parameterIndex = 0; parameterIndex < queryParametersList.Count; parameterIndex ++)
                     {
                         var operationQueryParameter = queryParametersList[parameterIndex];
-                        if (IsComplexQueryParameter(operationQueryParameter))
+                        if (operationQueryParameter.IsComplexQueryParameter())
                         {
                             @*
                             foreach (var property in operationQueryParameter.Schema.ActualProperties)
@@ -74,7 +71,7 @@ namespace @Model.Namespace
                         }
                         else
                         {
-                @:urlStringBuilder.AppendFormat(@(parameterIndex < queryParametersList.Count - 1 ? Raw("\"{0}={1}&\"") : Raw("\"{0}={1}\"")) , "@operationQueryParameter.VariableName", @RenderEncodeParameterSegment(operationQueryParameter));
+                @:urlStringBuilder.AppendFormat(@(parameterIndex < queryParametersList.Count - 1 ? Raw("\"{0}={1}&\"") : Raw("\"{0}={1}\"")) , "@operationQueryParameter.VariableName", @this.RenderEncodeParameterSegment(operationQueryParameter));
                         }
                     }
                 }
@@ -126,43 +123,5 @@ namespace @Model.Namespace
         {
             return string.Join("&", System.Linq.Enumerable.Select(request.GetType().GetProperties(), property => $"{property.Name}={System.Uri.EscapeDataString(property.GetValue(request).ToString())}"));
         }
-    }
-}
-@functions 
-{
-    IRawString CreateMethodArguments(CSharpOperationModel operation)
-    {
-        var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.Type} {parameter.VariableName.ToLower()}");
-        return Raw(string.Join(", ", cSharpParameterModels));
-    }
-
-    IRawString CreateMethodParameters(CSharpOperationModel operation)
-    {
-        var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.VariableName.ToLower()}");
-        return Raw(string.Join(", ", cSharpParameterModels));
-    }
-    
-    IRawString RenderEncodeParameterSegment(CSharpParameterModel parameterModel)
-    { 
-        if (parameterModel.IsDateArray)
-        {
-            return Raw($@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({parameterModel.VariableName.ToLower()}, item => item.ToString(""{Model.ParameterDateTimeFormat}"", System.Globalization.CultureInfo.InvariantCulture))))");
-        }
-        if (parameterModel.IsDate)
-        {
-            return Raw($@"System.Uri.EscapeDataString({parameterModel.VariableName.ToLower()}.ToString(""{Model.ParameterDateTimeFormat}"", System.Globalization.CultureInfo.InvariantCulture))");
-        }
-
-        if (parameterModel.IsArray)
-        {
-            return Raw($@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({parameterModel.VariableName.ToLower()}, item => ConvertToString(item, System.Globalization.CultureInfo.InvariantCulture))))");
-        }
-        
-        return Raw($@"System.Uri.EscapeDataString(ConvertToString({parameterModel.VariableName.ToLower()}, System.Globalization.CultureInfo.InvariantCulture))");
-    }
-
-    bool IsComplexQueryParameter(CSharpParameterModel parameterModel)
-    {
-        return !(parameterModel.Schema is SwaggerParameter);
     }
 }

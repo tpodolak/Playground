@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration.Interfaces;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating;
 using NJsonSchema.CodeGeneration.CSharp;

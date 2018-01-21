@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models;
-using NJsonSchema;
 using NSwag;
 using NSwag.CodeGeneration;
 using NSwag.CodeGeneration.CSharp;

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using DotRezCore.Api.Tests.Integration.ModelGenerator;
-using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration;
-using FluentAssertions;
 using Xunit;
 
 namespace NSwag.CodeGeneration.DotRezCore.Tests.Integration

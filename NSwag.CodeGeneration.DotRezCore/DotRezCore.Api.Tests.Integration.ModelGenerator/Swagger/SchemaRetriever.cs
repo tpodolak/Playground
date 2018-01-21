@@ -5,7 +5,6 @@ using System.Reflection;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.Swagger.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

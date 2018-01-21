@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System.Linq;
+using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models;
+using Microsoft.AspNetCore.Html;
+using NSwag.CodeGeneration.CSharp.Models;
 using RazorLight;
+using RazorLight.Text;
 
 namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
 {
@@ -19,6 +22,37 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------");
+        }
+        
+        public static IRawString CreateMethodArguments(this TemplatePage<DotRezClientTemplateModel> templatePage, CSharpOperationModel operation)
+        {
+            var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.Type} {parameter.VariableName.ToLower()}");
+            return templatePage.Raw(string.Join(", ", cSharpParameterModels));
+        }
+
+        public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage, CSharpOperationModel operation)
+        {
+            var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.VariableName.ToLower()}");
+            return templatePage.Raw(string.Join(", ", cSharpParameterModels));
+        }
+    
+        public static IRawString RenderEncodeParameterSegment(this TemplatePage<DotRezClientTemplateModel> templatePage, CSharpParameterModel parameterModel)
+        { 
+            if (parameterModel.IsDateArray)
+            {
+                return templatePage.Raw($@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({parameterModel.VariableName.ToLower()}, item => item.ToString(""{templatePage.Model.ParameterDateTimeFormat}"", System.Globalization.CultureInfo.InvariantCulture))))");
+            }
+            if (parameterModel.IsDate)
+            {
+                return templatePage.Raw($@"System.Uri.EscapeDataString({parameterModel.VariableName.ToLower()}.ToString(""{templatePage.Model.ParameterDateTimeFormat}"", System.Globalization.CultureInfo.InvariantCulture))");
+            }
+
+            if (parameterModel.IsArray)
+            {
+                return templatePage.Raw($@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({parameterModel.VariableName.ToLower()}, item => ConvertToString(item, System.Globalization.CultureInfo.InvariantCulture))))");
+            }
+        
+            return templatePage.Raw($@"System.Uri.EscapeDataString(ConvertToString({parameterModel.VariableName.ToLower()}, System.Globalization.CultureInfo.InvariantCulture))");
         }
     }
 }

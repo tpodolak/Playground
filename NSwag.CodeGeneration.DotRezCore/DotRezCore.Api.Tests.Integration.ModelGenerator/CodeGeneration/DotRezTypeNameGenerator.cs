@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NJsonSchema;
+﻿using NJsonSchema;
 
 namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
