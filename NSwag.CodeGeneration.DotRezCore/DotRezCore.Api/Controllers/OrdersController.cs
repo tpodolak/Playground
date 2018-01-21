@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DotRezCore.Api.Models.V1;
+using DotRezCore.Api.OperationFilters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,7 @@ namespace DotRezCore.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Order>), 200)]
+        [SwaggerResponseHeader(Name = Constants.Session.XSessionTokenHeaderName, Description = "", Type = "", StatusCode = 200)]
         public IActionResult Get([FromQuery] GetOrderRequest request)
         {
             var orders = new[]

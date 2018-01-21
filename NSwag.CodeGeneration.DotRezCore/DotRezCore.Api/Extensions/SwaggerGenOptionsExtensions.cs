@@ -9,6 +9,9 @@ namespace DotRezCore.Api.Extensions
         {
             options.SchemaFilter<EnumSchemaFilter>();
             options.OperationFilter<UseComplexParametersOperationFilter>();
+            options.OperationFilter<AddTokenHeaderParameter>();
+            options.OperationFilter<AddResponseHeadersFilter>();
+            
         }
     }
 }

@@ -18,6 +18,12 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Composition
             _serviceCollection.AddSingleton<TService, TImplementation>();
         }
 
+        public void RegisterSingleton<TService, TImplementation>(Func<IServiceProvider, TImplementation> implementationFactory)
+            where TService : class where TImplementation : class, TService
+        {
+            _serviceCollection.AddSingleton<TService, TImplementation>(implementationFactory);
+        }
+
         public void RegisterScoped<TService, TImplementation>() where TService : class where TImplementation : class, TService
         {
             _serviceCollection.AddScoped<TService, TImplementation>();

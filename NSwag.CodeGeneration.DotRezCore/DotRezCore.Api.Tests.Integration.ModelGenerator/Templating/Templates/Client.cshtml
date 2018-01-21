@@ -1,4 +1,5 @@
-﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
+﻿@using DotRezCore.Api
+@using DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
 @using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
 @inherits RazorLight.TemplatePage<DotRezClientTemplateModel>
 @this.FileHeader();
@@ -9,6 +10,7 @@ namespace @Model.Namespace
         private @Model.HttpClientType _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<@Model.Class> _logger;
+        public string XSessionToken = string.Empty;
 
         public @(Model.Class)(@Raw(Model.HttpClientType) httpClient, Microsoft.Extensions.Logging.ILogger<@Model.Class> logger)
         {
@@ -26,7 +28,6 @@ namespace @Model.Namespace
             @:try
             @:{
                 @:var response = await @(operation.ActualOperationName)ResponseAsync(@this.CreateMethodParameters(operation));
-                @:response.EnsureSuccessStatusCode();
                 @:content = await response.Content.ReadAsStringAsync();
                 if(operation.HasResult)
                 {
@@ -77,6 +78,10 @@ namespace @Model.Namespace
                 }
                 @:httpRequestMessage.Method = new System.Net.Http.HttpMethod("@operation.HttpMethodUpper.ToUpper()");
                 @:httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                if(operation.RequiresXSessionToken())
+                {
+                @:httpRequestMessage.Headers.Add("@Constants.Session.XSessionTokenHeaderName", @operation.GetXSessionTokenParameter().VariableName);
+                }
                 if (operation.HasAcceptHeaderParameterParameter)
                 {
                 @:httpRequestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("@operation.Produces"));
@@ -93,7 +98,13 @@ namespace @Model.Namespace
                 @:content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@operation.Consumes");
                 @:httpRequestMessage.Content = content;
                 }
-                @:return await _httpClient.SendAsync(httpRequestMessage);
+                @:var response = await _httpClient.SendAsync(httpRequestMessage);
+                @:response.EnsureSuccessStatusCode();
+                @:if(response.Headers.TryGetValues(DotRezCore.Api.Constants.Session.XSessionTokenHeaderName, out var sessionTokenHeaders))
+                @:{
+                    @:XSessionToken = System.Linq.Enumerable.First(sessionTokenHeaders);
+                @:}
+                @:return response;
             @:}
         @:}
         }

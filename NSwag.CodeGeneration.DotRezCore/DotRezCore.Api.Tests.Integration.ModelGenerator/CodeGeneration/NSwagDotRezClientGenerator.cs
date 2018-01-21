@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration.Interfaces;
-using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating;
+using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
 using NSwag;
 using NSwag.CodeGeneration;
@@ -10,6 +10,13 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
     public class NSwagDotRezClientGenerator : IDotRezClientGenerator
     {
+        private readonly ITemplateFactory _templateFactory;
+
+        public NSwagDotRezClientGenerator(ITemplateFactory templateFactory)
+        {
+            _templateFactory = templateFactory;
+        }
+
         public async Task<GeneratedCode> Generate(string swaggerSpecification, DotRezCodeGeneratorSettings settings)
         {
             var swaggerDocument = await SwaggerDocument.FromJsonAsync(swaggerSpecification);
@@ -53,7 +60,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
             return swaggerToCSharpTypeResolver;
         }
 
-        private static SwaggerToCSharpClientGeneratorSettings GetSwaggerCSharpGeneratorSettings(DotRezCodeGeneratorSettings settings)
+        private SwaggerToCSharpClientGeneratorSettings GetSwaggerCSharpGeneratorSettings(DotRezCodeGeneratorSettings settings)
         {
             return new SwaggerToCSharpClientGeneratorSettings
             {
@@ -66,7 +73,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
                     ArrayBaseType = "List",
                     TypeNameGenerator = new DotRezTypeNameGenerator(settings),
                     ClassStyle = CSharpClassStyle.Poco,
-                    TemplateFactory = new RazorTemplateFactory(),
+                    TemplateFactory = _templateFactory,
                     Namespace = settings.DesiredClientNamespacePrefix
                 },
                 ClassName = settings.ClientName
