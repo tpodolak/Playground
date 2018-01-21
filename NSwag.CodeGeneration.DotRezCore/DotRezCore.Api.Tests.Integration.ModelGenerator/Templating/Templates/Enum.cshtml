@@ -1,7 +1,7 @@
-﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator
-@using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
+﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
 @using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
-@model DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezEnumTemplateModel
+@inherits RazorLight.TemplatePage<DotRezEnumTemplateModel>
+@this.FileHeader();
 namespace @Model.Namespace
 {
     @Model.TypeAccessModifier enum @Model.Name

@@ -1,7 +1,9 @@
 ﻿@using DotRezCore.Api.Tests.Integration.ModelGenerator
 @using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 @using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models
-@model DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezClassTemplateModel
+@using DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions;
+@inherits RazorLight.TemplatePage<DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models.DotRezClassTemplateModel>
+@this.FileHeader()
 namespace @Model.Namespace
 {
     @Model.TypeAccessModifier @(Model.IsAbstract ? "abstract " : string.Empty)partial class @Model.ClassName @Model.InheritanceCode

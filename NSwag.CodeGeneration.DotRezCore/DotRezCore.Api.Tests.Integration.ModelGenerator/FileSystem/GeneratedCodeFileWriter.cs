@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration;
@@ -26,17 +27,15 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.FileSystem
         private async Task WriteAsync(string generatedCode, string destinationRoot, string namespacePrefix)
         {
             var syntaxRoot = await CSharpSyntaxTree.ParseText(generatedCode).GetRootAsync();
-
             foreach (var namespaceDeclarationSyntax in syntaxRoot.DescendantNodes().OfType<NamespaceDeclarationSyntax>())
             {
-                foreach (var typeDeclarationSyntax in namespaceDeclarationSyntax.DescendantNodes().OfType<BaseTypeDeclarationSyntax>())
-                {
-                    var path = namespaceDeclarationSyntax.Name.ToString().Replace(namespacePrefix, string.Empty).Replace(".", string.Empty);
-                    var filename = Path.Combine(destinationRoot, path, $"{typeDeclarationSyntax.Identifier.Text}.cs");
+                var typeDeclaration = namespaceDeclarationSyntax.DescendantNodes().OfType<BaseTypeDeclarationSyntax>().First();
 
-                    _fileSystem.EnsureDirectoryStructure(filename);
-                    _fileSystem.WriteAllText(filename, namespaceDeclarationSyntax.ToString());   
-                }
+                var path = namespaceDeclarationSyntax.Name.ToString().Replace(namespacePrefix, string.Empty).Replace(".", string.Empty);
+                var filename = Path.Combine(destinationRoot, path, $"{typeDeclaration.Identifier.Text}.Generated.cs");
+                var fileContent = namespaceDeclarationSyntax.ToFullString();
+                _fileSystem.EnsureDirectoryStructure(filename);
+                _fileSystem.WriteAllText(filename, fileContent);
             }
         }
     }

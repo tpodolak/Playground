@@ -36,6 +36,8 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
         {
             var classTemplateModel =
                 new DotRezClassTemplateModel(typeName, Settings, _resolver, schema, RootObject);
+            var last = classTemplateModel.Properties.Last();
+            var type = last.Type;
             var template =
                 Settings.TemplateFactory.CreateTemplate("CSharp", CodeArtifactType.Class.ToString(),
                     classTemplateModel);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DotRezCore.Api.Models.V1;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -12,6 +13,8 @@ namespace DotRezCore.Api.OperationFilters
             if (model.Properties == null)
                 return;
 
+            var schema2 = context.SchemaRegistry.GetOrRegister(typeof(GetOrderRequest));
+            
             var enumProperties = model.Properties.Where(p => p.Value.Enum != null)
                 .Union(model.Properties.Where(p => p.Value.Items?.Enum != null)).ToList();
             var enums = context.SystemType.GetProperties()
@@ -23,7 +26,7 @@ namespace DotRezCore.Api.OperationFilters
             foreach (var enumProperty in enumProperties)
             {
                 var enumPropertyValue = enumProperty.Value.Enum != null ? enumProperty.Value : enumProperty.Value.Items;
-                
+
                 var enumValues = enumPropertyValue.Enum.Select(value => value.ToString()).ToList();
                 var enumType = enums.SingleOrDefault(p =>
                 {
@@ -37,14 +40,18 @@ namespace DotRezCore.Api.OperationFilters
 
                 if (enumType == null)
                     throw new Exception($"Property {enumProperty} not found in {context.SystemType.Name} Type.");
-                
-                if (context.SchemaRegistry.Definitions.ContainsKey(enumType.FullName) == false)
-                    context.SchemaRegistry.Definitions.Add(enumType.FullName, enumPropertyValue);
 
-                var schema = new Schema
+                var schema = context.SchemaRegistry.GetOrRegister(enumType);
+                schema.Ref = $"#/definitions/{enumType.FullName}";
+                if (context.SchemaRegistry.Definitions.ContainsKey(enumType.FullName) == false)
                 {
-                    Ref = $"#/definitions/{enumType.FullName}"
-                };
+                    context.SchemaRegistry.Definitions.Add(enumType.FullName, enumPropertyValue);
+                }
+
+//                var schema = new Schema
+//                {
+//                    Ref = $"#/definitions/{enumType.FullName}"
+//                };
                 if (enumProperty.Value.Enum != null)
                 {
                     model.Properties[enumProperty.Key] = schema;

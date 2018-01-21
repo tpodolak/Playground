@@ -18,7 +18,6 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 
             var clientGenerator = CreateDotRezClientGenerator(swaggerDocument, settings);
             var contractGenerator = CreateDotRezContractGenerator(swaggerDocument, settings);
-
             var contractCode = contractGenerator.GenerateFile();
             var clientCode = clientGenerator.GenerateFile(ClientGeneratorOutputType.Full);
 

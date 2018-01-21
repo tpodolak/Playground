@@ -14,6 +14,7 @@ namespace DotRezCore.Api.Models.V1
         [Required]
         public string Customer { get; set; }
         
+        [Required]
         public Gender Gender { get; set; }
     }
 }

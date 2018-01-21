@@ -20,5 +20,7 @@ namespace DotRezCore.Api.Models.V1
         public City City { get; set; }
         
         public List<City> Cities { get; set; }
+        
+        public Gender Gender { get; set; }
     }
 }
