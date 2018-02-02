@@ -14,5 +14,10 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
         {
             return parameterModel.Kind == SwaggerParameterKind.Header && parameterModel.Name == Constants.Session.XSessionTokenHeaderName;
         }
+
+        public static bool IsCultureParameter(this CSharpParameterModel parameterModel)
+        {
+            return parameterModel.Kind == SwaggerParameterKind.Path && parameterModel.Name == Constants.UrlPath.CulturePath;
+        }
     }
 }

@@ -15,12 +15,21 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> _logger;
         public string XSessionToken = string.Empty;
-
+        public string DefaultCulture = "en-IE";
         public DotRezCoreApiClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> logger)
         {
             _httpClient = httpClient;
             _serializerSettings = new Newtonsoft.Json.JsonSerializerSettings();
             _logger = logger;
+        }
+        
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
+        {
+            return await ApiOrdersGetAsync(request, DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
+        {
+            return await ApiOrdersGetResponseAsync(request, DefaultCulture);
         }
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
@@ -60,6 +69,15 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
+        {
+            return await ApiOrdersPostAsync(order, DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
+        {
+            return await ApiOrdersPostResponseAsync(order, DefaultCulture);
+        }
+        
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
         { 
             string content = string.Empty;
@@ -96,6 +114,15 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 }
                 return response;
             }
+        }
+        
+        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
+        {
+            return await ApiOrdersGetSomethingElseGetAsync(id, id2, id3, DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3)
+        {
+            return await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3, DefaultCulture);
         }
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
@@ -137,6 +164,15 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id)
+        {
+            return await ApiOrdersByIdGetAsync(id, DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersByIdGetResponseAsync(int id)
+        {
+            return await ApiOrdersByIdGetResponseAsync(id, DefaultCulture);
+        }
+        
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id, string xsessiontoken)
         { 
             string content = string.Empty;
@@ -173,6 +209,15 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync()
+        {
+            return await ApiPeopleGetAsync(DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleGetResponseAsync()
+        {
+            return await ApiPeopleGetResponseAsync(DefaultCulture);
+        }
+        
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync(string xsessiontoken)
         { 
             string content = string.Empty;
@@ -206,6 +251,15 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 }
                 return response;
             }
+        }
+        
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id)
+        {
+            return await ApiPeopleByIdGetAsync(id, DefaultCulture);
+        }
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleByIdGetResponseAsync(int id)
+        {
+            return await ApiPeopleByIdGetResponseAsync(id, DefaultCulture);
         }
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id, string xsessiontoken)

@@ -11,5 +11,10 @@
         {
             public const string XSessionTokenHeaderName = "X-Session-Token";
         }
+        
+        public class UrlPath
+        {
+            public const string CulturePath = "culture";
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.Templating.Models;
 using Microsoft.AspNetCore.Html;
 using NSwag;
@@ -29,26 +30,37 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
         public static IRawString CreateMethodArgumentsWithoutSessionToken(this TemplatePage<DotRezClientTemplateModel> templatePage,
             CSharpOperationModel operation)
         {
-
             return CreateMethodArguments(templatePage,
-                operation.Parameters.Where(parameter => parameter.Kind != SwaggerParameterKind.Header && parameter.Name == Constants.Session.XSessionTokenHeaderName).ToList());
+                operation.Parameters.Where(parameter => parameter.IsXSessionTokenParameter() == false).ToList());
         }
 
         public static IRawString CreateMethodArguments(this TemplatePage<DotRezClientTemplateModel> templatePage, CSharpOperationModel operation)
         {
-            var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.Type} {parameter.VariableName}");
-            return templatePage.Raw(string.Join(", ", cSharpParameterModels));
+            return CreateMethodArguments(templatePage, operation.Parameters);
         }
 
-        private static IRawString CreateMethodArguments(TemplatePage templatePage, IList<CSharpParameterModel> parameters)
+        public static IRawString CreateMethodArguments(this TemplatePage<DotRezClientTemplateModel> templatePage,
+            IList<CSharpParameterModel> parameters)
         {
             var cSharpParameterModels = parameters.Select(parameter => $"{parameter.Type} {parameter.VariableName}");
             return templatePage.Raw(string.Join(", ", cSharpParameterModels));
         }
 
+        public static IRawString CreateMethodArguments(this TemplatePage<DotRezClientTemplateModel> templatePage, MethodOverloadDefinition operation)
+        {
+            return templatePage.CreateMethodArguments(operation.Parameters);
+        }
+
         public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage, CSharpOperationModel operation)
         {
-            var cSharpParameterModels = operation.Parameters.Select(parameter => $"{parameter.VariableName}");
+            return templatePage.CreateMethodParameters(operation.Parameters);
+        }
+
+        public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage, MethodOverloadDefinition overloadDefinition)
+        {
+            var descriptorMap = overloadDefinition.Descriptors.ToDictionary(descriptor => descriptor.VariableName);
+            var cSharpParameterModels = overloadDefinition.Operation.Parameters.Select(parameter =>
+                descriptorMap.TryGetValue(parameter.VariableName, out var descriptor) ? descriptor.Substitute : $"{parameter.VariableName}");
             return templatePage.Raw(string.Join(", ", cSharpParameterModels));
         }
 
@@ -74,15 +86,27 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
 
             if (parameterModel.IsArray)
             {
-                return templatePage.Raw($@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({
-                        parameterModel.VariableName
-                    }, item => ConvertToString(item, System.Globalization.CultureInfo.InvariantCulture))))");
+                return templatePage.Raw(
+                    $@"System.Uri.EscapeDataString(string.Join("","", System.Linq.Enumerable.Select({
+                            parameterModel.VariableName
+                        }, item => ConvertToString(item, System.Globalization.CultureInfo.InvariantCulture))))");
             }
 
             return templatePage.Raw(
-                $@"System.Uri.EscapeDataString(ConvertToString({
-                        parameterModel.VariableName
-                    }, System.Globalization.CultureInfo.InvariantCulture))");
+                $@"System.Uri.EscapeDataString(ConvertToString({parameterModel.VariableName}, System.Globalization.CultureInfo.InvariantCulture))");
+        }
+
+        public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage,
+            IList<CSharpParameterModel> parameters)
+        {
+            var cSharpParameterModels = parameters.Select(parameter => $"{parameter.VariableName}");
+            return templatePage.Raw(string.Join(", ", cSharpParameterModels));
+        }
+
+        private static IRawString CreateMethodArguments(TemplatePage templatePage, IList<CSharpParameterModel> parameters)
+        {
+            var cSharpParameterModels = parameters.Select(parameter => $"{parameter.Type} {parameter.VariableName}");
+            return templatePage.Raw(string.Join(", ", cSharpParameterModels));
         }
     }
 }

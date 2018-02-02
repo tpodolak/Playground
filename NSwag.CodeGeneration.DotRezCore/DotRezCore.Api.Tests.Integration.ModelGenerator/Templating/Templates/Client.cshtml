@@ -10,8 +10,8 @@ namespace @Model.Namespace
         private @Model.HttpClientType _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<@Model.Class> _logger;
-        public string XSessionToken = string.Empty;
-
+        public string XSessionToken { get; } = string.Empty;
+        public string DefaultCulture { get; } = "en-IE";
         public @(Model.Class)(@Raw(Model.HttpClientType) httpClient, Microsoft.Extensions.Logging.ILogger<@Model.Class> logger)
         {
             _httpClient = httpClient;
@@ -21,7 +21,19 @@ namespace @Model.Namespace
         @foreach (var operation in Model.Operations)
         {
         @:
-            
+        foreach (var overloadDefinition in operation.GetOverloads())
+        {
+        @:@operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@this.CreateMethodArguments(overloadDefinition))
+        @:{
+            @:return await @(operation.ActualOperationName)Async(@this.CreateMethodParameters(overloadDefinition));
+        @:}
+          
+        @:@operation.MethodAccessModifier async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> @(operation.ActualOperationName)ResponseAsync(@this.CreateMethodArguments(overloadDefinition))
+        @:{
+            @:return await @(operation.ActualOperationName)ResponseAsync(@this.CreateMethodParameters(overloadDefinition));
+        @:}
+        }
+        @:
         @:@operation.MethodAccessModifier async @Raw(operation.ResultType) @(operation.ActualOperationName)Async(@this.CreateMethodArguments(operation))
         @:{ 
             @:string content = string.Empty;
@@ -62,12 +74,7 @@ namespace @Model.Namespace
                         var operationQueryParameter = queryParametersList[parameterIndex];
                         if (operationQueryParameter.IsComplexQueryParameter())
                         {
-                            @*
-                            foreach (var property in operationQueryParameter.Schema.ActualProperties)
-                            {
-                                @:urlStringBuilder.AppendFormat("{0}={1}&", "@property.Key", @($"{operationQueryParameter.VariableName}.{Model.Settings.CodeGeneratorSettings.PropertyNameGenerator.Generate(property.Value)}"));
-                            }
-                            *@
+
                 @:urlStringBuilder.Append(SerializeToQueryString(@operationQueryParameter.VariableName));
                         }
                         else
