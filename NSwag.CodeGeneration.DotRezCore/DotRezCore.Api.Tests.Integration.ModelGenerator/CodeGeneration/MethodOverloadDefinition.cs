@@ -6,17 +6,17 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
 {
     public class MethodOverloadDefinition
     {
-        public CSharpOperationModel Operation { get; set; }
-        
-        public List<CSharpParameterModel> Parameters { get; set; }
+        public MethodOverloadDefinition(CSharpOperationModel operation, List<CSharpParameterModel> parameters, List<CSharpParameterDescriptor> descriptors)
+        {
+            Operation = operation;
+            Parameters = parameters;
+            Descriptors = descriptors;
+        }
 
-        public List<CSharpParameterDescriptor> Descriptors { get; set; }
-    }
+        public CSharpOperationModel Operation { get; }
 
-    public class CSharpParameterDescriptor
-    {
-        public string VariableName { get; set; }
+        public List<CSharpParameterModel> Parameters { get; }
 
-        public string Substitute { get; set; }
+        public List<CSharpParameterDescriptor> Descriptors { get; }
     }
 }

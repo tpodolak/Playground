@@ -14,8 +14,8 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         private System.Net.Http.HttpClient _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> _logger;
-        public string XSessionToken = string.Empty;
-        public string DefaultCulture = "en-IE";
+        public string XSessionToken { get; private set; } = string.Empty;
+        public string DefaultCulture { get; } = "en-IE";
         public DotRezCoreApiClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> logger)
         {
             _httpClient = httpClient;
@@ -25,11 +25,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         {
-            return await ApiOrdersGetAsync(request, DefaultCulture);
+            return await ApiOrdersGetAsync(request, XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         {
-            return await ApiOrdersGetResponseAsync(request, DefaultCulture);
+            return await ApiOrdersGetResponseAsync(request, XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
@@ -57,7 +57,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 urlStringBuilder.Append("?");
                 urlStringBuilder.Append(SerializeToQueryString(request));
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 var response = await _httpClient.SendAsync(httpRequestMessage);
                 response.EnsureSuccessStatusCode();
@@ -71,11 +71,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         {
-            return await ApiOrdersPostAsync(order, DefaultCulture);
+            return await ApiOrdersPostAsync(order, XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         {
-            return await ApiOrdersPostResponseAsync(order, DefaultCulture);
+            return await ApiOrdersPostResponseAsync(order, XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
@@ -101,7 +101,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             {
                 var urlStringBuilder = new System.Text.StringBuilder("api/Orders");
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("POST");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 System.Net.Http.StringContent content = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(order, _serializerSettings));
                 content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -118,11 +118,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
         {
-            return await ApiOrdersGetSomethingElseGetAsync(id, id2, id3, DefaultCulture);
+            return await ApiOrdersGetSomethingElseGetAsync(id, id2, id3, XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3)
         {
-            return await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3, DefaultCulture);
+            return await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3, XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
@@ -152,7 +152,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 urlStringBuilder.AppendFormat("{0}={1}&" , "id2", System.Uri.EscapeDataString(ConvertToString(id2, System.Globalization.CultureInfo.InvariantCulture)));
                 urlStringBuilder.AppendFormat("{0}={1}" , "id3", System.Uri.EscapeDataString(id3.ToString("s", System.Globalization.CultureInfo.InvariantCulture)));
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 var response = await _httpClient.SendAsync(httpRequestMessage);
                 response.EnsureSuccessStatusCode();
@@ -166,11 +166,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id)
         {
-            return await ApiOrdersByIdGetAsync(id, DefaultCulture);
+            return await ApiOrdersByIdGetAsync(id, XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersByIdGetResponseAsync(int id)
         {
-            return await ApiOrdersByIdGetResponseAsync(id, DefaultCulture);
+            return await ApiOrdersByIdGetResponseAsync(id, XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id, string xsessiontoken)
@@ -197,7 +197,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var urlStringBuilder = new System.Text.StringBuilder("api/Orders/{id}");
                 urlStringBuilder.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 var response = await _httpClient.SendAsync(httpRequestMessage);
                 response.EnsureSuccessStatusCode();
@@ -211,11 +211,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync()
         {
-            return await ApiPeopleGetAsync(DefaultCulture);
+            return await ApiPeopleGetAsync(XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleGetResponseAsync()
         {
-            return await ApiPeopleGetResponseAsync(DefaultCulture);
+            return await ApiPeopleGetResponseAsync(XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync(string xsessiontoken)
@@ -241,7 +241,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             {
                 var urlStringBuilder = new System.Text.StringBuilder("api/People");
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 var response = await _httpClient.SendAsync(httpRequestMessage);
                 response.EnsureSuccessStatusCode();
@@ -255,11 +255,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id)
         {
-            return await ApiPeopleByIdGetAsync(id, DefaultCulture);
+            return await ApiPeopleByIdGetAsync(id, XSessionToken);
         }
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleByIdGetResponseAsync(int id)
         {
-            return await ApiPeopleByIdGetResponseAsync(id, DefaultCulture);
+            return await ApiPeopleByIdGetResponseAsync(id, XSessionToken);
         }
         
         public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id, string xsessiontoken)
@@ -286,7 +286,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
                 var urlStringBuilder = new System.Text.StringBuilder("api/People/{id}");
                 urlStringBuilder.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
                 var response = await _httpClient.SendAsync(httpRequestMessage);
                 response.EnsureSuccessStatusCode();

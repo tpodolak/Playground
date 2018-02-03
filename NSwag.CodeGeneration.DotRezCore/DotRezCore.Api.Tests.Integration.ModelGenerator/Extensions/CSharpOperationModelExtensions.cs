@@ -26,61 +26,45 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
         {
             var cultureParameter = operationModel.Parameters.SingleOrDefault(parameter => parameter.IsCultureParameter());
             var sessionParameter = operationModel.Parameters.SingleOrDefault(parameter => parameter.IsXSessionTokenParameter());
+            MethodOverloadDefinition cultureOverloadDefinition = null;
+            MethodOverloadDefinition sessionOverloadDefinition = null;
+
             if (cultureParameter != null)
             {
-                var methodOverloadDefinition = new MethodOverloadDefinition
+                var descriptors = new List<CSharpParameterDescriptor>
                 {
-                    Operation = operationModel,
-                    Parameters = operationModel.Parameters.Except(new[] {cultureParameter}).ToList(),
-                    Descriptors = new List<CSharpParameterDescriptor>
-                    {
-                        new CSharpParameterDescriptor
-                        {
-                            VariableName = cultureParameter.VariableName,
-                            Substitute = "DefaultCulture"
-                        }
-                    }
+                    new CSharpParameterDescriptor(cultureParameter.VariableName, Constants.VariableNames.DefaultCulturePropertyName)
                 };
-                yield return methodOverloadDefinition;
+
+                cultureOverloadDefinition = new MethodOverloadDefinition(operationModel,
+                    operationModel.Parameters.Except(new[] {cultureParameter}).ToList(),
+                    descriptors);
+
+                yield return cultureOverloadDefinition;
             }
 
             if (sessionParameter != null)
             {
-                yield return new MethodOverloadDefinition
+                var descriptors = new List<CSharpParameterDescriptor>
                 {
-                    Operation = operationModel,
-                    Parameters = operationModel.Parameters.Except(new[] {sessionParameter}).ToList(),
-                    Descriptors = new List<CSharpParameterDescriptor>
-                    {
-                        new CSharpParameterDescriptor
-                        {
-                            VariableName = sessionParameter.VariableName,
-                            Substitute = "XSessionToken"
-                        }
-                    }
+                    new CSharpParameterDescriptor(sessionParameter.VariableName, Constants.VariableNames.XSessionTokenPropertyName)
                 };
+
+                sessionOverloadDefinition = new MethodOverloadDefinition(operationModel,
+                    operationModel.Parameters.Except(new[] {sessionParameter}).ToList(),
+                    descriptors);
+
+                yield return sessionOverloadDefinition;
             }
 
-            if (sessionParameter != null && cultureParameter != null)
+            if (cultureOverloadDefinition != null && sessionOverloadDefinition != null)
             {
-                yield return new MethodOverloadDefinition
-                {
-                    Operation = operationModel,
-                    Parameters = operationModel.Parameters.Except(new[] {cultureParameter, sessionParameter}).ToList(),
-                    Descriptors = new List<CSharpParameterDescriptor>
-                    {
-                        new CSharpParameterDescriptor
-                        {
-                            VariableName = cultureParameter.VariableName,
-                            Substitute = "DefaultCulture"
-                        },
-                        new CSharpParameterDescriptor
-                        {
-                            VariableName = sessionParameter.VariableName,
-                            Substitute = "XSessionToken"
-                        }
-                    }
-                };
+                var descriptors = cultureOverloadDefinition.Descriptors.Union(sessionOverloadDefinition.Descriptors).ToList();
+                yield return new MethodOverloadDefinition(operationModel,
+                    operationModel.Parameters.Except(new[] {cultureParameter, sessionParameter}).ToList(),
+                    descriptors);
+
+                yield return sessionOverloadDefinition;
             }
         }
     }

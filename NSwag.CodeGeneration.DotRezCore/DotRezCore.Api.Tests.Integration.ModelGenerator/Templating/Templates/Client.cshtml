@@ -10,8 +10,8 @@ namespace @Model.Namespace
         private @Model.HttpClientType _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
         private Microsoft.Extensions.Logging.ILogger<@Model.Class> _logger;
-        public string XSessionToken { get; } = string.Empty;
-        public string DefaultCulture { get; } = "en-IE";
+        public string @Constants.VariableNames.XSessionTokenPropertyName { get; private set; } = string.Empty;
+        public string @Constants.VariableNames.DefaultCulturePropertyName { get; } = "en-IE";
         public @(Model.Class)(@Raw(Model.HttpClientType) httpClient, Microsoft.Extensions.Logging.ILogger<@Model.Class> logger)
         {
             _httpClient = httpClient;
@@ -84,7 +84,7 @@ namespace @Model.Namespace
                     }
                 }
                 @:httpRequestMessage.Method = new System.Net.Http.HttpMethod("@operation.HttpMethodUpper.ToUpper()");
-                @:httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString());
+                @:httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
                 if(operation.RequiresXSessionToken())
                 {
                 @:httpRequestMessage.Headers.Add("@Constants.Session.XSessionTokenHeaderName", @operation.GetXSessionTokenParameter().VariableName);
@@ -109,7 +109,7 @@ namespace @Model.Namespace
                 @:response.EnsureSuccessStatusCode();
                 @:if(response.Headers.TryGetValues(DotRezCore.Api.Constants.Session.XSessionTokenHeaderName, out var sessionTokenHeaders))
                 @:{
-                    @:XSessionToken = System.Linq.Enumerable.First(sessionTokenHeaders);
+                    @:@Constants.VariableNames.XSessionTokenPropertyName = System.Linq.Enumerable.First(sessionTokenHeaders);
                 @:}
                 @:return response;
             @:}

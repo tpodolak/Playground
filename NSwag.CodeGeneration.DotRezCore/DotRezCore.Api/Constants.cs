@@ -16,5 +16,11 @@
         {
             public const string CulturePath = "culture";
         }
+        
+        public class VariableNames
+        {
+            public const string DefaultCulturePropertyName = "DefaultCulture";
+            public const string XSessionTokenPropertyName = "XSessionToken";
+        }
     }
 }
