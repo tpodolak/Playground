@@ -9,35 +9,36 @@
 //------------------------------------------------------------------------------;
 namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
 {
-    public partial class DotRezCoreApiClient 
+    public partial class OrdersClient 
     {
         private System.Net.Http.HttpClient _httpClient;
         private Newtonsoft.Json.JsonSerializerSettings _serializerSettings;
-        private Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> _logger;
+        private Microsoft.Extensions.Logging.ILogger<OrdersClient> _logger;
         public string XSessionToken { get; private set; } = string.Empty;
         public string DefaultCulture { get; } = "en-IE";
-        public DotRezCoreApiClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Logging.ILogger<DotRezCoreApiClient> logger)
+         
+        public OrdersClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Logging.ILogger<OrdersClient> logger)
         {
             _httpClient = httpClient;
             _serializerSettings = new Newtonsoft.Json.JsonSerializerSettings();
             _logger = logger;
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> GetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         {
-            return await ApiOrdersGetAsync(request, XSessionToken);
+            return await GetAsync(request, XSessionToken);
         }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request)
         {
-            return await ApiOrdersGetResponseAsync(request, XSessionToken);
+            return await GetResponseAsync(request, XSessionToken);
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>> GetAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
         { 
             string content = string.Empty;
             try
             {
-                var response = await ApiOrdersGetResponseAsync(request, xsessiontoken);
+                var response = await GetResponseAsync(request, xsessiontoken);
                 content = await response.Content.ReadAsStringAsync();
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Order>>(content, _serializerSettings);
                 return result;
@@ -49,7 +50,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.GetOrderRequest request, string xsessiontoken)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
@@ -69,21 +70,21 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> PostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         {
-            return await ApiOrdersPostAsync(order, XSessionToken);
+            return await PostAsync(order, XSessionToken);
         }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order)
         {
-            return await ApiOrdersPostResponseAsync(order, XSessionToken);
+            return await PostResponseAsync(order, XSessionToken);
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersPostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> PostAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
         { 
             string content = string.Empty;
             try
             {
-                var response = await ApiOrdersPostResponseAsync(order, xsessiontoken);
+                var response = await PostResponseAsync(order, xsessiontoken);
                 content = await response.Content.ReadAsStringAsync();
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Order>(content, _serializerSettings);
                 return result;
@@ -95,7 +96,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersPostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostResponseAsync(DotRezCore.Api.Tests.Integration.Models.V1.Order order, string xsessiontoken)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
@@ -116,21 +117,21 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> GetSomethingElseGetAsync(int id, int id2, System.DateTime id3)
         {
-            return await ApiOrdersGetSomethingElseGetAsync(id, id2, id3, XSessionToken);
+            return await GetSomethingElseGetAsync(id, id2, id3, XSessionToken);
         }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3)
         {
-            return await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3, XSessionToken);
+            return await GetSomethingElseGetResponseAsync(id, id2, id3, XSessionToken);
         }
         
-        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> ApiOrdersGetSomethingElseGetAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>> GetSomethingElseGetAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
         { 
             string content = string.Empty;
             try
             {
-                var response = await ApiOrdersGetSomethingElseGetResponseAsync(id, id2, id3, xsessiontoken);
+                var response = await GetSomethingElseGetResponseAsync(id, id2, id3, xsessiontoken);
                 content = await response.Content.ReadAsStringAsync();
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, DotRezCore.Api.Tests.Integration.Models.V1.Order>>(content, _serializerSettings);
                 return result;
@@ -142,7 +143,7 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersGetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> GetSomethingElseGetResponseAsync(int id, int id2, System.DateTime id3, string xsessiontoken)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
@@ -164,21 +165,21 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ByIdGetAsync(int id)
         {
-            return await ApiOrdersByIdGetAsync(id, XSessionToken);
+            return await ByIdGetAsync(id, XSessionToken);
         }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersByIdGetResponseAsync(int id)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ByIdGetResponseAsync(int id)
         {
-            return await ApiOrdersByIdGetResponseAsync(id, XSessionToken);
+            return await ByIdGetResponseAsync(id, XSessionToken);
         }
         
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ApiOrdersByIdGetAsync(int id, string xsessiontoken)
+        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Order> ByIdGetAsync(int id, string xsessiontoken)
         { 
             string content = string.Empty;
             try
             {
-                var response = await ApiOrdersByIdGetResponseAsync(id, xsessiontoken);
+                var response = await ByIdGetResponseAsync(id, xsessiontoken);
                 content = await response.Content.ReadAsStringAsync();
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Order>(content, _serializerSettings);
                 return result;
@@ -190,100 +191,11 @@ namespace DotRezCore.Api.Tests.Integration.ApiClients.V1
             }
         }
         
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiOrdersByIdGetResponseAsync(int id, string xsessiontoken)
+        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ByIdGetResponseAsync(int id, string xsessiontoken)
         {
             using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
             {
                 var urlStringBuilder = new System.Text.StringBuilder("api/Orders/{id}");
-                urlStringBuilder.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-                httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
-                httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
-                var response = await _httpClient.SendAsync(httpRequestMessage);
-                response.EnsureSuccessStatusCode();
-                if(response.Headers.TryGetValues(DotRezCore.Api.Constants.Session.XSessionTokenHeaderName, out var sessionTokenHeaders))
-                {
-                    XSessionToken = System.Linq.Enumerable.First(sessionTokenHeaders);
-                }
-                return response;
-            }
-        }
-        
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync()
-        {
-            return await ApiPeopleGetAsync(XSessionToken);
-        }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleGetResponseAsync()
-        {
-            return await ApiPeopleGetResponseAsync(XSessionToken);
-        }
-        
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>> ApiPeopleGetAsync(string xsessiontoken)
-        { 
-            string content = string.Empty;
-            try
-            {
-                var response = await ApiPeopleGetResponseAsync(xsessiontoken);
-                content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<DotRezCore.Api.Tests.Integration.Models.V1.Person>>(content, _serializerSettings);
-                return result;
-            }
-            catch(System.Exception ex)
-            {
-                Microsoft.Extensions.Logging.LoggerExtensions.LogError(_logger, default(Microsoft.Extensions.Logging.EventId), ex, "There was an error while making a API call. Response content is {0}", content);
-                throw;
-            }
-        }
-        
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleGetResponseAsync(string xsessiontoken)
-        {
-            using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
-            {
-                var urlStringBuilder = new System.Text.StringBuilder("api/People");
-                httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
-                httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);
-                httpRequestMessage.Headers.Add("X-Session-Token", xsessiontoken);
-                var response = await _httpClient.SendAsync(httpRequestMessage);
-                response.EnsureSuccessStatusCode();
-                if(response.Headers.TryGetValues(DotRezCore.Api.Constants.Session.XSessionTokenHeaderName, out var sessionTokenHeaders))
-                {
-                    XSessionToken = System.Linq.Enumerable.First(sessionTokenHeaders);
-                }
-                return response;
-            }
-        }
-        
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id)
-        {
-            return await ApiPeopleByIdGetAsync(id, XSessionToken);
-        }
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleByIdGetResponseAsync(int id)
-        {
-            return await ApiPeopleByIdGetResponseAsync(id, XSessionToken);
-        }
-        
-        public async System.Threading.Tasks.Task<DotRezCore.Api.Tests.Integration.Models.V1.Person> ApiPeopleByIdGetAsync(int id, string xsessiontoken)
-        { 
-            string content = string.Empty;
-            try
-            {
-                var response = await ApiPeopleByIdGetResponseAsync(id, xsessiontoken);
-                content = await response.Content.ReadAsStringAsync();
-                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<DotRezCore.Api.Tests.Integration.Models.V1.Person>(content, _serializerSettings);
-                return result;
-            }
-            catch(System.Exception ex)
-            {
-                Microsoft.Extensions.Logging.LoggerExtensions.LogError(_logger, default(Microsoft.Extensions.Logging.EventId), ex, "There was an error while making a API call. Response content is {0}", content);
-                throw;
-            }
-        }
-        
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> ApiPeopleByIdGetResponseAsync(int id, string xsessiontoken)
-        {
-            using(var httpRequestMessage = new System.Net.Http.HttpRequestMessage())
-            {
-                var urlStringBuilder = new System.Text.StringBuilder("api/People/{id}");
                 urlStringBuilder.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
                 httpRequestMessage.Method = new System.Net.Http.HttpMethod("GET");
                 httpRequestMessage.RequestUri = new System.Uri(urlStringBuilder.ToString(), System.UriKind.RelativeOrAbsolute);

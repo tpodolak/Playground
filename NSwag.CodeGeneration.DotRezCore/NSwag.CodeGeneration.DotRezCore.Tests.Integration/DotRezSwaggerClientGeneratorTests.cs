@@ -13,7 +13,7 @@ namespace NSwag.CodeGeneration.DotRezCore.Tests.Integration
         [MemberData(nameof(GenerateContractTestCases))]
         public async Task Generate_CorrectlyGeneratesModelClasses(TestCase testCase)
         {
-           // var subject = new DotRezSwaggerClientGenerator();
+            var subject = new DotRezSwaggerClientGenerator();
 
            // var result = await subject.Generate(testCase.Input);
             

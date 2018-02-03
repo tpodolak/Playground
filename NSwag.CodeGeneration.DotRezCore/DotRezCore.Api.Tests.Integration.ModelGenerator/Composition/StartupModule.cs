@@ -19,7 +19,13 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Composition
         {
             containerBuilder.RegisterSingleton<Application, Application>();
             containerBuilder.RegisterSingleton<IRazorLightEngine, IRazorLightEngine>(provider =>
-                EngineFactory.CreatePhysical(Path.Combine(Environment.CurrentDirectory, "Templating", "Templates")));
+            {
+                var combine = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase),
+                        "Templating", "Templates")
+                    .Replace(@"file:\", string.Empty);
+                
+                return EngineFactory.CreatePhysical(combine);
+            });
             containerBuilder.RegisterSingleton<ITemplateFactory, RazorTemplateFactory>();
             containerBuilder.RegisterScoped<IFileSystem, PhysicalFileSystem>();
             containerBuilder.RegisterScoped<ISchemaRetriever, SchemaRetriever>();

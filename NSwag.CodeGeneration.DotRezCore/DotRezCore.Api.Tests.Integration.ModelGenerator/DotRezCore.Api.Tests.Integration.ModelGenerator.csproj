@@ -11,4 +11,18 @@
     <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="11.12.16" />
     <PackageReference Include="RazorLight" Version="1.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Templating\Templates\Class.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templating\Templates\Client.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templating\Templates\Enum.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="$(SolutionDir)\DotRezCore.Api.Tests.Integration.ModelGenerator\$(OutDir)\DotRezCore.Api.Tests.Integration.ModelGenerator.exe" />
+  </Target>
 </Project>

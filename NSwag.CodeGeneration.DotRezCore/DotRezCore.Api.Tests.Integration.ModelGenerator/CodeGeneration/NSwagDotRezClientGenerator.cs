@@ -75,7 +75,9 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration
                     ClassStyle = CSharpClassStyle.Poco,
                     TemplateFactory = _templateFactory,
                     Namespace = settings.DesiredClientNamespacePrefix
+                    
                 },
+                OperationNameGenerator = new TaggedClientsFromOperationIdOperationNameGenerator(),
                 ClassName = settings.ClientName
             };
         }

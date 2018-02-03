@@ -12,6 +12,7 @@ namespace @Model.Namespace
         private Microsoft.Extensions.Logging.ILogger<@Model.Class> _logger;
         public string @Constants.VariableNames.XSessionTokenPropertyName { get; private set; } = string.Empty;
         public string @Constants.VariableNames.DefaultCulturePropertyName { get; } = "en-IE";
+         
         public @(Model.Class)(@Raw(Model.HttpClientType) httpClient, Microsoft.Extensions.Logging.ILogger<@Model.Class> logger)
         {
             _httpClient = httpClient;

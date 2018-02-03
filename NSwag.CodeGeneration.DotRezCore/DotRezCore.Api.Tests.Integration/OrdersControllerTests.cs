@@ -13,28 +13,30 @@ namespace DotRezCore.Api.Tests.Integration
         [Fact]
         public async Task GetMethodTest()
         {
-            var server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
-            var httpClient = server.CreateClient();
-            var apiClient = new DotRezCoreApiClient(httpClient, null);
-            var result = await apiClient.ApiOrdersByIdGetAsync(1);
+            using (var client = IntegrationTestsFixture.Server.CreateClient())
+            {
+                var apiClient = new OrdersClient(client, null);
+                var result = await apiClient.ByIdGetAsync(1);
 
-            result.Should().NotBeNull();
+                result.Should().NotBeNull();
+            }
         }
 
         [Fact]
         public async Task GetMethodByRequestObjectTest()
         {
-            var server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
-            var httpClient = server.CreateClient();
-            var apiClient = new DotRezCoreApiClient(httpClient, null);
-            var result = await apiClient.ApiOrdersGetAsync(new GetOrderRequest
+            using (var client = IntegrationTestsFixture.Server.CreateClient())
             {
-                Gender = Gender.Male,
-                Id = "1",
-                Type = "type"
-            });
+                var apiClient = new OrdersClient(client, null);
+                var result = await apiClient.GetAsync(new GetOrderRequest
+                {
+                    Gender = Gender.Male,
+                    Id = "1",
+                    Type = "type"
+                });
 
-            result.Should().NotBeNull();
+                result.Should().NotBeNull();
+            }
         }
     }
 }

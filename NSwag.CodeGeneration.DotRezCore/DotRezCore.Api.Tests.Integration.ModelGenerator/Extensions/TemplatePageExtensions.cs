@@ -56,7 +56,8 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator.Extensions
             return templatePage.CreateMethodParameters(operation.Parameters);
         }
 
-        public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage, MethodOverloadDefinition overloadDefinition)
+        public static IRawString CreateMethodParameters(this TemplatePage<DotRezClientTemplateModel> templatePage,
+            MethodOverloadDefinition overloadDefinition)
         {
             var descriptorMap = overloadDefinition.Descriptors.ToDictionary(descriptor => descriptor.VariableName);
             var cSharpParameterModels = overloadDefinition.Operation.Parameters.Select(parameter =>

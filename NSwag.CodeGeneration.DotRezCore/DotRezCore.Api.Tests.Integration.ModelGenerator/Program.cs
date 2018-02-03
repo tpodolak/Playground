@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using DotRezCore.Api.Tests.Integration.ModelGenerator.CodeGeneration;
@@ -29,7 +30,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
                         CurrentContractNamespacePrefix = "DotRezCore.Api.Models",
                         DesiredClientNamespacePrefix = "DotRezCore.Api.Tests.Integration.ApiClients",
                         DesiredContractNamespacePrefix = "DotRezCore.Api.Tests.Integration.Models",
-                        ClientName = "DotRezCoreApiClient"
+                        ClientName = "{controller}Client"
                     };
 
                     await application.Generate(Api.Program.BuildWebHost(new[] {$"--{Constants.CommandLineArguments.UseCustomSwaggerSchema}", bool.TrueString}), settings);
@@ -37,7 +38,7 @@ namespace DotRezCore.Api.Tests.Integration.ModelGenerator
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Debug.WriteLine(e);
                 (container as IDisposable)?.Dispose();
                 throw;
             }
