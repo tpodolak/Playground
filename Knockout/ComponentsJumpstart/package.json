@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "chalk": "~0.4.0",
-    "deeply": "~0.1.0",
+    "deeply": "~3.1.0",
     "event-stream": "~3.1.0",
     "gulp": "^3.9.1",
     "gulp-clean": "~0.2.4",
