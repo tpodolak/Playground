@@ -47,7 +47,7 @@ object JSONSerialization extends App {
   }
   
   object JSONConverter{
-    def apply[T](implicit converter: JSONConverter[T]) = converter
+    def apply[T : JSONConverter]() = implicitly[JSONConverter[T]]
   }
   
   implicit object StringConverter extends JSONConverter[String] {
